@@ -5,16 +5,6 @@ Sample for Adiscope Android sdk
 
 Project Gradle:
 ```gradle
-buildscript {
-    repositories {
-        maven {
-            url 'http://repository.adiscope.com:8081/repository/adiscope/'
-        }
-        ...
-    }
-    ...
-}    
-    
 allprojects {
     repositories {
         maven {
