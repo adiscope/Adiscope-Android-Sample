@@ -17,10 +17,10 @@
             </intent-filter>
         </activity>
 
-        <!-- admob app id for adiscope Admob rewarded video networks -->
+        <!-- insert admob app id for adiscope Admob rewarded video networks -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9819870612497647~7019217618"/>
+            android:value=""/>
 
     </application>
 

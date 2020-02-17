@@ -1,6 +1,10 @@
 # Adiscope-Android-Sample
 Sample for Adiscope Android sdk
 
+### Requirements
+- minSdkVersion 15
+
+
 ### Download
 
 Project Gradle:
