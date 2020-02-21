@@ -1,8 +1,14 @@
 # Adiscope-Android-Sample
 Sample for Adiscope Android sdk
 
-### Requirements
+
+## Requirements
 - minSdkVersion 15
+
+
+## Link 
+- [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
+- [Adiscope Android Sdk Guide](https://github.com/adiscope/Adiscope-Android-Sample/tree/master/doc/AdiscopeAndroidSdk_guide.pdf)
 
 
 ### Download
@@ -19,7 +25,7 @@ allprojects {
 }
 ```
 
-Module Gradle:
+### Module Gradle
 ```gradle
 dependencies {
 
@@ -41,8 +47,7 @@ dependencies {
 }
 ```
 
-
-AndroidManifest.xml setting for admob network:
+### AndroidManifest.xml setting for admob network:
 ```
 <application ...>
     <!-- admob app id for adiscope Admob rewarded video networks -->
@@ -52,3 +57,4 @@ AndroidManifest.xml setting for admob network:
     ...
 </application>
 ```
+
