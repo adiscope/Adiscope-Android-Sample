@@ -8,7 +8,7 @@ Sample for Adiscope Android sdk
 
 ## Link 
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
-- [Adiscope Android Sdk Guide](https://github.com/adiscope/Adiscope-Android-Sample/tree/master/doc/AdiscopeAndroidSdk_guide.pdf)
+- [Adiscope Android Sdk Guide](https://github.com/adiscope/Adiscope-Android-Sample/tree/master/doc/AdiscopeAndroidSdk_guide.pdf) (해당 페이지에서 Download 버튼을 클릭해 파일을 다운로드받으세요)
 
 
 ### Download
