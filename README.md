@@ -5,15 +5,15 @@ Sample for Adiscope Android sdk
 ## Requirements
 - minSdkVersion 15
 
+## version : 1.1.4
 
-## Link 
+## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
 - [Adiscope Android Sdk Guide](https://github.com/adiscope/Adiscope-Android-Sample/tree/master/doc/AdiscopeAndroidSdk_guide.pdf) (해당 페이지에서 Download 버튼을 클릭해 파일을 다운로드받으세요)
 
+## Download
 
-### Download
-
-Project Gradle:
+### Project Gradle
 ```gradle
 allprojects {
     repositories {
