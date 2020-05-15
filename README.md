@@ -4,8 +4,9 @@ Sample for Adiscope Android sdk
 
 ## Requirements
 - minSdkVersion 15
+- To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 1.1.4
+## version : 1.1.5
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -30,20 +31,21 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:1.1.4'
+    implementation 'com.nps.adiscope:adiscopeCore:1.1.5'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.2'
 
-    // If you are already using goople play-services-ads, you can remove play-services-basement
-    implementation 'com.google.android.gms:play-services-basement:8.3.0'
+    // adiscope sdk have to extract Google Advertising Id.
+    // if com.google.android.gms.ads.identifier.AdvertisingIdClient class is not included in your app, uncomment following code
+    // implementation 'com.google.android.gms:play-services-basement:8.3.0'
 
     // [optional] adiscope rewarded video networks
-    implementation 'com.nps.adiscope:adapter.adcolony:3.3.10.2'     // adcolony
-    implementation 'com.nps.adiscope:adapter.admob:1.1.1.3'         // admob
-    implementation 'com.nps.adiscope:adapter.fan:5.5.0.2'           // fan
-    implementation 'com.nps.adiscope:adapter.ironsource:6.6.5.2'    // ironsource
-    implementation 'com.nps.adiscope:adapter.mobvista:9.12.7.2'     // mobvista
-    implementation 'com.nps.adiscope:adapter.unityads:3.4.2.2'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.4.11.2'       // vungle
+    implementation 'com.nps.adiscope:adapter.adcolony:3.3.10.3'     // adcolony
+    implementation 'com.nps.adiscope:adapter.admob:1.1.1.4'         // admob
+    implementation 'com.nps.adiscope:adapter.fan:5.5.0.3'           // fan
+    implementation 'com.nps.adiscope:adapter.ironsource:6.6.5.3'    // ironsource
+    implementation 'com.nps.adiscope:adapter.mobvista:13.1.1.0'     // mobvista
+    implementation 'com.nps.adiscope:adapter.unityads:3.4.2.3'      // unityads
+    implementation 'com.nps.adiscope:adapter.vungle:6.5.3.0'        // vungle
 }
 ```
 
