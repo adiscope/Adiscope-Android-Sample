@@ -19,7 +19,9 @@ Sample for Adiscope Android sdk
 allprojects {
     repositories {
         maven {
-            url 'http://repository.adiscope.com:8081/repository/adiscope/' // In order to connect, you need to register the IP address to adiscope inbound
+            // To use url we need to register your IP address to adiscope repository server inbound.
+            // Ask us to register your IP.
+            url 'http://repository.adiscope.com:8081/repository/adiscope/'
         }
         ...
     }
