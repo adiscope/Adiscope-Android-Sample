@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
             @Override
             public void onClick(View view) {
                 // show offerwall
-                mOfferwallAd.show(SAMPLE_OFFERWALL_UNIT);
+                mOfferwallAd.show(MainActivity.this, SAMPLE_OFFERWALL_UNIT);
             }
         });
 
