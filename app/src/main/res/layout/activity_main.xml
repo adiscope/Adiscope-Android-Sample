@@ -19,6 +19,12 @@
         android:text="Load Rewarded Video" />
 
     <Button
+        android:id="@+id/btnLoadInterstitial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Interstitial" />
+
+    <Button
         android:visibility="invisible"
         android:id="@+id/btn"
         android:layout_width="wrap_content"
