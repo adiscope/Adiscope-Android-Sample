@@ -18,7 +18,7 @@ allprojects {
         jcenter()
         google()
         maven {
-            url 'http://repository.adiscope.com:8081/repository/adiscope/'
+            url 'https://repository.adiscope.com/repository/adiscope/'
         }
     }
 }

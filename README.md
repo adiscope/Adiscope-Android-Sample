@@ -21,7 +21,7 @@ allprojects {
         maven {
             // To use url we need to register your IP address to adiscope repository server inbound.
             // Ask us to register your IP.
-            url 'http://repository.adiscope.com:8081/repository/adiscope/'
+            url 'https://repository.adiscope.com/repository/adiscope/'
         }
         ...
     }
