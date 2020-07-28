@@ -19,8 +19,6 @@ Sample for Adiscope Android sdk
 allprojects {
     repositories {
         maven {
-            // To use url we need to register your IP address to adiscope repository server inbound.
-            // Ask us to register your IP.
             url 'https://repository.adiscope.com/repository/adiscope/'
         }
         ...
