@@ -31,7 +31,7 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:1.1.7'
+    implementation 'com.nps.adiscope:adiscopeCore:1.5.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.2'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -45,7 +45,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.ironsource:6.16.1.0'   // ironsource
     implementation 'com.nps.adiscope:adapter.mobvista:13.1.1.1'     // mobvista (use androidx)
     implementation 'com.nps.adiscope:adapter.unityads:3.4.2.3'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.5.3.0'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.vungle:6.5.3.1'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
     implementation 'com.nps.adiscope:adapter.admob:17.2.0.1'        // admob (use play-services-ads:17.2.0 dependency)
