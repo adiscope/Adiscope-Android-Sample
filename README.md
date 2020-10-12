@@ -6,7 +6,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 15
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 1.5.7
+## version : 1.5.8
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -31,7 +31,7 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:1.5.7'
+    implementation 'com.nps.adiscope:adiscopeCore:1.5.8'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.2'
 
     // adiscope sdk have to extract Google Advertising Id.
