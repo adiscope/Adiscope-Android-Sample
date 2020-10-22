@@ -3,10 +3,10 @@ Sample for Adiscope Android sdk
 
 
 ## Requirements
-- minSdkVersion 15
+- minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 1.5.8
+## version : 1.5.9
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -31,7 +31,7 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:1.5.8'
+    implementation 'com.nps.adiscope:adiscopeCore:1.5.9'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.2'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -40,15 +40,15 @@ dependencies {
 
     // [optional] adiscope rewarded video networks
     implementation 'com.nps.adiscope:adapter.adcolony:4.1.4.0'      // adcolony
-    implementation 'com.nps.adiscope:adapter.admob:17.2.0.1'        // admob (use play-services-ads:17.2.0 dependency)
-    implementation 'com.nps.adiscope:adapter.fan:5.9.0.0'           // fan
+    implementation 'com.nps.adiscope:adapter.admob:19.4.0.0'        // admob (use play-services-ads:19.4.0 dependency)
+    implementation 'com.nps.adiscope:adapter.fan:6.1.0.0'           // fan
     implementation 'com.nps.adiscope:adapter.ironsource:6.16.1.0'   // ironsource
     implementation 'com.nps.adiscope:adapter.mobvista:13.1.1.1'     // mobvista (use androidx)
-    implementation 'com.nps.adiscope:adapter.unityads:3.4.2.3'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.5.3.1'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.unityads:3.5.0.0'      // unityads
+    implementation 'com.nps.adiscope:adapter.vungle:6.8.0.0'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
-    implementation 'com.nps.adiscope:adapter.admob:17.2.0.1'        // admob (use play-services-ads:17.2.0 dependency)
+    implementation 'com.nps.adiscope:adapter.admob:19.4.0.0'        // admob (use play-services-ads:19.4.0 dependency)
 }
 ```
 
