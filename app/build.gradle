@@ -32,7 +32,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:1.5.9'
+    implementation 'com.nps.adiscope:adiscopeCore:1.6.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.2'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -40,14 +40,14 @@ dependencies {
     // implementation 'com.google.android.gms:play-services-basement:8.3.0'
 
     // [optional] adiscope rewarded video networks
-    implementation 'com.nps.adiscope:adapter.adcolony:4.1.4.0'      // adcolony
-    implementation 'com.nps.adiscope:adapter.admob:19.4.0.0'        // admob (use play-services-ads:19.4.0 dependency)
-    implementation 'com.nps.adiscope:adapter.fan:6.1.0.0'           // fan
-    implementation 'com.nps.adiscope:adapter.ironsource:6.16.1.0'   // ironsource
-    implementation 'com.nps.adiscope:adapter.mobvista:13.1.1.1'     // mobvista (use androidx)
-    implementation 'com.nps.adiscope:adapter.unityads:3.5.0.0'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.8.0.0'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.adcolony:4.1.4.1'      // adcolony
+    implementation 'com.nps.adiscope:adapter.admob:19.4.0.1'        // admob (use play-services-ads:19.4.0 dependency)
+    implementation 'com.nps.adiscope:adapter.fan:6.1.0.1'           // fan
+    implementation 'com.nps.adiscope:adapter.ironsource:6.16.1.1'   // ironsource
+    implementation 'com.nps.adiscope:adapter.mobvista:13.1.1.2'     // mobvista (use androidx)
+    implementation 'com.nps.adiscope:adapter.unityads:3.5.0.1'      // unityads
+    implementation 'com.nps.adiscope:adapter.vungle:6.8.0.1'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
-    implementation 'com.nps.adiscope:adapter.admob:19.4.0.0'        // admob (use play-services-ads:19.4.0 dependency)
+    implementation 'com.nps.adiscope:adapter.admob:19.4.0.1'        // admob (use play-services-ads:19.4.0 dependency)
 }
