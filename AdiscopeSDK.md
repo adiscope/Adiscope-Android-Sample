@@ -1,7 +1,7 @@
 # Adiscope for Android Integration
 
 
-## 0. version history.Android
+## version history.Android
 |날짜|변경 사항|
 |----------|------------------|
 |2021/03/17| [기능 변경] <br>mobvista  13.1.1 → 15.4.31</br> unityads  UnityMonetization -> UnityAds 변경 |
@@ -35,6 +35,14 @@
 |2018/06/14	| [기능 추가] <br>오퍼월 광고는 Adiscope 서버가 3rd-party 서버로부터 광고 캠페인들을 직접 수집하는 방식으로 변경되었습니다. 따라서 3rd-party 오퍼월 sdk들은 제거되었습니다.<br>인터페이스 변경<br>메인 클래스의 클래스 이름이 변경되었습니다. (com.nps.adiscope.Adiscope -> com.nps.adiscope.AdiscopeSdk)|
 |2018/03/04	| [기능 추가] <br>OptionSetter.setUseCloudFrontProxy(boolean useCloudFrontProxy) API 추가|
 
+
+## 애디스콥 네트워크 버전 호환정보
+|adiscope core version|adcolony|admob|applovin|fan|ironsource|mobvista|tapjoy|unityads|vungle|
+|---------------------|--------|-----|--------|---|----------|--------|------|--------|------|
+|~1.1.5|~3.3.10.2|~1.1.1.3|no service|~5.5.0.2|~6.6.5.2|~13.1.1.2|no service|~3.4.2.2|~6.4.11.2|
+|1.15~1.6.3   |3.3.10.3 ~ 4.3.0.0   |1.1.1.4~19.4.0.1	|no service|5.5.0.3~6.1.0.1	|6.6.5.3~7.0.3.0	|13.1.1.3~13.1.1.2	|no service|3.4.2.3~3.5.0.1	|6.5.3.0~6.8.0.1|
+|1.6.4~1.6.6	|4.3.0.1~|19.4.0.2~|9.14.9.0~|6.1.0.2~|7.0.3.1~|15.4.31.0~|12.7.1.2~|3.5.0.3~|6.8.0.2~|
+|2.0.0~	|4.3.0.2~|19.4.0.3~|9.14.10.0~|6.4.0.1~|7.0.3.2~|15.4.31.1~|12.7.1.3~|3.5.0.4~|6.8.0.3~|
 
 
 
