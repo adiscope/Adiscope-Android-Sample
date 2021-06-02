@@ -6,11 +6,10 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 1.6.6
+## version : 2.0.0
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
-- [Adiscope Android Sdk Guide](https://github.com/adiscope/Adiscope-Android-Sample/tree/master/doc/AdiscopeAndroidSdk_guide.pdf) (해당 페이지에서 Download 버튼을 클릭해 파일을 다운로드받으세요)
 
 ## Download
 
