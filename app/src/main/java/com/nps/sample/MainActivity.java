@@ -10,6 +10,7 @@ import com.nps.adiscope.AdiscopeError;
 import com.nps.adiscope.AdiscopeSdk;
 import com.nps.adiscope.interstitial.InterstitialAd;
 import com.nps.adiscope.interstitial.InterstitialAdListener;
+import com.nps.adiscope.listener.AdiscopeInitializeListener;
 import com.nps.adiscope.offerwall.OfferwallAd;
 import com.nps.adiscope.offerwall.OfferwallAdListener;
 import com.nps.adiscope.reward.RewardItem;
@@ -45,21 +46,26 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
         setContentView(R.layout.activity_main);
 
         // initialize adiscope sdk
-        AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET);
+        AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET, new AdiscopeInitializeListener() {
+            @Override
+            public void onInitialized(boolean isSuccess) {
+                if (isSuccess) {
+                    // get offerwall singleton instance
+                    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(MainActivity.this);
 
-        // get offerwall singleton instance
-        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
+                    // get rewardVideo singleton instance
+                    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(MainActivity.this);
 
-        // get rewardVideo singleton instance
-        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this);
+                    // get interstitial singleton instance
+                    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(MainActivity.this);
 
-        // get interstitial singleton instance
-        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
-
-        // set listener
-        mOfferwallAd.setOfferwallAdListener(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
-        mInterstitialAd.setInterstitialAdListener(this);
+                    // set listener
+                    mOfferwallAd.setOfferwallAdListener(MainActivity.this);
+                    mRewardedVideoAd.setRewardedVideoAdListener(MainActivity.this);
+                    mInterstitialAd.setInterstitialAdListener(MainActivity.this);
+                }
+            }
+        });
 
         // set userId (user unique id)
         AdiscopeSdk.setUserId("testUserId");
@@ -92,15 +98,14 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
 
     // region implementation RewardedVideoAdListener
     @Override
-    public void onRewardedVideoAdLoaded() {
+    public void onRewardedVideoAdLoaded(String unitId) {
         Log.d(TAG, "onRewardedVideoAdLoaded");
         mRewardedVideoAd.show();
     }
 
     @Override
-    public void onRewardedVideoAdFailedToLoad(AdiscopeError adiscopeError) {
+    public void onRewardedVideoAdFailedToLoad(String unitId, AdiscopeError adiscopeError) {
         Log.e(TAG, "onRewardedVideoAdFailedToLoad : " + adiscopeError);
-
     }
 
     @Override
@@ -160,17 +165,17 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
     }
 
     @Override
-    public void onInterstitialAdOpened(String s) {
+    public void onInterstitialAdOpened(String unitId) {
         Log.d(TAG, "onInterstitialAdOpened");
     }
 
     @Override
-    public void onInterstitialAdClosed(String s) {
+    public void onInterstitialAdClosed(String unitId) {
         Log.d(TAG, "onInterstitialAdClosed");
     }
 
     @Override
-    public void onInterstitialAdFailedToShow(String s, AdiscopeError adiscopeError) {
+    public void onInterstitialAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
         Log.e(TAG, "onInterstitialAdFailedToShow : " + adiscopeError);
     }
     // endregion
