@@ -51,6 +51,11 @@ Version Info
 
 ## ReleaseNote
 
+> ## Version 2.0.1
+> _2021-06-08_
+>  * RV hotfix
+>  * admob timeout 추
+
 > ## Version 2.0.0
 > _2021-06-02_
 >  * RV 구조 변경
@@ -78,7 +83,7 @@ Version Info
 > ## Version 1.6.3
 > _2021-01-05_
 >  * 이슈 수정
->  (RV, Interstitial 최초 진입시 ADID 가져 오지 못하는 이슈 수정)
+>  (RV, Interstitial 최초가 진입시 ADID 가져 오지 못하는 이슈 수정)
 
 > ## Version 1.6.2
 > _2020-12-02_
