@@ -51,10 +51,15 @@ Version Info
 
 ## ReleaseNote
 
+> ## Version 2.0.2
+> _2021-06-24_
+>  * RV 안정화
+>  * 전 network timeout 추가
+
 > ## Version 2.0.1
 > _2021-06-08_
 >  * RV hotfix
->  * admob timeout 추
+>  * admob timeout 추가
 
 > ## Version 2.0.0
 > _2021-06-02_
