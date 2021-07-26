@@ -74,7 +74,10 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
             @Override
             public void onClick(View view) {
                 // show offerwall
-                mOfferwallAd.show(MainActivity.this, SAMPLE_OFFERWALL_UNIT);
+
+                String[] excludeType = new String[]{}; // excludeType List
+                // ex) [CPI, CPE, CPS, CPA]
+                mOfferwallAd.show(MainActivity.this, SAMPLE_OFFERWALL_UNIT, excludeType);
             }
         });
 

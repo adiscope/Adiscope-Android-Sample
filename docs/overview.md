@@ -197,7 +197,7 @@ OverView
     import com.nps.adiscope.offerwall.OfferwallAd;
   
     // show offerwall ad
-    if (offerwallAd.show(activity, "UNIT_ID")) {
+    if (offerwallAd.show(activity, "UNIT_ID", new String[]{})) {
         // Succeed
     } else {
         // show is already in progress

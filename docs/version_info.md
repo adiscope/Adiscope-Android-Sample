@@ -7,6 +7,10 @@ Version Info
 ## ChangeLog
 |날짜|변경 사항|
 |----------|------------------|
+|2021/07/26| 기능 변경 <br>adiscope-core  2.0.2 → 2.0.3</br> cps 탭 분리 excludeType List param 변경 |
+|2021/06/24| 기능 변경 <br>RV 안정화</br> 전 network timeout 추가 |
+|2021/06/08| 기능 변경 <br>RV hotfix</br> admob timeout 추가 |
+|2021/06/02| 기능 변경 <br>RV 구조 변경</br> |
 |2021/03/17| 기능 변경 <br>mobvista  13.1.1 → 15.4.31</br> unityads  UnityMonetization -> UnityAds 변경 |
 |2021/02/19| 이슈 수정 <br>offerwall 문의 하기 이슈 수정|
 |2021/02/16| 이슈 수정 <br> 무한로딩 이슈 수정 <br>android target30 에서 패키지 네임 못가져오는 이슈 수정 |
@@ -50,6 +54,11 @@ Version Info
 |2.0.0~	|4.3.0.2~|19.4.0.3~|9.14.10.0~|6.4.0.1~|7.0.3.2~|15.4.31.1~|12.7.1.3~|3.5.0.4~|6.8.0.3~|
 
 ## ReleaseNote
+
+> ## Version 2.0.3
+> _2021-07-26_
+>  * CPS 탭 분리
+>  * 구매한도 리스트 제어
 
 > ## Version 2.0.2
 > _2021-06-24_
