@@ -190,6 +190,7 @@ OverView
        - Offerwall 광고를 사용자에게 보여준다.
        - Show method는 중복하여 호출 할 수 없다.
        - unitId는 admin page을 통하여 등록/조회한다.
+       - excludeAdTypeList 는 제외할 타입을 지정해준다. ex) ["CPS"] 
    ```
     // Show Ad
  

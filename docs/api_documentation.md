@@ -297,10 +297,12 @@ API Reference
      *  Offerwall 광고를 사용자에게 표시한다.
 
      - Definition
-       - boolean show(Activity activity, String unitId)
+       - boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
      - Parameters
        - activity : 상위 액티비티
        - unitId : 사용자에게 표시할 광고의 unit id. Admin page에 등록된 id와 동일해야 한다.
+       - excludeAdTypeList : 구매 제한 타입 리스트 ex) [ "CPS" ].
+         
      - Return
        - bool : show가 정상적으로 시작되면 True, 만약 이미 다른 show가 처리되는 중이라면 False
      * show가 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
@@ -320,10 +322,10 @@ API Reference
            - unitId : load 여부를 체크할 광고의 unit id
 
        - Return
-           - bool : load된 광고가 있을 시 True, load된 광고가 없을 시 False
+           - bool : load 된 광고가 있을 시 True, load된 광고가 없을 시 False
 
    - Show
-     * 최근에 load된 Interstitial 광고 유닛에 속한 광고를 사용자에게 보여준다.
+     * 최근에 load 된 Interstitial 광고 유닛에 속한 광고를 사용자에게 보여준다.
 
      - Definition
         - boolean show()
