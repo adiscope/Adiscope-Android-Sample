@@ -7,6 +7,7 @@ Version Info
 ## ChangeLog
 |날짜|변경 사항|
 |----------|------------------|
+|2021/09/03| 이슈 수정 <br>unityads:3.5.0.6 -> 3.5.0.7 </br> UnityAdsAdapter NPE 수정 |
 |2021/08/12| 기능 변경 <br>adiscope-core  2.0.3 → 2.0.3.1</br> cps 탭 분리 사이드 이펙트 수정 |
 |2021/07/26| 기능 변경 <br>adiscope-core  2.0.2 → 2.0.3</br> cps 탭 분리 excludeType List param 변경 |
 |2021/06/24| 기능 변경 <br>RV 안정화</br> 전 network timeout 추가 |
