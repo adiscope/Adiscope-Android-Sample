@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.ironsource:7.0.3.4'   // ironsource
     implementation 'com.nps.adiscope:adapter.mobvista:15.4.31.3'     // mobvista (use androidx)
     implementation 'com.nps.adiscope:adapter.tapjoy:12.7.1.5'        // tapjoy
-    implementation 'com.nps.adiscope:adapter.unityads:3.5.0.6'      // unityads
+    implementation 'com.nps.adiscope:adapter.unityads:3.5.0.7'      // unityads
     implementation 'com.nps.adiscope:adapter.vungle:6.8.0.5'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
