@@ -7,6 +7,7 @@ Version Info
 ## ChangeLog
 |날짜|변경 사항|
 |----------|------------------|
+|2021/09/07| 이슈 수정 <br>adiscope-core  2.0.3.1 → 2.0.3.2 </br> rv initialize time out 추가 |
 |2021/09/03| 이슈 수정 <br>unityads:3.5.0.6 -> 3.5.0.7 </br> UnityAdsAdapter NPE 수정 |
 |2021/08/12| 기능 변경 <br>adiscope-core  2.0.3 → 2.0.3.1</br> cps 탭 분리 사이드 이펙트 수정 |
 |2021/07/26| 기능 변경 <br>adiscope-core  2.0.2 → 2.0.3</br> cps 탭 분리 excludeType List param 변경 |
@@ -56,6 +57,10 @@ Version Info
 |2.0.0~	|4.3.0.2~|19.4.0.3~|9.14.10.0~|6.4.0.1~|7.0.3.2~|15.4.31.1~|12.7.1.3~|3.5.0.4~|6.8.0.3~|
 
 ## ReleaseNote
+
+> ## Version 2.0.3.2
+> _2021-09-07_
+>  * RV load 시 네트워크 sdk 이니셜라이즈 시간도 타임아웃 시간으로 포함
 
 > ## Version 2.0.3.1
 > _2021-08-12_
