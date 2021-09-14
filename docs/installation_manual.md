@@ -29,7 +29,7 @@ module build.gradle
 dependencies {
  
      // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.0.3.2'
+    implementation 'com.nps.adiscope:adiscopeCore:2.0.3.3'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.3'
 
     // adiscope sdk have to extract Google Advertising Id.
