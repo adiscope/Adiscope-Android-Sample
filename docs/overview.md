@@ -51,6 +51,7 @@ OverView
                 } else {
                     // Init 실패 에 대한 처리 Code 
                 }
+        }
    ```
 2. 사용자 정보 설정
 
