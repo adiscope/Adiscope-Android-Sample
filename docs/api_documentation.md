@@ -194,6 +194,8 @@ API Reference
 |GOOGLE_FAMILY_ERROR (Only Android)|9|구글 가족정책에 의거, 사용할 수 없는 기능이 호출되었음을 의미|구글 가족정책 가이드 참고|**만 13세 미만 사용자에게 광고 시청이 제한되어있습니다 (Code 9)**|
 |INVALID_ADID (Only Android)|10|adid 가 없거나 유효하지 않음을 의미|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요(Code 10]**|
 |TIME_OUT|11|세팅한 기간 내에 Mediation 광고 네트워크의 로드 성공 콜백이 오지 않은 경우|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요 (Code 11)**|
+|SHOW_CALLED_BEFORE_LOAD|12|로드를 하기전에 Show 를 호출한경우|**Show 호출전에 Load 가 되도록 해주세요 (Code 12)**|
+|ADID IS NOT AVAILABLE|13|Android 광고 설정의 adid 를 제거한 경우|**개인 정보 활용 동의 안함	|**유저는 광고 참여 및 보상 획득을 위해 필수로 ADID 정보가 있거나 광고 개인 최적화 선택 해제 해야함 에러코드 발생 시 광고 ID 설정하는 화면으로 이동. 관련 매체 자체 대응을 희망할 경우 이를 유념하여 구성 (Code 13)**|
 |UNKNOWN_ERROR(Only Unity)|-1|알 수 없는 오류|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요 (Code -1)**|
 
 ## API Reference - InterstitialAd.Android
