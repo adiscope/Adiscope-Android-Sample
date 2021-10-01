@@ -29,6 +29,8 @@ OverView
     // initialize AdiscopeSdk, must be called in main thread
     AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
     ```
+   
+   **사용 예**
 
    ```
         AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET, new AdiscopeInitializeListener() {
