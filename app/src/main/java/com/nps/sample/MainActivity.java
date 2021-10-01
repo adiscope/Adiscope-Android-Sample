@@ -63,6 +63,8 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
                     mOfferwallAd.setOfferwallAdListener(MainActivity.this);
                     mRewardedVideoAd.setRewardedVideoAdListener(MainActivity.this);
                     mInterstitialAd.setInterstitialAdListener(MainActivity.this);
+                } else {
+                    // Init 실패 에 대한 처리 Code
                 }
             }
         });

@@ -29,6 +29,29 @@ OverView
     // initialize AdiscopeSdk, must be called in main thread
     AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
     ```
+
+   ```
+        AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET, new AdiscopeInitializeListener() {
+            @Override
+            public void onInitialized(boolean isSuccess) {
+                if (isSuccess) {
+                    // get offerwall singleton instance
+                    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(MainActivity.this);
+
+                    // get rewardVideo singleton instance
+                    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(MainActivity.this);
+
+                    // get interstitial singleton instance
+                    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(MainActivity.this);
+
+                    // set listener
+                    mOfferwallAd.setOfferwallAdListener(MainActivity.this);
+                    mRewardedVideoAd.setRewardedVideoAdListener(MainActivity.this);
+                    mInterstitialAd.setInterstitialAdListener(MainActivity.this);
+                } else {
+                    // Init 실패 에 대한 처리 Code 
+                }
+   ```
 2. 사용자 정보 설정
 
     <br>application 사용자의 unique user id를 Adiscope Sdk에 전달한다. unique user id는 보상이 지급 될 시 사용자를 구분하기 위해 사용된다.
