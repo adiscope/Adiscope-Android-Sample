@@ -18,7 +18,7 @@ Adiscope for Android Integration
 - [API Reference](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#api-reference)
   - [AdiscopeSdk](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopesdk)
   - [OptionSetter](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#optionsetter)
-  - [AdiscopeError](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror)
+  - [AdiscopeError](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/error_info.md#adiscopeerror)
     - [AdiscopeError Code](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror-code)
     - [AdiscopeError Message Examples](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror-message-examples)
   - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#interstitialad)
