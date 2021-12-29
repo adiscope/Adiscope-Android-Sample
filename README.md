@@ -15,7 +15,7 @@ Sample for Adiscope Android sdk
 - [연동 가이드](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/AdiscopeSDKGuide.md)
 
 ## Error Information
-- [Error 정보](https://github.com/adiscope/Adiscope-Android-Sample/blob/test/docs/error_info.md)
+- [Error 정보](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/error_info.md)
 
 ## Download
 
