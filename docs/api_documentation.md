@@ -4,7 +4,6 @@ API Reference
 - [OptionSetter](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#optionsetter)
 - [AdiscopeError](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror)
   - [AdiscopeError Code](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror-code)
-  - [AdiscopeError Message Examples](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopeerror-message-examples)
 - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#interstitialad)
 - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#offerwallad)
 - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedvideoad)
