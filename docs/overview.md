@@ -1,9 +1,9 @@
 OverView
 ===========
-- [AdiscopeSdk](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/overview.md#adiscopesdk)
-- [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/overview.md#interstitialad)
-- [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/overview.md#offerwallad)
-- [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/overview.md#rewardedvideoad)
+- [AdiscopeSdk](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#adiscopesdk)
+- [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#interstitialad)
+- [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#offerwallad)
+- [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#rewardedvideoad)
 
 ## Overview - Sdk.Android
 ### AdiscopeSdk

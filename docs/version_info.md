@@ -1,8 +1,8 @@
 Version Info
 ============
-- [ChangeLog](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/version_info.md#changelog)
-- [VersionCompatible](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/version_info.md#versioncompatible)
-- [ReleaseNote](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.0.0/docs/version_info.md#releasenote)
+- [ChangeLog](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/version_info.md#changelog)
+- [VersionCompatible](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/version_info.md#versioncompatible)
+- [ReleaseNote](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/version_info.md#releasenote)
 
 ## ChangeLog
 |날짜|변경 사항|
