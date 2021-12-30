@@ -6,7 +6,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 2.0.7.1
+## version : 2.0.8.0
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -36,7 +36,7 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.0.7.1'
+    implementation 'com.nps.adiscope:adiscopeCore:2.0.8.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.3'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -44,17 +44,17 @@ dependencies {
     // implementation 'com.google.android.gms:play-services-basement:8.3.0'
 
     // [optional] adiscope rewarded video networks
-    implementation 'com.nps.adiscope:adapter.admob:20.2.0.2'        // admob (use play-services-ads:19.4.0 dependency)
-    implementation 'com.nps.adiscope:adapter.applovin:9.14.10.2'        // applovin
-    implementation 'com.nps.adiscope:adapter.fan:6.7.0.0'           // fan
-    implementation 'com.nps.adiscope:adapter.ironsource:7.1.12.0'   // ironsource
-    implementation 'com.nps.adiscope:adapter.mobvista:15.4.31.4'     // mobvista (use androidx)
-    implementation 'com.nps.adiscope:adapter.tapjoy:12.7.1.6'        // tapjoy
-    implementation 'com.nps.adiscope:adapter.unityads:3.7.5.1'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.10.2.0'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.admob:20.5.0.0'        // admob (use play-services-ads:19.4.0 dependency)
+    implementation 'com.nps.adiscope:adapter.applovin:10.3.5.0'        // applovin
+    implementation 'com.nps.adiscope:adapter.fan:6.7.0.1'           // fan
+    implementation 'com.nps.adiscope:adapter.ironsource:7.1.12.1'   // ironsource
+    implementation 'com.nps.adiscope:adapter.mobvista:15.4.31.5'     // mobvista (use androidx)
+    implementation 'com.nps.adiscope:adapter.tapjoy:12.8.1.0'        // tapjoy
+    implementation 'com.nps.adiscope:adapter.unityads:3.7.5.2'      // unityads
+    implementation 'com.nps.adiscope:adapter.vungle:6.10.2.1'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
-    implementation 'com.nps.adiscope:adapter.admob:20.2.0.2'        // admob (use play-services-ads:19.4.0 dependency)
+    implementation 'com.nps.adiscope:adapter.admob:20.5.0.0'        // admob (use play-services-ads:19.4.0 dependency)
 }
 ```
 

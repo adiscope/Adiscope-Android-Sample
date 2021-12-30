@@ -154,7 +154,17 @@ API Reference
    ```
     package com.nps.adiscope;
  
-    public enum AdiscopeError
+    public class AdiscopeError {
+        private final int code;
+        private final String description;
+        private String xb3TraceId;
+   
+        public int getCode() {    return code;   }
+
+        public String getDescription() {    return description;   }
+
+        public String getXb3TraceId() {     return xb3TraceId;      }
+    }
    ```
 2. ErrorCode
 #### AdiscopeError Code
