@@ -16,12 +16,12 @@ API Reference
         public class AdiscopeSdk {
 
             public static void initialize(Activity activity, AdiscopeInitializeListener listener)
-            @Deprecated
-            public static void initialize(Activity activity, String mediaId, String mediaSecret)
 
             public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
 
             public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
+            
+            public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
             
             public static OfferwallAd getOfferwallAdInstance(Activity activity)
                         
@@ -49,14 +49,15 @@ API Reference
 
      - Definition
        - public static void initialize(Activity activity, AdiscopeInitializeListener listener)
-       - public static void initialize(Activity activity, String mediaId, String mediaSecret)
        - public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
        - public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
+       - public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
      - Parameters
        - activity : Activity
        - mediaId : Amdin page에서 등록한 해당 application에 대한 Id
        - mediaSecret : mediaId에 대응되는 secret key
        - callbackTag : 보상 콜백을 복수 개로 등록해서 사용할시에 어떤 보상 콜백을 사용할지 지정한다. 지정하지 않을시에는 기본 보상콜백이 사용된다.
+       - childYN : 어린이 인지 아닌지의 여부를 설정 해주는 값 그대로 Google GMA 에 세팅 된다.  
      - Return
 
    - setUserId
@@ -124,8 +125,32 @@ API Reference
                     return active;
                 }
            }
+    
+         ```
+         
+   - getNetworksVersions
+     * 각 네트워크 버전을 리스트로 반환한다.
+
+       - Definition
+           - public static String getNetworksVersions()
+
+       - Parameters
+
+       - Return
+          - String :  Network Version List
+
+
+   - getSDKVersion
+    * 현 애디스콥의 버전을 반환한다.
+
+        - Definition
+            - public static String getSDKVersion()
+
+        - Parameters
+
+        - Return
+            - String :  Adiscope core version return
           
-          ```
 
 ## API Reference - OptionSetter.Android
 ### OptionSetter
