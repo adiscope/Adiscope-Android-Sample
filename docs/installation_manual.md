@@ -75,3 +75,12 @@ dependencies {
 
 #### Vungle - Rewarded Video Network
 * 6.5.3.0 버전부터 androidx 라이브러리를 사용합니다. 앱 환경에 따라서 androidx migration이 필요할 수 있습니다. (https://developer.android.com/jetpack/androidx/migrate)
+* 아래 참조가 없다면 참조를 해주어야합니다.  
+  implementation 'androidx.core:core:1.3.1'
+  implementation 'com.google.code.gson:gson:2.8.6'
+  implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+  implementation 'com.squareup.okhttp3:okhttp:3.12.12'
+  implementation 'com.squareup.okio:okio:1.15.0'
+#### Ironsource - Rewarded Video Network
+* 아래 참조가 없다면 참조를 해주어야합니다.  
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'
