@@ -30,10 +30,10 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
 
     private static final String TAG = MainActivity.class.getName();
 
-    private String SAMPLE_MEDIA_ID              = "";
-    private String SAMPLE_MEDIA_SECRET          = "";
+    private String SAMPLE_MEDIA_ID              = "225";
+    private String SAMPLE_MEDIA_SECRET          = "1eb20aa978344e28aefc52dbd9eb58f8";
     private String SAMPLE_OFFERWALL_UNIT        = "";
-    private String SAMPLE_REWARDED_VIDEO_UNIT   = "";
+    private String SAMPLE_REWARDED_VIDEO_UNIT   = "MOTOV_RV";
     private String SAMPLE_INTERSTITIAL_UNIT     = "";
 
     private static OfferwallAd mOfferwallAd;
