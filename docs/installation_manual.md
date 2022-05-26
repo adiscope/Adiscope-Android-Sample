@@ -45,7 +45,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.2'     // mobvista (use androidx)
     implementation 'com.nps.adiscope:adapter.tapjoy:12.8.1.2'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.0.1.1'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.10.3.2'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.vungle:6.10.3.4'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
     implementation 'com.nps.adiscope:adapter.admob:20.6.0.2'        // admob (use play-services-ads:20.6.0 dependency)
