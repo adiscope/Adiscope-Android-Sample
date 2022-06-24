@@ -45,8 +45,9 @@ API Reference
     ```
 2. Methods
    - initialize
-     *  Sdk 기능을 초기화 한다.
-
+     *  Sdk 기능을 초기화 한다. 
+        <주의> setUserId는 64자까지 설정 할 수 있습니다.
+       
      - Definition
        - public static void initialize(Activity activity, AdiscopeInitializeListener listener)
        - public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
@@ -193,23 +194,7 @@ API Reference
    ```
 2. ErrorCode
 #### AdiscopeError Code
-|Code	|Value	|Description	|
-|-------|-------|---------------|
-|INTERNAL_ERROR	|0	|"Internal error"	|
-|MEDIATION_ERROR	|1	|"3rd party mediation network error"	|
-|INITIALIZE_ERROR	|2	|"mediaId/mediaSecret must be valid"	|
-|SERVER_SETTING_ERROR	|3	|"Server settings are incorrect"	|
-|INVALID_REQUEST	|4	|"The request is invalid"	|
-|NETWORK_ERROR	|5	|"There is a network problem"	|
-|NO_FILL	|6	|"No more ads to show"	|
-|TIME_LIMIT	|7	|"It was time-limited"	|
-|"NOT_EXIST_IDFA (Only iOS)"	|8	|iOS 디바이스에서 추출된 IDFA 값이 "00000000-0000-0000-0000-000000000000" 인 경우	|
-|GOOGLE_FAMILY_ERROR (Only Android)	|9	|"It is not available because of Google Family Policy"	|
-|INVALID_ADID (Only Android)	|10	|"ADID value is invalid"	|
-|TIME_OUT	|11	|"Time out"	|
-|SHOW_CALLED_BEFORE_LOAD	|12	|"Show called before load"	|
-|ADID IS NOT AVAILABLE (Only Android)		|13	|"When users delete ADID or opt out of Ads personalization"	|
-|"UNKNOWN_ERROR (Only Unity)"	|-1	|""	|
+[AdiscopeError](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/error_info.md)
 
 ## API Reference - InterstitialAd.Android
 ### InterstitialAd
