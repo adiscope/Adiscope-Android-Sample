@@ -12,7 +12,7 @@
 |Accept|-|
 |URL Format|http<span>s://m</span>y-server.com/anypath?{URL_PARAMETERS}|
 
-* URL_PARAMETERS는 이하 [Adiscope Server Paramters](https://github.com/adiscope/Adiscope-Android-Sample/blob/2.1.2.0/docs/reward_callback_info.md#adiscope-server-parameters) 를 참조합니다.
+* URL_PARAMETERS는 이하 [Adiscope Server Paramters](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/reward_callback_info.md#adiscope-server-parameters) 를 참조합니다.
 * Example
     * Placeholder의 값은 고정되어있습니다. 이하 응답값에 대한 Key(userID, unit 등...)은 자유로운 포맷으로 사용 할 수 있습니다.
     * http<span>s://</span>my-server.com/anypath/transctionID=[TRANSCTION_ID]&signature=[SIGNATURE]&unitID=[UNIT_ID]&userID=[USER_ID]&adid=[ADID]&unit=[REWARD_UNIT]&amount=[AMOUNT]

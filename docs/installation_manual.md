@@ -29,7 +29,7 @@ module build.gradle
 dependencies {
  
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.2.0'
+    implementation 'com.nps.adiscope:adiscopeCore:2.1.2.1'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.5'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -40,12 +40,12 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:20.6.0.3'        // admob (use play-services-ads:20.6.0 dependency)
     implementation 'com.nps.adiscope:adapter.applovin:11.4.1.0'        // applovin
     implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.0'        // chartboost
-    implementation 'com.nps.adiscope:adapter.fan:6.10.0.0'           // fan
+    implementation 'com.nps.adiscope:adapter.fan:6.11.0.0'           // fan
     implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.1'   // ironsource
     implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.2'     // mobvista (use androidx)
     implementation 'com.nps.adiscope:adapter.tapjoy:12.10.0.0'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.0'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.10.3.4'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.vungle:6.11.0.0'        // vungle (use androidx)
 
     // [optional] adiscope interstitial networks
     implementation 'com.nps.adiscope:adapter.admob:20.6.0.3'        // admob (use play-services-ads:20.6.0 dependency)
