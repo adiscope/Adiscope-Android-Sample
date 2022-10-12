@@ -58,6 +58,11 @@ OverView
 2. 사용자 정보 설정
 
     <br>application 사용자의 unique user id를 Adiscope Sdk에 전달한다. unique user id는 보상이 지급 될 시 사용자를 구분하기 위해 사용된다.
+    
+    <br>* 최대길이 64자로 제한된다. 그 이상일 경우 false를 반환 
+
+    <span style="color:red">* 만일 서비스에서 한 사람당 N개의 계정 사용이 가능한 경우, 계정 변경 시 `setUserId` 호출로 애디스콥에 변경 정보를 전달해주어야 한다. 그렇지 않을 경우 변경된 계정 정보로 보상 지급이 되지 않으므로 유의해야 한다.</span></br>
+
 
     ```
     // Setting User Id
