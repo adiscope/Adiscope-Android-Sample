@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.1'        // chartboost
     implementation 'com.nps.adiscope:adapter.fan:6.11.0.0'           // fan
     implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.1'   // ironsource
-    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.1"        // pangle
+    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.2"        // pangle
     implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.2'     // mobvista (use androidx)
     implementation 'com.nps.adiscope:adapter.tapjoy:12.10.0.0'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.0'      // unityads
