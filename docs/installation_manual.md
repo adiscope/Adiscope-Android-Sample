@@ -29,7 +29,7 @@ module build.gradle
 dependencies {
  
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.5.0'
+    implementation 'com.nps.adiscope:adiscopeCore:2.1.6.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.5'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -37,16 +37,25 @@ dependencies {
     // implementation 'com.google.android.gms:play-services-basement:8.3.0'
 
     // [optional] adiscope rewarded video networks
-    implementation 'com.nps.adiscope:adapter.admob:20.6.0.3'        // admob (use play-services-ads:20.6.0 dependency)
-    implementation 'com.nps.adiscope:adapter.applovin:11.4.4.1'        // applovin
-    implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.1'        // chartboost
-    implementation 'com.nps.adiscope:adapter.fan:6.11.0.0'           // fan
-    implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.1'   // ironsource
-    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.1"        // pangle
-    implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.2'     // mobvista (use androidx)
-    implementation 'com.nps.adiscope:adapter.tapjoy:12.10.0.0'        // tapjoy
-    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.0'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.11.0.0'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.admob:20.6.0.4'        // admob (use play-services-ads:20.6.0 dependency)
+
+    implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.2'        // chartboost
+
+    implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.2'   // ironsource
+    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.5"        // pangle
+
+    implementation 'com.nps.adiscope:adapter.tapjoy:12.10.0.1'        // tapjoy
+    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
+    implementation 'com.nps.adiscope:adapter.vungle:6.11.0.2'        // vungle (use androidx)
+
+    implementation 'com.nps.adiscope:adapter.max:11.4.4.1'        // max
+    /****************************
+     만약 위 max lib 을 참조 하신 경우라면 아래의 applovin, fan, mobvista 참조를 하시면 안됩니다.
+     *****************************/
+
+    // implementation 'com.nps.adiscope:adapter.applovin:11.4.4.3'        // applovin
+    // implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.3'     // mobvista (use androidx)
+    // implementation 'com.nps.adiscope:adapter.fan:6.11.0.1'           // fan
 
     // [optional] adiscope interstitial networks
     implementation 'com.nps.adiscope:adapter.admob:20.6.0.3'        // admob (use play-services-ads:20.6.0 dependency)
