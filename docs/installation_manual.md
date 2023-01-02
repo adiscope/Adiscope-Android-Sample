@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.vungle:6.11.0.2'        // vungle (use androidx)
 
     implementation 'com.nps.adiscope:adapter.max:11.4.4.1'        // max
+    implementation 'com.applovin:applovin-sdk:11.4.4'        // applovin 앱러빈은 직접 참조 해야함
+    
     /****************************
      만약 위 max lib 을 참조 하신 경우라면 아래의 applovin, fan, mobvista 참조를 하시면 안됩니다.
      *****************************/
