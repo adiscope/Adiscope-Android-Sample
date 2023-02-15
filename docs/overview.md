@@ -17,7 +17,7 @@ OverView
     import com.nps.adiscope.AdiscopeSdk;
   
     // initialize AdiscopeSdk, must be called in main thread
-    AdiscopeSdk.initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener) 
+    AdiscopeSdk.initialize(Activity activity, AdiscopeInitializeListener listener) 
     ```
     **callback tag 사용**
 
@@ -27,13 +27,13 @@ OverView
     import com.nps.adiscope.AdiscopeSdk;
   
     // initialize AdiscopeSdk, must be called in main thread
-    AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
+    AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener)
     ```
    
    **사용 예**
 
    ```
-        AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET, new AdiscopeInitializeListener() {
+        AdiscopeSdk.initialize(this, new AdiscopeInitializeListener() {
             @Override
             public void onInitialized(boolean isSuccess) {
                 if (isSuccess) {
@@ -104,7 +104,7 @@ OverView
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
-    AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener);
+    AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
    - Interstitial Ad instance 생성
    ```
@@ -193,7 +193,7 @@ OverView
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
-    AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener);
+    AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
    - Offerwall Ad instance 생성
    ```
@@ -238,9 +238,39 @@ OverView
       - show가 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
 
    -  Callbacks
-      - show 성공 시 onOfferwallAdOpened, onOfferwallAdOpened callback이 순차적으로 호출된다.
+      - show 성공 시 onOfferwallAdOpened, onOfferwallAdClosed callback이 순차적으로 호출된다.
       - show 실패 시 onOfferwallAdFailedToShow callback이 호출된다.
 
+
+   - ShowDetail
+       - 특정 광고 아이템의 상세 페이지로 이동한다.
+       - ShowDetail method는 중복하여 호출 할 수 없다.
+       - unitId는 admin page을 통하여 등록/조회한다.
+       - excludeAdTypeList 는 제외할 타입을 지정해준다. ex) ["CPS"]
+       - sponsorshipItemId는 이동하고자 할 스폰서십 id이며 admin page을 통하여 등록/조회한다.
+       - url는 mediaId, unitId, excludeAdTypes, sponsorshipItemId가 포함된 형식의 url이다.
+
+    ```
+    // ShowDetail Ad
+ 
+    import com.nps.adiscope.AdiscopeSdk;
+    import com.nps.adiscope.offerwall.OfferwallAd;
+  
+    // showDetail offerwall ad
+    if (offerwallAd.showDetail(activity, "UNIT_ID", new String[]{}, "SPONSORSHIP_ITEM_ID")) {
+        // Succeed
+    } else {
+        // show is already in progress
+    }
+    ```
+   - showDetail이 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
+
+   -  Callbacks
+      - show 성공 시 onOfferwallAdOpened, onOfferwallAdClosed callback이 순차적으로 호출된다.
+      - show 실패 시 onOfferwallAdFailedToShow callback이 호출된다.
+
+
+    
 ## Overview - RewardedVideoAd.Android
 ### RewardedVideoAd
 1. Singleton Instance
@@ -252,7 +282,7 @@ OverView
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
-    AdiscopeSdk.initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener);
+    AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
     - Rewarded Video Ad instance 생성
     ```

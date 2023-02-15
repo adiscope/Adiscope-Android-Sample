@@ -17,10 +17,15 @@ API Reference
 
             public static void initialize(Activity activity, AdiscopeInitializeListener listener)
 
-            public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
+            public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag, String childYN)
 
+            @Deprecated
+            public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
+            
+            @Deprecated
             public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
             
+            @Deprecated
             public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
             
             public static OfferwallAd getOfferwallAdInstance(Activity activity)
@@ -50,9 +55,10 @@ API Reference
        
      - Definition
        - public static void initialize(Activity activity, AdiscopeInitializeListener listener)
-       - public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)
-       - public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)
-       - public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
+       - public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag, String childYN)
+       - ~~public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)~~
+       - ~~public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)~~
+       - ~~public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)~~
      - Parameters
        - activity : Activity
        - mediaId : Amdin page에서 등록한 해당 application에 대한 Id
@@ -237,11 +243,11 @@ API Reference
      * load가 실행되면 onInterstitialAdLoaded 와 onInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
 
      - Callback
-       - onInterstitialAdLoaded :
-       - |Method|Info|Parameter|
-       |-------|---|---------|
-       |onInterstitialAdLoaded	|Interstitial 를 load 하였을 때 |void|
-       |onInterstitialAdFailedToLoad	|Interstitial load 가 실패하였을 때| AdiscopeError|
+      - onInterstitialAdLoaded :
+      - |Method|Info|Parameter|
+        |-------|---|---------|
+        |onInterstitialAdLoaded	|Interstitial 를 load 하였을 때 |void|
+        |onInterstitialAdFailedToLoad	|Interstitial load 가 실패하였을 때| AdiscopeError|
 
    - isLoaded<br>특정 유닛의 Interstitial 광고가 load 되었는 지를 확인한다.
        - Definition
@@ -275,11 +281,15 @@ API Reference
 
 ## API Reference - OfferwallAd.Android
 ### OfferwallAd
-1.  Class Declaration
+1. Class Declaration
     ```
         public interface OfferwallAd {
 
-            boolean show(Activity activity, String unitId);
+            boolean show(Activity activity, String unitId, String[] excludeAdTypeList);
+
+            boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId);
+
+            boolean showDetail(Activity activity, String url);
 
             void setOfferwallAdListener(OfferwallAdListener offerwallAdListener);
         }
@@ -309,40 +319,30 @@ API Reference
      * show가 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
 
      - Callback
-       - |Method|Info|Parameter|
-       |-------|---|---------|
-       |onOfferwallAdOpened	|Offerwall 광고창이 열릴 때	 |String unitId|
-       |onOfferwallAdClosed		|Offerwall 광고창이 닫혔을 때	| String unitId|
-       |onOfferwallAdFailedToShow		|Offerwall 광고창을 보여 줄 수 없을 때	| String unitId, AdiscopeError error|
+      - |Method|Info|Parameter|
+        |-------|---|---------|
+        |onOfferwallAdOpened	|Offerwall 광고창이 열릴 때	 |String unitId|
+        |onOfferwallAdClosed		|Offerwall 광고창이 닫혔을 때	| String unitId|
+        |onOfferwallAdFailedToShow		|Offerwall 광고창을 보여 줄 수 없을 때	| String unitId, AdiscopeError error|
 
-   - isLoaded<br>특정 유닛의 Interstitial 광고가 load 되었는 지를 확인한다.
-       - Definition
-           - boolean isLoaded(String unitId)
-
-       - Parameters
-           - unitId : load 여부를 체크할 광고의 unit id
-
-       - Return
-           - bool : load 된 광고가 있을 시 True, load된 광고가 없을 시 False
-
-   - Show
-     * 최근에 load 된 Interstitial 광고 유닛에 속한 광고를 사용자에게 보여준다.
+   - showDetail
+     * 특정 광고 아이템의 상세 페이지로 이동한다.
 
      - Definition
-        - boolean show()
+       - boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId)
+       - boolean showDetail(Activity activity, String url)
+     - Parameters
+       - activity : 상위 액티비티
+       - unitId: 사용자에게 표시할 광고의 unit id. Admin page에 등록된 id와 동일해야 한다.
+       - excludeAdTypeList : 구매 제한 타입 리스트 ex) [ "CPS" ].
+       - sponsorshipItemId: 이동하고자 할 스폰서십의 item id. Admin page에 등록된 id와 동일해야 한다.
+       - url: mediaId, unitId, excludeAdTypes, sponsorshipItemId가 포함된 형식의 url
+     
+     - Return
+       - bool : showDetail이 정상적으로 시작되면 True, 그렇지 않다면 False
+     * showDetail이 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
 
-        - Parameters
 
-        - Return
-           - bool : show가 정상적으로 시작되면 True, 만약 이미 다른 show가 진행중이라면 False
-           *  show가 실행되면 (return값이 True일 경우) onInterstitialAdOpened 와 onInterstitialAdFailedToShow 중 하나가 항상 호출되고, onInterstitialAdOpened가 호출되었다면 이후 onInterstitialAdClosed가 항상 호출된다.
-
-        - Callback
-             - |Method|Info|Parameter|
-               |-------|---|---------|
-               |onInterstitialAdOpened	|Interstitial 광고창이 열릴 때	| String unitId |
-               |onInterstitialAdClosed	|Interstitial 광고창이 닫혔을 때	|String unitId|
-               |onInterstitialAdFailedToShow	|Interstitial 광고창을 보여 줄 수 없을 때	|String unitId, AdiscopeError error|
 
 ## API Reference - RewardedVideoAd.Android
 ### RewardedVideoAd
