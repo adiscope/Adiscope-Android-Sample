@@ -29,8 +29,8 @@ module build.gradle
 dependencies {
  
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.6.0'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.5'
+    implementation 'com.nps.adiscope:adiscopeCore:2.1.7.0'
+    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.6'
 
     // adiscope sdk have to extract Google Advertising Id.
     // if com.google.android.gms.ads.identifier.AdvertisingIdClient class is not included in your app, uncomment following code
@@ -44,11 +44,11 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.2'   // ironsource
     implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.5"        // pangle
 
-    implementation 'com.nps.adiscope:adapter.tapjoy:12.10.0.1'        // tapjoy
+    implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.0'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.11.0.2'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.0'        // vungle (use androidx)
 
-    implementation 'com.nps.adiscope:adapter.max:11.4.4.2'        // max
+    implementation 'com.nps.adiscope:adapter.max:11.4.4.3'        // max
     implementation 'com.applovin:applovin-sdk:11.4.4'        // applovin 앱러빈은 직접 참조 해야함
     
     /****************************
