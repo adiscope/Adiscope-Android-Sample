@@ -37,6 +37,10 @@ repositories {
     }
 }
 
+repositories {
+    maven { url = uri("https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea") }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation fileTree(dir: 'libs', include: ['*.aar'])
