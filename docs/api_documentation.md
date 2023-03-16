@@ -17,6 +17,8 @@ API Reference
 
             public static void initialize(Activity activity, AdiscopeInitializeListener listener)
 
+            public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag)
+    
             public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag, String childYN)
 
             @Deprecated
@@ -55,6 +57,7 @@ API Reference
        
      - Definition
        - public static void initialize(Activity activity, AdiscopeInitializeListener listener)
+       - public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag)
        - public static void initialize(Activity activity, AdiscopeInitializeListener listener, String callbackTag, String childYN)
        - ~~public static void initialize(Activity activity, String mediaId, String mediaSecret, AdiscopeInitializeListener listener)~~
        - ~~public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, AdiscopeInitializeListener listener)~~
