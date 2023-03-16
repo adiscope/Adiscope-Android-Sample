@@ -6,7 +6,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 2.1.7.1 (for only fandom version)
+## version : 2.1.7.2
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -36,8 +36,8 @@ allprojects {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.7.1'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.6'
+    implementation 'com.nps.adiscope:adiscopeCore:2.1.7.2'
+    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.7'
 
     // adiscope sdk have to extract Google Advertising Id.
     // if com.google.android.gms.ads.identifier.AdvertisingIdClient class is not included in your app, uncomment following code
@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
     implementation 'com.nps.adiscope:adapter.vungle:6.12.1.0'        // vungle (use androidx)
 
-    implementation 'com.nps.adiscope:adapter.max:11.4.4.5'        // max
+    implementation 'com.nps.adiscope:adapter.max:11.4.4.6'        // max
     implementation 'com.applovin:applovin-sdk:11.4.4'        // applovin 앱러빈은 직접 참조 해야함
     /****************************
      만약 위 max lib 을 참조 하신 경우라면 아래의 applovin, fan, mobvista 참조를 하시면 안됩니다.
