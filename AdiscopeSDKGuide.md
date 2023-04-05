@@ -25,3 +25,7 @@ Adiscope for Android Integration
   - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#offerwallad)
   - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedvideoad)
 
+- [Offerwall Detail](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md)
+  - [함수 호출(showDetail())](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md#%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-showdetail)
+  - [Deep Link](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md#%EB%94%A5%EB%A7%81%ED%81%AC-custom-scheme)
+  - App Link (제공 예정)
