@@ -27,40 +27,40 @@ allprojects {
 module build.gradle
 ```
 dependencies {
- 
+
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.8.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.0.0.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.8'
 
     // adiscope sdk have to extract Google Advertising Id.
     // if com.google.android.gms.ads.identifier.AdvertisingIdClient class is not included in your app, uncomment following code
     // implementation 'com.google.android.gms:play-services-basement:8.3.0'
 
-    // [optional] adiscope rewarded video networks
-    implementation 'com.nps.adiscope:adapter.admob:20.6.0.4'        // admob (use play-services-ads:20.6.0 dependency)
-
     implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.2'        // chartboost
 
     implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.3'   // ironsource
-    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.5"        // pangle
 
-    implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.1'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.0'        // vungle (use androidx)
 
-    implementation 'com.nps.adiscope:adapter.max:11.4.4.7'        // max
-    implementation 'com.applovin:applovin-sdk:11.4.4'        // applovin 앱러빈은 직접 참조 해야함
-    
+    implementation 'com.nps.adiscope:adapter.max:11.9.0.0'        // max
+    implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
+
     /****************************
-     만약 위 max lib 을 참조 하신 경우라면 아래의 applovin, fan, mobvista 참조를 하시면 안됩니다.
+     max lib를 사용하더라도 max bidder로 포함되어 있는 미디에이션의 워터폴을 사용하실 경우,
+     해당 미디에이션 어댑터 참조를 선택적으로 하시면 됩니다.
+     (아래 미디에이션들이 max bidder에 포함됨)
      *****************************/
 
-    // implementation 'com.nps.adiscope:adapter.applovin:11.4.4.5'        // applovin
-    // implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.3'     // mobvista (use androidx)
-    // implementation 'com.nps.adiscope:adapter.fan:6.11.0.1'           // fan
-
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin
+    implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
+    implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi
+    implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)
+    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle
+    implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato
+    implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.2'        // tapjoy
+    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.1'        // vungle (use androidx)
     // [optional] adiscope interstitial networks
-    implementation 'com.nps.adiscope:adapter.admob:20.6.0.3'        // admob (use play-services-ads:20.6.0 dependency)
+    implementation 'com.nps.adiscope:adapter.admob:20.6.0.4'        // admob (use play-services-ads:20.6.0 dependency)
 }
 ```
 
@@ -84,16 +84,33 @@ dependencies {
 * 디바이스에서 광고를 테스트하기위해서는 Facebook admin에 디바이스의 ADID가 등록되어야합니다.
 
 #### Mobvista - Rewarded Video Network
-* 13.1.1.0 버전부터 androidx 라이브러리를 사용합니다. 앱 환경에 따라서 androidx migration이 필요할 수 있습니다. <a href="#heading-ids">https://developer.android.com/jetpack/androidx/migrate</a>
+* 13.1.1.0 버전부터 androidx 라이브러리를 사용합니다. 앱 환경에 따라서 androidx migration이 필요할 수 있습니다. <a href="#heading-ids">https://developer.android.com/jetpack/androidx/migrate </a>
 
 #### Vungle - Rewarded Video Network
 * 6.5.3.0 버전부터 androidx 라이브러리를 사용합니다. 앱 환경에 따라서 androidx migration이 필요할 수 있습니다. (https://developer.android.com/jetpack/androidx/migrate)
 * 아래 참조가 없다면 참조를 해주어야합니다.  
-  implementation 'androidx.core:core:1.3.1'
-  implementation 'com.google.code.gson:gson:2.8.6'
-  implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
-  implementation 'com.squareup.okhttp3:okhttp:3.12.12'
-  implementation 'com.squareup.okio:okio:1.15.0'
+
+  `implementation 'androidx.core:core:1.3.1'`  
+  `implementation 'com.google.code.gson:gson:2.8.6'`  
+  `implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'`  
+  `implementation 'com.squareup.okhttp3:okhttp:3.12.12'`  
+  `implementation 'com.squareup.okio:okio:1.15.0'`  
+
+
 #### Ironsource - Rewarded Video Network
 * 아래 참조가 없다면 참조를 해주어야합니다.  
-  implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'
+  `implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'`
+
+#### Max - Rewarded Video / Interstitial Network
+* 11.9.0.0 버전부터 앱러빈의 미디에이션 플랫폼인 MAX를 통해 비딩, 워터폴을 교차 운영할 수 있도록 지원합니다.
+* MAX 사용을 위해서는 앱러빈을 직접 참조해주어야 합니다.  
+  `implementation 'com.applovin:applovin-sdk:11.9.0'`
+* MAX 라이브러리를 사용하더라도 MAX 비더로 포함되어 있는 네트워크의 워터폴을 사용하실 경우, 워터폴로 사용하고자 하는 네트워크 어댑터를 선택적으로 참조해야 합니다.  
+  `implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin`  
+  `implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan`  
+  `implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi`  
+  `implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)`  
+  `implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle`  
+  `implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato`  
+  `implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.2'        // tapjoy`  
+  `implementation 'com.nps.adiscope:adapter.vungle:6.12.1.1'        // vungle (use androidx)`
