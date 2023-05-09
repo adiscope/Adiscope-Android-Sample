@@ -33,6 +33,7 @@ startActivity(intent)
 ## 앱링크 (https)
 
 애디스콥측의 도메인에 앱을 연결해주는 association file을 등록하여 앱링크를 동작하도록 지원합니다.
+애디스콥측 Manifest에 intent-filter가 적용되어 있으므로 매체 측에서 별도로 설정/구현해야 할 부분은 없습니다. 다만, 매체의 `build.gradle(app)`에 `adiscope_media_id`와 `adiscope_media_secret`, `adiscope_sub_domain`이 정확히 기입되어 있는지 확인이 필요합니다.
 
 매체는 도메인 연결을 위한 json 파일을 [공식 문서의 가이드](https://developer.android.com/studio/write/app-link-indexing?utm_source=android-studio#associatesite)에 따라 생성하여, 애디스콥측에 제공해야 합니다.
 
