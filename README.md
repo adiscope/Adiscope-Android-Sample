@@ -33,6 +33,21 @@ allprojects {
 
 ### Module Gradle
 ```gradle
+android {
+    ...
+    defaultConfig {
+
+        // 애디스콥 측에 media_id 와 media_secret, sub_domain 문의!
+
+        manifestPlaceholders = [
+                adiscope_media_id: "media id 기입필요",
+                adiscope_media_secret: "media secret 기입필요",
+                adiscope_sub_domain: "sub domain 기입필요"
+        ]
+    }
+    ...
+}
+
 dependencies {
 
     // [required] adiscope library
