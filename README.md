@@ -87,7 +87,7 @@ dependencies {
 }
 ```
 
-### AndroidManifest.xml setting for admob network:
+### AndroidManifest.xml setting for admob network, manifestPlaceholders
 ```
 <application ...>
     <!-- admob app id for adiscope Admob rewarded video networks -->
@@ -95,6 +95,10 @@ dependencies {
         android:name="com.google.android.gms.ads.APPLICATION_ID"
         android:value="admob_app_id"/>
     ...
+    <!-- gradle에 정의한 애디스콥 매체 아이디, 시크릿키, 서브도메인 값을 매니페스트에 연결 -->
+    <meta-data android:name="adiscope_media_id" android:value="${adiscope_media_id}"/>
+    <meta-data android:name="adiscope_media_secret" android:value="${adiscope_media_secret}"/>
+    <meta-data android:name="adiscope_sub_domain" android:value="${adiscope_sub_domain}"/>
 </application>
 ```
 
