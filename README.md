@@ -6,7 +6,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 2.1.8.0
+## version : 3.0.0.0
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -33,10 +33,25 @@ allprojects {
 
 ### Module Gradle
 ```gradle
+android {
+    ...
+    defaultConfig {
+
+        // 애디스콥 측에 media_id 와 media_secret, sub_domain 문의!
+
+        manifestPlaceholders = [
+                adiscope_media_id: "media id 기입필요",
+                adiscope_media_secret: "media secret 기입필요",
+                adiscope_sub_domain: "sub domain 기입필요"
+        ]
+    }
+    ...
+}
+
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:2.1.8.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.0.0.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.1.8'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -49,25 +64,30 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.chartboost:8.4.2.2'        // chartboost
 
     implementation 'com.nps.adiscope:adapter.ironsource:7.2.1.3'   // ironsource
-    implementation "com.nps.adiscope:adapter.pangle:4.7.0.5.5"        // pangle
 
-    implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.1'        // tapjoy
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
-    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.0'        // vungle (use androidx)
 
-    implementation 'com.nps.adiscope:adapter.max:11.4.4.7'        // max
-    implementation 'com.applovin:applovin-sdk:11.4.4'        // applovin 앱러빈은 직접 참조 해야함
+    implementation 'com.nps.adiscope:adapter.max:11.9.0.0'        // max
+    implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
+
     /****************************
-     만약 위 max lib 을 참조 하신 경우라면 아래의 applovin, fan, mobvista 참조를 하시면 안됩니다.
+     max lib를 사용하더라도 max bidder로 포함되어 있는 네트워크의 워터폴을 사용하실 경우,
+     해당 네트워크 어댑터 참조를 선택적으로 하시면 됩니다.
+     (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
 
-    // implementation 'com.nps.adiscope:adapter.applovin:11.4.4.5'        // applovin
-    // implementation 'com.nps.adiscope:adapter.mobvista:15.8.0.3'     // mobvista (use androidx)
-    // implementation 'com.nps.adiscope:adapter.fan:6.11.0.1'           // fan
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin
+    implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
+    implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi
+    implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)
+    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle
+    implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato
+    implementation 'com.nps.adiscope:adapter.tapjoy:12.11.1.2'        // tapjoy
+    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.1'        // vungle (use androidx)
 }
 ```
 
-### AndroidManifest.xml setting for admob network:
+### AndroidManifest.xml setting for admob network, manifestPlaceholders
 ```
 <application ...>
     <!-- admob app id for adiscope Admob rewarded video networks -->
@@ -75,6 +95,10 @@ dependencies {
         android:name="com.google.android.gms.ads.APPLICATION_ID"
         android:value="admob_app_id"/>
     ...
+    <!-- gradle에 정의한 애디스콥 매체 아이디, 시크릿키, 서브도메인 값을 매니페스트에 연결 -->
+    <meta-data android:name="adiscope_media_id" android:value="${adiscope_media_id}"/>
+    <meta-data android:name="adiscope_media_secret" android:value="${adiscope_media_secret}"/>
+    <meta-data android:name="adiscope_sub_domain" android:value="${adiscope_sub_domain}"/>
 </application>
 ```
 
