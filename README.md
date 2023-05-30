@@ -42,6 +42,9 @@ android {
         manifestPlaceholders = [
                 adiscope_media_id: "media id 기입필요",
                 adiscope_media_secret: "media secret 기입필요",
+                // 필드값은 필수이나 value는 빈 값으로 기입할 수 있음 (ex. adiscope_sub_domain: "")
+                // 무료페이지 상세 페이지 이동 기능을 적용 시에 기재하는 값으로,
+                // 해당 기능 적용 시 애디스콥과 협의 필요
                 adiscope_sub_domain: "sub domain 기입필요"
         ]
     }
@@ -69,6 +72,7 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.max:11.9.0.0'        // max
     implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (max 운영 시 함께 참조해야 함)
 
     /****************************
      max lib를 사용하더라도 max bidder로 포함되어 있는 네트워크의 워터폴을 사용하실 경우,
@@ -76,7 +80,6 @@ dependencies {
      (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
 
-    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
     implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi
     implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)

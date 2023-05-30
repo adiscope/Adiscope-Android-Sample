@@ -44,6 +44,7 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.max:11.9.0.0'        // max
     implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (max 운영 시 함께 참조해야 함)
 
     /****************************
      max lib를 사용하더라도 max bidder로 포함되어 있는 미디에이션의 워터폴을 사용하실 경우,
@@ -51,7 +52,6 @@ dependencies {
      (아래 미디에이션들이 max bidder에 포함됨)
      *****************************/
 
-    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
     implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi
     implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)
@@ -103,11 +103,12 @@ dependencies {
 
 #### Max - Rewarded Video / Interstitial Network
 * 11.9.0.0 버전부터 앱러빈의 미디에이션 플랫폼인 MAX를 통해 비딩, 워터폴을 교차 운영할 수 있도록 지원합니다.
-* MAX 사용을 위해서는 앱러빈을 직접 참조해주어야 합니다.  
+   `implementation 'com.nps.adiscope:adapter.max:11.9.0.0'        // max`
+* MAX 사용을 위해서는 앱러빈을 직접 참조해주어야 합니다. 또한 앱러빈 어댑터도 함께 참조해주어야 합니다.
   `implementation 'com.applovin:applovin-sdk:11.9.0'`
+  `implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin`
 * MAX 라이브러리를 사용하더라도 MAX 비더로 포함되어 있는 네트워크의 워터폴을 사용하실 경우, 워터폴로 사용하고자 하는 네트워크 어댑터를 선택적으로 참조해야 합니다.  
-  `implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin`  
-  `implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan`  
+  `implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan`
   `implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi`  
   `implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)`  
   `implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle`  
