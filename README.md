@@ -75,9 +75,9 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (max 운영 시 함께 참조해야 함)
 
     /****************************
-     MAX 비더로 운영하고자 하는 네트워크를 선택적으로 참조해야 합니다.
-     즉, MAX 어댑터와 운영하고자 하는 MAX 비더 참조 시 MAX 비딩/워터폴을 동시 운영할 수 있습니다.
-     (아래 네트워크들이 max bidder에 포함됨)
+     운영하고자 하는 네트워크를 선택적으로 참조해야 합니다.
+     애디스콥 담당자와 연동 네트워크 목록을 협의 후 운영하고자 하는 네트워크를 선택적으로 참조해주세요.
+     (아래 네트워크들은 max bidder에 포함되며, MAX 비더에 포함되어 있는 네트워크와 MAX 연동 시에는 비딩/워터폴 동시 운영 가능)
      *****************************/
 
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan

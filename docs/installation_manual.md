@@ -107,7 +107,7 @@ dependencies {
 * MAX 사용을 위해서는 앱러빈을 직접 참조해주어야 합니다. 또한 앱러빈 어댑터도 함께 참조해주어야 합니다.
   `implementation 'com.applovin:applovin-sdk:11.9.0'`
   `implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin`
-* MAX 비더로 운영하고자 하는 네트워크를 선택적으로 참조해야 합니다. (MAX 비더, 네트워크 워터폴 동시 운영 가능)
+* 비더로 운영하고자 하는 네트워크를 선택적으로 참조해야 합니다. 애디스콥 담당자와 연동 네트워크 목록을 협의 후 해당 네트워크를 선택적으로 참조해주세요. (MAX 비더에 포함되어 있는 네트워크와 MAX 연동 시에는 비딩/워터폴 동시 운영 가능)
   `implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan`
   `implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi`  
   `implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)`  
