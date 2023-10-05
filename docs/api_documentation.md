@@ -11,7 +11,7 @@ API Reference
 
 ## API Reference - AdiscopeSdk.Android
 ### AdiscopeSdk
-1.  Class Declaration
+1. Class Declaration
     ```
         public class AdiscopeSdk {
 
@@ -30,6 +30,8 @@ API Reference
             @Deprecated
             public static void initialize(final Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
             
+            public static boolean isInitialize()
+    
             public static OfferwallAd getOfferwallAdInstance(Activity activity)
                         
             public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
@@ -43,6 +45,8 @@ API Reference
             public static void getUnitStatus(String unitId, IUnitStatus callback)                
     
             public static String getNetworksVersion()
+   
+            public static String getSDKVersion()
         }
     
         public interface AdiscopeInitializeListener {
@@ -70,6 +74,15 @@ API Reference
        - childYN : 어린이 인지 아닌지의 여부를 설정 해주는 값 그대로 Google GMA 에 세팅 된다.  
      - Return
 
+   - isInitialize
+       * 이니셜라이즈 여부를 확인할 수 있다. 애디스콥 내부에서 이니셜라이즈가 되지 않았다고 판단 시에는 false를 반환한다.
+
+       - Definition
+           - public static boolean isInitialize()
+       - Return
+           - bool : 이니셜라이즈 된 상태일 경우 True, 이니셜라이즈가 되지 않은 상태일 경우 False
+
+
    - setUserId
      * Application 사용자의 Unique Id를 설정한다. 이 정보는 reward 지급 등에 있어 사용자를 구분하는데 사용된다.
 
@@ -82,7 +95,7 @@ API Reference
 
    - GetOfferwallAdInstance
      * Offerwall Ad의 전역 Singleton 객체를 생성한다.
-     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값이 true 로 받은뒤 객체 생성 해주어야한다.
+     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
 
      - Definition
        - public static OfferwallAd getOfferwallAdInstance(Activity activity)
@@ -93,7 +106,7 @@ API Reference
 
    - GetRewardedVideoAdInstance
      * Rewarded Video Ad의 전역 Singleton 객체를 생성한다.
-     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값이 true 로 받은뒤 객체 생성 해주어야한다.
+     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
 
      - Definition
        - public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
@@ -101,6 +114,17 @@ API Reference
        - activity : Activity
      - Return
        - RewardedVideoAd : Rewarded Video 광고의 Singleton Instance
+
+   - GetInterstitialAdInstance
+       * Interstitial Ad의 전역 Singleton 객체를 생성한다.
+       * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
+
+       - Definition
+           - public static InterstitialAd getInterstitialAdInstance(Activity activity)
+       - Parameters
+           - activity : Activity
+       - Return
+           - InterstitialAd : Interstitial 광고의 Singleton Instance
 
 
    - getUnitStatus
