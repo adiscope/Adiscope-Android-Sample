@@ -6,7 +6,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 3.1.0
+## version : 3.1.0 (hotfix)
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -67,7 +67,7 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
 
-    implementation 'com.nps.adiscope:adapter.max:11.9.1'        // max
+    implementation 'com.nps.adiscope:adapter.max:11.9.2'        // max
     implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
     implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (max 운영 시 함께 참조해야 함)
 
@@ -78,7 +78,6 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.admob:20.6.1'        // admob (use play-services-ads:20.6.0 dependency)
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
-    implementation 'com.nps.adiscope:adapter.inmobi:10.1.4'      // inmobi
     implementation 'com.nps.adiscope:adapter.mobvista:16.4.32'     // mobvista (use androidx)
     implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle
     implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato

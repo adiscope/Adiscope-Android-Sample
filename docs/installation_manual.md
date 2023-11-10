@@ -42,7 +42,7 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.unityads:4.2.1.1'      // unityads
 
-    implementation 'com.nps.adiscope:adapter.max:11.9.1'        // max
+    implementation 'com.nps.adiscope:adapter.max:11.9.2'        // max
     implementation 'com.applovin:applovin-sdk:11.9.0'        // applovin 앱러빈은 직접 참조 해야함
     implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (max 운영 시 함께 참조해야 함)
 
@@ -53,7 +53,6 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.admob:20.6.1'        // admob (use play-services-ads:20.6.0 dependency)
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan
-    implementation 'com.nps.adiscope:adapter.inmobi:10.1.4'      // inmobi
     implementation 'com.nps.adiscope:adapter.mobvista:16.4.32'     // mobvista (use androidx)
     implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle
     implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato
@@ -111,7 +110,6 @@ dependencies {
   `implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin`
 * 비더로 운영하고자 하는 네트워크를 선택적으로 참조해야 합니다. 애디스콥 담당자와 연동 네트워크 목록을 협의 후 해당 네트워크를 선택적으로 참조해주세요. (MAX 비더에 포함되어 있는 네트워크와 MAX 연동 시에는 비딩/워터폴 동시 운영 가능)
   `implementation 'com.nps.adiscope:adapter.fan:6.13.7.0'           // fan`
-  `implementation 'com.nps.adiscope:adapter.inmobi:10.1.3.4.0'      // inmobi`  
   `implementation 'com.nps.adiscope:adapter.mobvista:16.4.31.0'     // mobvista (use androidx)`  
   `implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.0"        // pangle`  
   `implementation 'com.nps.adiscope:adapter.smaato:22.1.0.0'        // smaato`  
