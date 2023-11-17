@@ -30,7 +30,7 @@ dependencies {
 
     // [required] adiscope library
     implementation 'com.nps.adiscope:adiscopeCore:3.1.0'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.8'
+    implementation 'com.nps.adiscope:adiscopeAndroid:1.1.9'
 
     // adiscope sdk have to extract Google Advertising Id.
     // if com.google.android.gms.ads.identifier.AdvertisingIdClient class is not included in your app, uncomment following code
