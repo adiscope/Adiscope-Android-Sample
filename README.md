@@ -38,13 +38,19 @@ android {
     defaultConfig {
 
         // 애디스콥 측에 media_id 와 media_secret, sub_domain 문의!
-
+        // adiscope_media_id: 매체 아이디
+        // adiscope_media_secret: 매체 시크릿키
+        // adiscope_sub_domain: '무료충전소 상세 화면 이동 기능'에 사용하는 값으로, 해당 기능 적용 시 애디스콥과 협의 필요
         manifestPlaceholders = [
                 adiscope_media_id: "media id 기입필요",
                 adiscope_media_secret: "media secret 기입필요",
-                // 필드값은 필수이나 value는 빈 값으로 기입할 수 있음 (ex. adiscope_sub_domain: "")
-                // 무료페이지 상세 페이지 이동 기능을 적용 시에 기재하는 값으로,
-                // 해당 기능 적용 시 애디스콥과 협의 필요
+                
+                // adiscopeAndroid 1.1.9 이상
+                // => 필드값은 필수이나 '무료충전소 상세 화면 이동 기능' 미사용 시 
+                //    value는 빈 값으로 기입할 수 있음 (ex. adiscope_sub_domain: "")
+                // adiscopeAndroid 1.1.8
+                // => 필드값은 필수이나 '무료충전소 상세 화면 이동 기능' 미사용 시 
+                //    디폴트 값(adiscope) 추가 필요  (ex. adiscope_sub_domain: "adiscope")
                 adiscope_sub_domain: "sub domain 기입필요"
         ]
     }
