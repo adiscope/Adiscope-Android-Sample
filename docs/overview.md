@@ -4,6 +4,7 @@ OverView
 - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#interstitialad)
 - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#offerwallad)
 - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#rewardedvideoad)
+- [RewardedInterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#rewardedinterstitialad)
 
 ## Overview - Sdk.Android
 ### AdiscopeSdk
@@ -75,23 +76,23 @@ OverView
 3. 광고 Instance
 
    <br>각 Ad의 global singleton instance를 얻을 수 있다.
-   ```
+   ```java
     import com.nps.adiscope.AdiscopeSdk;
     import com.nps.adiscope.offerwall.OfferwallAd;
     import com.nps.adiscope.reward.RewardedVideoAd;
+    import com.nps.adiscope.interstitial.InterstitialAd;
+    import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAd;
   
     // get singleton instance of offerwall ad
     OfferwallAd offerwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
-    RewardedVideoAd rewardedVideoAd = Adiscope.getRewardedVideoAdInstance(this);
+    RewardedVideoAd rewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this);
+    InterstitialAd interstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
+    RewardedInterstitialAd rewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this);
    ```
 
 
 4. 광고의 표시
-   <br>실제 광고를 보여주기 위해서는 필요한 상세정보에 대해서는 Overview section의 OfferwallAd와 RewardedVideoAd 항목을 참조할 것
-    ```
-     Offerwall Ad는 이후 Show를 하면 광고가 표시된다.
-     Rewarded Video Ad의 경우는 이후 위의 과정을 거친후 RewardedVideoAd.Load를 실행해야여 OnLoaded callback이 전달 된 후에 Show를 할 수 있다
-    ```
+   <br>실제 광고를 보여주기 위해 필요한 상세정보에 대해서는 Overview section의 각 광고 타입별 show 항목을 참조할 것
 
 ## Overview - InterstitialAd.Android
 
@@ -100,14 +101,15 @@ OverView
    - Interstitial Ad Instance는 global singleton instance이므로 여러개의 instance가 생성되지 않는다.
 2. Interstitial Ad 사용 방법
    - Interstitial Ad를 게임 내에서 표시하기 위해서는 다음의 과정을 거쳐야 한다.
-   ```
+   ```java
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
     AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
+   
    - Interstitial Ad instance 생성
-   ```
+   ```java
     // Get Instance
     import com.nps.adiscope.AdiscopeSdk;
     import com.nps.adiscope.interstitial.InterstitialAd;
@@ -115,8 +117,9 @@ OverView
     // get singleton instance of Interstitial Ad
     InterstitialAd interstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
    ```
+   
    - Callback 등록
-    ```
+    ```java
     // Register Callback Event Handlers 
     import com.nps.adiscope.AdiscopeSdk;
     import com.nps.adiscope.interstitial.InterstitialAd;
@@ -125,34 +128,37 @@ OverView
     // set callbacks
     interstitialAd.setInterstitialAdListener(this);
     ```
+   
    -  Load AD
       -  특정 유닛에 속한 ad 네크워크들의 광고를 load 한다.
       -  onInterstitialAdLoaded callback이 호출되면 load가 완료된 것이다.
-   ```
+   ```java
     // Load Ad
     // load a interstitial ad which belongs to a specific unit
     interstitialAd.load("UNIT_ID"); 
    ```
       - load가 실행되면 onInterstitialAdLoaded와 onInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
       - Interstitial Ad의 load와 show는 pair로 호출되어야 한다. 즉 load를 한 후 show를 하고, 광고를 show한 후에는 다시 load를 하여 다음번 show를 준비하여야 한다.
-   - isLoaded
-       - 광고가 load 되었는지 상태를 확인 할 수 있다.
-   ```
-        //Check Loaded Ad
 
-        // check Interstitial load
-        if (interstitialAd.isLoaded("UNIT_ID")) {
-            // show ad here
-        } else {
-            // do something else
-        }
+      - isLoaded
+          - 광고가 load 되었는지 상태를 확인 할 수 있다.
+   ```java
+   //Check Loaded Ad
+
+   // check Interstitial load
+   if (interstitialAd.isLoaded("UNIT_ID")) {
+       // show ad here
+   } else {
+       // do something else
+   }
    ```
+   
    - show
      - 마지막으로 load된 광고를 사용자에게 보여준다.
      - show 호출 후에는 다시 load를 호출해야한다.
      - show method는 중복하여 호출 할 수 없다.
      - unitId는 admin page을 통하여 등록/조회한다.
-   ```
+   ```java
    // Show Ad
    
    // check Interstitial Ad is loaded
@@ -171,6 +177,7 @@ OverView
         Debug.Log("AdiscopeExample - InterstitialAd is not loaded");
     }
    ```
+   
       -  show가 실행되면 (return값이 True일 경우) onInterstitialAdOpened 와 onInterstitialAdFailedToShow 중 하나가 항상 호출되고, onInterstitialAdOpened가 호출되었다면 이후 onInterstitialAdClosed 가 항상 호출된다.
       - Interstitial Ad의 load와 show는 pair로 호출되어야 한다. 즉 load를 한 후 show를 하고, 광고를 show한 후에는 다시 load를 하여 다음번 show를 준비하여야 한다.
 
@@ -189,14 +196,15 @@ OverView
 2. Offerwall Ad 사용 방법
    <br>Offerwall Ad를 게임 내에서 표시하기 위해서는 다음의 과정을 거쳐야 한다.
      - 초기화 및 사용자 정보 설정
-     ```
+   ```java
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
     AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
+   
    - Offerwall Ad instance 생성
-   ```
+   ```java
     //Get Instance
 
     import com.nps.adiscope.AdiscopeSdk;
@@ -205,8 +213,9 @@ OverView
     // get singleton instance of Offerwall Ad
     OfferwallAd offerwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
    ```
+   
    - Callback 등록
-   ```
+   ```java
     // Register Callback Event Handlers
 
     import com.nps.adiscope.AdiscopeSdk;
@@ -222,7 +231,7 @@ OverView
        - Show method는 중복하여 호출 할 수 없다.
        - unitId는 admin page을 통하여 등록/조회한다.
        - excludeAdTypeList 는 제외할 타입을 지정해준다. ex) ["CPS"] 
-   ```
+   ```java
     // Show Ad
  
     import com.nps.adiscope.AdiscopeSdk;
@@ -250,7 +259,8 @@ OverView
        - sponsorshipItemId는 이동하고자 할 스폰서십 id이며 admin page을 통하여 등록/조회한다.
        - url는 mediaId, unitId, excludeAdTypes, sponsorshipItemId가 포함된 형식의 url이다.
 
-    ```
+   
+   ```java
     // ShowDetail Ad
  
     import com.nps.adiscope.AdiscopeSdk;
@@ -262,7 +272,7 @@ OverView
     } else {
         // show is already in progress
     }
-    ```
+   ```
    - showDetail이 실행되면 (return값이 True일 경우) onOfferwallAdOpened 와 onOfferwallAdFailedToShow 중 하나가 항상 호출되고, onOfferwallAdOpened가 호출되었다면 이후 onOfferwallAdClosed가 항상 호출된다.
 
    -  Callbacks
@@ -278,22 +288,24 @@ OverView
 2. Rewarded Video Ad 사용 방법
    - Rewarded Video Ad를 게임 내에서 표시하기 위해서는 다음의 과정을 거쳐야 한다.
      - 초기화 및 사용자 정보 설정
-    ```
+    ```java
     // Sdk Initialization
     import com.nps.adiscope.AdiscopeSdk;
   
     AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
    ```
+   
     - Rewarded Video Ad instance 생성
-    ```
+    ```java
     import com.nps.adiscope.AdiscopeSdk;
     import com.nps.adiscope.reward.RewardedVideoAd;
   
     // get singleton instance of Rewarded Video Ad
     RewardedVideoAd rewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this); 
     ```
+   
    -  Callback 등록
-   ```
+   ```java
     // Register Callback Event Handlers
 
     import com.nps.adiscope.AdiscopeSdk;
@@ -303,10 +315,11 @@ OverView
     // set callbacks
     rewardedVideoAd.setRewardedVideoAdListener(this);
    ```
+   
    - load
      - 특정 유닛에 속한 ad 네크워크들의 광고를 load 한다.
      - onRewardedVideoAdLoaded callback이 호출되면 load가 완료된 것이다.
-   ```
+   ```java
    // Load Ad
    
     // load a rewarded video ad which belongs to a specific unit
@@ -316,7 +329,7 @@ OverView
       - Rewarded Video Ad의 load와 show는 pair로 호출되어야 한다. 즉 load를 한 후 show를 하고, 광고를 show한 후에는 다시 load를 하여 다음번 show를 준비하여야 한다.
    - isLoaded
      - 광고가 load 되었는지 상태를 확인 할 수 있다.
-     ```
+     ```java
         // check video load
         if (rewardedVideoAd.isLoaded("UNIT_ID")) {
             // show ad here
@@ -330,7 +343,7 @@ OverView
      - show 호출 후에는 다시 load를 호출해야한다.
      - show method는 중복하여 호출 할 수 없다.
      - unitId는 admin page을 통하여 등록/조회한다.
-   ```
+   ```java
     // check rewarded video is loaded
     if (rewardedVideoAd.isLoaded("UNIT_ID")) {
         // only one "show" can not be requested at a time
@@ -354,7 +367,7 @@ OverView
      - 이 보상 정보를 바탕으로 게임 내에서 보상을 지급할 수 있다.
 
    - Reward
-   ```
+   ```java
     @Override
     public void onRewarded(String unitId, RewardItem rewardItem) {
         /*
@@ -368,6 +381,89 @@ OverView
       -  Mediation network 중 Adcolony의 경우, Reward 설정을 Server-to-server로 하였다면, Adcolony의 Video 시청 후에는 onRewarded가 호출되지 않는다.
       -  Reward 정보는 abusing 방지를 위해서 Server-to-server 방식으로 전달 받는 것을 권장한다. <br>Server-to-server 방식을 선택하더라도 보상이 전달 될 시에는 onRewarded가 호출된다. 이때는 Server를 통해 전달받은 정보를 기준으로 처리하고, onRewarded를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 한다.
    -  Callbacks
-      -  load 성공 시 onRewardedVideoAdLoaded, 실패 시 onRewardedVideoAdFailedToLoad 가 호출된다.
-      -  show 성공 시 onRewardedVideoAdOpened, onRewardedVideoAdClosed 가 순차적으로 호출되고, 실패시 onRewardedVideoAdFailedToShow 가 호출된다.
-      -  보상이 있을 경우 onRewarded 가 호출된다.
+      - load 성공 시 onRewardedVideoAdLoaded, 실패 시 onRewardedVideoAdFailedToLoad 가 호출된다.
+      - show 성공 시 onRewardedVideoAdOpened, onRewardedVideoAdClosed 가 순차적으로 호출되고, 실패시 onRewardedVideoAdFailedToShow 가 호출된다.
+      - 보상이 있을 경우 onRewarded 가 호출된다.
+      
+
+
+## Overview - RewardedInterstitialAd.Android
+### RewardedInterstitialAd
+1. Singleton Instance
+    - Rewarded Interstitial Ad Instance는 global singleton instance이므로 여러개의 instance가 생성되지 않는다.
+2. Rewarded Interstitial Ad 사용 방법
+    - Rewarded Interstitial Ad를 게임 내에서 표시하기 위해서는 다음의 과정을 거쳐야 한다.
+        - 초기화 및 사용자 정보 설정
+   ```java
+    // Sdk Initialization
+    import com.nps.adiscope.AdiscopeSdk;
+  
+    AdiscopeSdk.initialize(final Activity activity, String callbackTag, AdiscopeInitializeListener listener);
+   ```
+    
+    - Rewarded Video Ad instance 생성
+    ```java
+    import com.nps.adiscope.AdiscopeSdk;
+    import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd;
+  
+    // get singleton instance of Rewarded Interstitial Ad
+    RewardedInterstitialAd rewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this); 
+    ```
+     
+    - Callback 등록
+   ```java
+    // Register Callback Event Handlers
+
+    import com.nps.adiscope.AdiscopeSdk;
+    import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAd;
+    import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAdListener;
+  
+    // set callbacks
+    rewardedInterstitialAd.setRewardedInterstitialAdListener(this);
+   ```
+    
+    - preloadUnit
+        - 특정 유닛들에 속한 ad 네트워크들의 전면형 보상 광고를 순차적으로 load 한다.
+        - 이니셜라이즈 콜백 이후 1회 호출 권장
+   ```java
+   // Preload RI Ad List
+   
+   // preload rewarded interstitial ad which belongs to specific unit list
+   String[] unitList = {"RI_UNIT1", "RI_UNIT2", "RI_UNIT3"};
+   rewardedInterstitialAd.preloadUnit(unitList);
+   ```
+
+   - preloadAll
+        - Admin page에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 load 한다.
+        - 이니셜라이즈 콜백 이후 1회 호출 권장
+   ```java
+   // PreloadAll
+   
+   // preload all activated rewarded interstitial ad 
+   rewardedInterstitialAd.preloadAll();
+   ```   
+
+    - show
+        - load된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여준다.
+        - 해당 유닛이 load 되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여준다.
+        - show는 중복하여 호출할 수 없다.
+        - `onRewardedInterstitialAdClosed`와 `onRewardedInterstitialAdFailedToShow`가 호출되면 내부에서 해당 유닛을 자동 load 시킨다.
+   ```java
+   rewardedInterstitialAd.show(unitId);
+   ```
+   
+    - show가 실행되면 `onRewardedInterstitialAdSkipped` 와 `onRewardedInterstitialAdOpened와` `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출되고, `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
+    - `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
+    - Reward
+        - 보상이 주어져야 할 경우 `onRewardedInterstitialAdRewarded` callback이 호출되며 그 parameter로 관련 정보가 전달된다.
+        - 이 보상 정보를 바탕으로 게임 내에서 보상을 지급할 수 있다.
+   ```java
+    @Override
+    public void onRewardedInterstitialAdRewarded(String unitId, RewardItem rewardItem) {
+        /*
+        RewardItem.getType - 보상 type
+        RewardItem.getAmount - 보상의 양
+        */
+        DoSomethingWithReward();
+    }
+   ```

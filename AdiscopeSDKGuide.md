@@ -10,6 +10,7 @@ Adiscope for Android Integration
   - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#interstitialad)
   - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#offerwallad)
   - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#rewardedvideoad)
+  - [RewardedInterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/overview.md#rewardedinterstitialad)
 
 - [Installation_manual](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/installation_manual.md#installation_manual)
   - [1. gradle 연동 설정](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/installation_manual.md#1-gradle-연동-설정)
@@ -24,8 +25,8 @@ Adiscope for Android Integration
   - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#interstitialad)
   - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#offerwallad)
   - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedvideoad)
+  - [RewardedInterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedinterstitialad)
 
 - [Offerwall Detail](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md)
   - [함수 호출(showDetail())](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md#%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-showdetail)
   - [Deep Link](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md#%EB%94%A5%EB%A7%81%ED%81%AC-custom-scheme)
-  - [App Link](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/offerwall_detail_guide.md#%EC%95%B1%EB%A7%81%ED%81%AC-https)

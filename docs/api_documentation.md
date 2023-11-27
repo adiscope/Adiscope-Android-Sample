@@ -7,12 +7,13 @@ API Reference
 - [InterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#interstitialad)
 - [OfferwallAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#offerwallad)
 - [RewardedVideoAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedvideoad)
+- [RewardedInterstitialAd](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#rewardedinterstitialad)
 
 
 ## API Reference - AdiscopeSdk.Android
 ### AdiscopeSdk
 1. Class Declaration
-    ```
+    ```java
         public class AdiscopeSdk {
 
             public static void initialize(Activity activity, AdiscopeInitializeListener listener)
@@ -37,6 +38,8 @@ API Reference
             public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
     
             public static InterstitialAd getInterstitialAdInstance(Activity activity)
+   
+            public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity activity)
     
             public static OptionSetter getOptionSetterInstance(Activity activity) 
             
@@ -93,7 +96,7 @@ API Reference
      - Return
        - bool : load된 광고가 있을 시 True, load된 광고가 없을 시 False
 
-   - GetOfferwallAdInstance
+   - getOfferwallAdInstance
      * Offerwall Ad의 전역 Singleton 객체를 생성한다.
      * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
 
@@ -104,9 +107,9 @@ API Reference
      - Return
        - OfferwallAd : Offerwall 광고의 Singleton Instance
 
-   - GetRewardedVideoAdInstance
+   - getRewardedVideoAdInstance
      * Rewarded Video Ad의 전역 Singleton 객체를 생성한다.
-     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
+     * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성을 해주어야 한다.
 
      - Definition
        - public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
@@ -115,9 +118,9 @@ API Reference
      - Return
        - RewardedVideoAd : Rewarded Video 광고의 Singleton Instance
 
-   - GetInterstitialAdInstance
+   - getInterstitialAdInstance
        * Interstitial Ad의 전역 Singleton 객체를 생성한다.
-       * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성 해주어야한다.
+       * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성을 해주어야 한다.
 
        - Definition
            - public static InterstitialAd getInterstitialAdInstance(Activity activity)
@@ -125,6 +128,17 @@ API Reference
            - activity : Activity
        - Return
            - InterstitialAd : Interstitial 광고의 Singleton Instance
+
+   - getRewardedInterstitialAdInstance
+       * Rewarded Interstitial Ad의 전역 Singleton 객체를 생성한다.
+       * Initialize() 를 호출하고 반드시 AdiscopeInitializeListener 의 콜백함수 onInitialized 의 isSuccess값을 true 로 받은뒤 객체 생성을 해주어야 한다.
+
+       - Definition
+           - public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity activity)
+       - Parameters
+           - activity : Activity
+       - Return
+           - RewardedInterstitialAd : Rewarded Interstitial 광고의 Singleton Instance
 
 
    - getUnitStatus
@@ -140,26 +154,25 @@ API Reference
      - Return
        - IUnitStatus : Rewarded Video 광고의 Singleton Instance
        - 
-          ```
+          ```java
           public interface IUnitStatus {
-            void onResult(AdiscopeError error, UnitStatus unitStatus);
+              void onResult(AdiscopeError error, UnitStatus unitStatus);
           }
           
           public class UnitStatus {
-                private boolean live;       // 광고 수익화 on/off
-                private boolean active;     // 유닛 활성화 on/off
+              private boolean live;       // 광고 수익화 on/off
+              private boolean active;     // 유닛 활성화 on/off
 
-                public UnitStatus() {}
+              public UnitStatus() {}
 
-                public boolean isLive() {
-                    return live;
-                }
+              public boolean isLive() {
+                  return live;
+              }
 
-                public boolean isActive() {
-                    return active;
-                }
-           }
-    
+              public boolean isActive() {
+                  return active;
+              }
+          }
          ```
          
    - getNetworksVersions
@@ -189,7 +202,7 @@ API Reference
 ## API Reference - OptionSetter.Android
 ### OptionSetter
 1.  Class Declaration
-    ```
+    ```java
         public interface OptionSetter {
             void setUseCloudFrontProxy(boolean useCloudFrontProxy);
             void setChildYN(String childYN);
@@ -210,7 +223,7 @@ API Reference
 
 ### AdiscopeError
 1. Class Declaration
-   ```
+   ```java
     package com.nps.adiscope;
  
     public class AdiscopeError {
@@ -232,7 +245,7 @@ API Reference
 ## API Reference - InterstitialAd.Android
 ### InterstitialAd
 1.  Class Declaration
-    ```
+    ```java
         public interface InterstitialAd {
 
             void load(String unitId);
@@ -243,6 +256,7 @@ API Reference
 
             void setInterstitialAdListener(InterstitialAdListener interstitialAdListener);
         }
+    
         public interface InterstitialAdListener {
 
             void onInterstitialAdLoaded();
@@ -309,7 +323,7 @@ API Reference
 ## API Reference - OfferwallAd.Android
 ### OfferwallAd
 1. Class Declaration
-    ```
+    ```java
         public interface OfferwallAd {
 
             boolean show(Activity activity, String unitId, String[] excludeAdTypeList);
@@ -374,7 +388,7 @@ API Reference
 ## API Reference - RewardedVideoAd.Android
 ### RewardedVideoAd
 1.  Class Declaration
-    ```
+    ```java
         public interface RewardedVideoAd {
 
             void load(String unitId);
@@ -386,7 +400,7 @@ API Reference
             void setRewardedVideoAdListener(RewardedVideoAdListener rewardedVideoAdListener);
         }
     
-    public interface RewardedVideoAdListener {
+        public interface RewardedVideoAdListener {
 
             void onRewardedVideoAdLoaded(String unitId);
 
@@ -399,7 +413,7 @@ API Reference
             void onRewarded(String unitId, RewardItem rewardItem);
 
             void onRewardedVideoAdFailedToShow(String unitId, AdiscopeError error);
-    }    
+        }    
     ```
 2. Methods
    - load
@@ -450,3 +464,113 @@ API Reference
        |onRewardedVideoAdClosed	|Rewarded Video 광고창이 닫혔을 때	|String unitId|
        |onRewarded	|Rewarded Video 시청 후 보상이 있을 시	|String unitId, RewardItem rewardItem|
        |onRewardedVideoAdFailedToShow	|Rewarded Video 광고창을 보여 줄 수 없을 때	|String unitId, AdiscopeError error|
+
+
+
+## API Reference - RewardedInterstitialAd.Android
+### RewardedInterstitialAd
+1.  Class Declaration
+    ```java
+    public interface RewardedInterstitialAd {
+        void preloadUnit(String[] unitIdList);
+
+        void preloadAll();
+
+        void show(String unitId);
+
+        void getUnitStatus(String unitId, IUnitStatus callback);
+
+        void setRewardedInterstitialAdListener(RewardedInterstitialAdShowListener listener);
+    }
+
+    public interface RewardedInterstitialAdShowListener {
+        void onRewardedInterstitialAdSkipped(String unitId);
+
+        void onRewardedInterstitialAdOpened(String unitId);
+
+        void onRewardedInterstitialAdClosed(String unitId);
+
+        void onRewardedInterstitialAdRewarded(String unitId, RewardItem rewardItem);
+
+        void onRewardedInterstitialAdFailedToShow(String unitId, AdiscopeError error);
+    } 
+    ```
+2. Methods
+    - preloadUnit
+        * 특정 유닛들에 속한 ad 네트워크들의 전면형 보상 광고를 순차적으로 load 한다.
+        * 이니셜라이즈 콜백 이후 1회 호출 권장
+
+        - Definition
+            - void preloadUnit(String[] unitIdList)
+        - Parameters
+            - String[] unitIdList : load 할 광고의 unit id 목록. Admin page에 등록된 id와 동일해야 한다.
+   
+    - preloadAll
+        * Admin page에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 load 한다.
+        * 이니셜라이즈 콜백 이후 1회 호출 권장
+
+        - Definition
+            - void preloadAll()
+
+    - show
+        * load된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여준다.
+
+        - Definition
+            - void show(String unitId)
+        - Parameters
+          - String unitId : show 하고자 할 전면형 보상 광고의 유닛 아이디
+
+        * 해당 유닛이 load 되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여준다.
+        * show는 중복하여 호출할 수 없다.
+        * show가 실행되면 `onRewardedInterstitialAdSkipped` 와 `onRewardedInterstitialAdOpened와` `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출되고, `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
+        * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
+        * `onRewardedInterstitialAdClosed`와 `onRewardedInterstitialAdFailedToShow`가 호출되면 내부에서 해당 유닛을 자동 load 시킨다.
+
+        - Callback
+        - |Method| Info                            | Parameter                            |
+          |---------------------------------|--------------------------------------|---------|
+          |onRewardedInterstitialAdSkipped	| 사용자가 스킵 버튼을 클릭하여 안내 팝업창을 닫았을 때	 | String unitId                        |
+          |onRewardedInterstitialAdOpened	| 전면형 보상 광고창이 열릴 때	               | String unitId                        |
+          |onRewardedInterstitialAdClosed	| 전면형 보상 광고창이 닫혔을 때	              | String unitId                        |
+          |onRewardedInterstitialAdRewarded	| 전면형 보상 광고 시청 후 보상이 있을 시	        | String unitId, RewardItem rewardItem |
+          |onRewardedInterstitialAdFailedToShow	| 전면형 보상 광고창을 보여 줄 수 없을 때	        | String unitId, AdiscopeError error   |
+   
+    - getUnitStatus
+       * Rewarded Interstitial 광고 유닛의 상태 정보를 구한다.
+      
+       - Definition
+         - void getUnitStatus(String unitId, IUnitStatus callback)
+       - Parameters
+         - unitId : Rewarded Interstitial 광고의 유닛 아이디
+         - callback : 결과를 리턴받을 콜백 객체
+       - Return
+         - IUnitStatus : Rewarded Interstitial 광고의 Singleton Instance
+         - 
+           ```java
+           public interface IUnitStatus {
+               void onResult(AdiscopeError error, UnitStatus unitStatus);
+           }
+       
+           public class UnitStatus {
+               private boolean live;       // 광고 수익화 on/off
+               private boolean active;     // 유닛 활성화 on/off
+
+               public UnitStatus() {}
+
+               public boolean isLive() {
+                   return live;
+               }
+
+               public boolean isActive() {
+                   return active;
+               }
+           }
+           ```
+
+    - setRewardedInterstitialAdListener
+      * 전면형 보상 광고의 콜백을 받기 위한 콜백 리스너를 등록한다.
+
+      - Definition
+        - void setRewardedInterstitialAdListener(RewardedInterstitialAdShowListener listener)
+      - Parameters
+        - RewardedInterstitialAdShowListener : 전면형 보상 광고의 show에 대한 콜백을 받을 리스너
