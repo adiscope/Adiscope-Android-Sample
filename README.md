@@ -20,7 +20,7 @@ Sample for Adiscope Android sdk
 ## Download
 
 ### Project Gradle
-```gradle
+```groovy
 allprojects {
     repositories {
         maven {
@@ -32,7 +32,7 @@ allprojects {
 ```
 
 ### Module Gradle
-```gradle
+```groovy
 android {
     ...
     defaultConfig {
@@ -84,7 +84,7 @@ dependencies {
 ```
 
 ### AndroidManifest.xml setting for admob network, manifestPlaceholders
-```
+```xml
 <application ...>
     <!-- admob app id for adiscope Admob rewarded video networks -->
     <meta-data
@@ -95,5 +95,49 @@ dependencies {
     <meta-data android:name="adiscope_media_id" android:value="${adiscope_media_id}"/>
     <meta-data android:name="adiscope_media_secret" android:value="${adiscope_media_secret}"/>
 </application>
+```
+
+## ETC
+### MAX Ad Review
+Max 어댑터를 사용하는 매체에 한하여, 동영상 소재에 따른 효율 파악 및 매출 증대를 위해 하기 작업 필요합니다.
+
+1. 애디스콥측으로부터 맥스 Ad Review 키를 전달받는다.
+2. root 수준의 build.gradle에 아래 코드를 추가한다.
+```groovy
+// gradle ~6.x
+// build.gradle (root)
+buildscript {
+    repositories {
+        maven { url 'https://artifacts.applovin.com/android' }
+    }
+    dependencies {
+        classpath "com.applovin.quality:AppLovinQualityServiceGradlePlugin:11.9.0"
+    }
+}
+```
+
+gradle 버전 7 이상 사용 시에는 settings.gradle, root 수준의 build.gradle에 각각의 코드를 추가한다.
+```groovy
+// gradle 7+
+// settings.gradle
+pluginManagement {
+    repositories {
+        maven { url 'https://artifacts.applovin.com/android' }
+    }
+}
+
+// build.gradle (root)
+plugins {
+    id 'com.applovin.quality' version '+' apply false
+}
+```
+
+3. app 수준의 build.gradle에 전달받은 Ad Review 키와 함께 아래 코드를 추가한다.  
+   (gradle 버전 상관없이 동일하게 적용한다.)
+```groovy
+apply plugin: 'applovin-quality-service'
+applovin {
+       apiKey "AD_REVIEW_KEY"
+} 
 ```
 
