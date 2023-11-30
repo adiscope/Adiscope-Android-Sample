@@ -11,13 +11,32 @@ Installation_manual
 `프로젝트 단위의 gradle file 에 아래의 repository 주소를 추가 해준다.`
 
 project build.gradle
-```
+```groovy
 allprojects {
     repositories {
+        // [required] adiscope library
         maven {
             url 'https://repository.adiscope.com/repository/adiscope/'
         }
-        ...
+
+        /****************************
+         (Adiscope SDK 3.3.0~) 
+         3.3.0 이상 연동 시 각 네트워크별로 maven url 등록이 필요합니다.
+         아래 네트워크 어댑터를 연동하는 매체는 각각의 maven url을 등록해주세요.
+         max, pangle, mobvista, chartboost, ironsource 
+         *****************************/
+         
+        // max adapter 연동 시 필수로 포함해야 합니다. (max의 비더로 포함되는 네트워크: smaato, pangle, mobvista)
+        // max 미운영 매체는 pangle, mobvista 워터폴 연동 시 각각의 maven url을 추가하셔야 합니다.
+        maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max bidder로 max 연동 시 추가
+        maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
+       
+        // chartboost 연동 시 추가
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
+       
+       // ironsource 연동 시 추가
+        maven {url 'https://android-sdk.is.com/'}
     }
 }
 ```
@@ -25,7 +44,7 @@ allprojects {
 `모듈(앱) 단위의 gradle file 에 아래의 라이브러리를  추가 해준다.`
 
 module build.gradle
-```
+```groovy
 dependencies {
 
     // [required] adiscope library
@@ -67,7 +86,7 @@ dependencies {
 #### Admob - Rewarded Video / Interstitial Network
 * AndroidManifest.xml 의 application 태그 하위에 아래의 meta-data가 선언되어야합니다.
 >  <br>AndroidManifest.xml 설정
-> ```
+> ```xml
 >  <application ..>
 >  // ... (생략)
 >       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>

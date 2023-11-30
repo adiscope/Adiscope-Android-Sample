@@ -7,7 +7,7 @@ Version Info
 ## ChangeLog
 | 날짜          | 변경 사항                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2023/11/29  | 기능 변경 <br>adiscope-core  3.1.0 → 3.3.0 </br> Rewarded Interstitial 추가 </br> Admob Dynamic Floor 추가 </br> 오퍼월 신규 광고 강조 추가 </br> admob, ironsource, smaato SDK 버전 업데이트 </br> * admob: 20.6.0 -> 22.3.0 </br> * ironsource: 7.2.1 -> 7.5.1 </br> * smaato(max bidder): 22.1.0 -> 22.1.1 </br> tapjoy, inmobi, smaato 어댑터 제거 </br>                                                                                       |
+| 2023/11/29  | 기능 변경 <br>adiscope-core  3.1.0 → 3.3.0 </br> Rewarded Interstitial 추가 </br> Admob Dynamic Floor 추가 </br> 오퍼월 신규 광고 라벨 UI 추가 </br> admob, ironsource, smaato SDK 버전 업데이트 </br> * admob: 20.6.0 -> 22.3.0 </br> * ironsource: 7.2.1 -> 7.5.1 </br> * smaato(max bidder): 22.1.0 -> 22.1.1 </br> max 어댑터 구조 변경 및 tapjoy, inmobi, smaato 어댑터 제거 </br>                                                                          |
 | 2023/11/10  | 핫픽스 <br>MAX Adapter 업데이트 9.2.1 → 9.2.2 </br> ㄴ inmobi bidder 제외 </br>                                                                                                                                                                                                                                                                                                                                                      |
 | 2023/08/17  | 기능 변경 <br>adiscope-core  3.0.0.0 → 3.1.0 </br> MAX 3rd party bidder 추가 (Google Bidding - Admob) </br> chartboost SDK 업데이트 8.4.2 -> 9.2.1 </br> 아래 함수 호출시, 이니셜라이즈 실패할 경우 인스턴스를 null로 반환 하도록 변경 </br>   * `AdiscopeSdk.getRewardedVideoAdInstance(act)` </br> * `AdiscopeSdk.getInterstitialAdInstance(act)` </br> * `AdiscopeSdk.getOfferwallAdInstance(act)` </br> ㄴ `AdiscopeSdk.isInitialize()` 함수로 이니셜라이즈 여부 체크하여 사용 필요 |
 | 2023/08/17  | 기능 변경 <br>adiscope-core  3.0.0.0 → 3.1.0 </br> MAX 3rd party bidder 추가 (Google Bidding - Admob) </br> chartboost SDK 업데이트 8.4.2 -> 9.2.1 </br> 아래 함수 호출시, 이니셜라이즈 실패할 경우 인스턴스를 null로 반환 하도록 변경 </br>   * `AdiscopeSdk.getRewardedVideoAdInstance(act)` </br> * `AdiscopeSdk.getInterstitialAdInstance(act)` </br> * `AdiscopeSdk.getOfferwallAdInstance(act)` </br> ㄴ `AdiscopeSdk.isInitialize()` 함수로 이니셜라이즈 여부 체크하여 사용 필요 |
@@ -99,9 +99,12 @@ Version Info
 >  * admob: 20.6.0 -> 22.3.0
 >  * ironsource: 7.2.1 -> 7.5.1
 >  * smaato(max bidder): 22.1.0 -> 22.1.1
-> * tapjoy, inmobi, smaato 어댑터 제거
+> * max 어댑터 구조 변경 및 tapjoy, inmobi, smaato 어댑터 제거
 >  * smaato는 max 어댑터에 통합되었음
 >  * tapjoy, inmobi는 미지원하는 네트워크로 제거
+>  * (전) max 연동 시 비더로 포함되는 모든 워터폴 어댑터의 연동 필요
+>  * (후) max 연동 시 비더로 포함되는 네트워크의 물량 제공.   
+     비더로 포함되는 네트워크의 워터폴 운영이 필요할 경우 선택적으로 연동 필요
 
 > ## Version 3.1.0 (hotfix)
 > _2023-11-10_

@@ -23,10 +23,29 @@ Sample for Adiscope Android sdk
 ```groovy
 allprojects {
     repositories {
+        // [required] adiscope library
         maven {
             url 'https://repository.adiscope.com/repository/adiscope/'
         }
-        ...
+
+        /****************************
+         (Adiscope SDK 3.3.0~) 
+         3.3.0 이상 연동 시 각 네트워크별로 maven url 등록이 필요합니다.
+         아래 네트워크 어댑터를 연동하는 매체는 각각의 maven url을 등록해주세요.
+         max, pangle, mobvista, chartboost, ironsource 
+         *****************************/
+         
+        // max adapter 연동 시 필수로 포함해야 합니다. (max의 비더로 포함되는 네트워크: smaato, pangle, mobvista)
+        // max 미운영 매체는 pangle, mobvista 워터폴 연동 시 각각의 maven url을 추가하셔야 합니다.
+        maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max bidder로 max 연동 시 추가
+        maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
+       
+        // chartboost 연동 시 추가
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
+       
+       // ironsource 연동 시 추가
+        maven {url 'https://android-sdk.is.com/'}
     }
 }
 ```
