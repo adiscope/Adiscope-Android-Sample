@@ -38,8 +38,7 @@ allprojects {
         // max 미운영 매체는 pangle, mobvista 워터폴 연동 시 각각의 maven url을 추가하셔야 합니다.
         maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max bidder로 max 연동 시 추가
         maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
-        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
-        // max 혹은 mobvista 연동 시 추가
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
 
         // chartboost 연동 시 추가
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
