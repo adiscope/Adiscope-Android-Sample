@@ -3,7 +3,6 @@ Installation_manual
 - [1. gradle 연동 설정](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/installation_manual.md#1-gradle-연동-설정)
 - [2. Network 별 추가작업](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/installation_manual.md#2-network-별-추가작업)
 
-
 ## Adiscope Android Sdk Install
 
 ### 1. gradle 연동 설정
@@ -34,14 +33,14 @@ allprojects {
        
         // chartboost 연동 시 추가
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
-       
-       // ironsource 연동 시 추가
-        maven {url 'https://android-sdk.is.com/'}
+
+        // ironsource 연동 시 추가
+        maven { url 'https://android-sdk.is.com/' }
     }
 }
 ```
 
-`모듈(앱) 단위의 gradle file 에 아래의 라이브러리를  추가 해준다.`
+`모듈(앱) 단위의 gradle file 에 아래의 라이브러리를 추가 해준다.`
 
 module build.gradle
 ```groovy
@@ -57,23 +56,23 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.chartboost:9.2.1.1'        // chartboost
 
-    implementation 'com.nps.adiscope:adapter.ironsource:7.5.1.0'   // ironsource
+    implementation 'com.nps.adiscope:adapter.ironsource:7.5.1.0'        // ironsource
 
-    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.2'      // unityads
+    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.2'          // unityads
 
     /****************************
-     max adapter를 연동하면 하기 네트워크들이 max bidder로 포함됩니다.
+     max adapter를 연동하면 하기 네트워크들이 max의 bidder로 포함됩니다.
      admob, fan, mobvista, pangle, smaato, vungle
      비더 네트워크를 워터폴로도 함께 운영하려면 아래 워터폴 어댑터 라이브러리들을 선택적으로 포함해야 합니다.
      (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
-    implementation 'com.nps.adiscope:adapter.max:11.9.2.1'        // max
-    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (watarfall adapter)
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.0'        // admob (use play-services-ads:22.3.0 dependency)
-    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'           // fan
-    implementation 'com.nps.adiscope:adapter.mobvista:16.4.32.1'     // mobvista (use androidx)
-    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.1"        // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.2'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.max:11.9.2.1'              // max
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'         // applovin (watarfall adapter)
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.0'            // admob (use play-services-ads:22.3.0 dependency)
+    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
+    implementation 'com.nps.adiscope:adapter.mobvista:16.4.32.1'        // mobvista (use androidx)
+    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.2'           // vungle (use androidx)
 }
 ```
 

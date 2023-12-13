@@ -1,7 +1,6 @@
 # Adiscope-Android-Sample
 Sample for Adiscope Android sdk
 
-
 ## Requirements
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
@@ -34,23 +33,25 @@ allprojects {
          아래 네트워크 어댑터를 연동하는 매체는 각각의 maven url을 등록해주세요.
          max, pangle, mobvista, chartboost, ironsource 
          *****************************/
-         
+
         // max adapter 연동 시 필수로 포함해야 합니다. (max의 비더로 포함되는 네트워크: smaato, pangle, mobvista)
         // max 미운영 매체는 pangle, mobvista 워터폴 연동 시 각각의 maven url을 추가하셔야 합니다.
         maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max bidder로 max 연동 시 추가
         maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
-        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
-       
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
+        // max 혹은 mobvista 연동 시 추가
+
         // chartboost 연동 시 추가
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
-       
-       // ironsource 연동 시 추가
-        maven {url 'https://android-sdk.is.com/'}
+
+        // ironsource 연동 시 추가
+        maven { url 'https://android-sdk.is.com/' }
     }
 }
 ```
 
 ### Module Gradle
+
 ```groovy
 android {
     ...
@@ -61,16 +62,22 @@ android {
         // adiscope_media_secret: 매체 시크릿키
         // adiscope_sub_domain: '무료충전소 상세 화면 이동 기능'에 사용하는 값으로, 해당 기능 적용 시 애디스콥과 협의 필요
         manifestPlaceholders = [
-                adiscope_media_id: "media id 기입필요",
+                // 파라미터에 mediaId, mediaSecret이 미포함된 이니셜라이즈 함수를 사용할 경우 
+                // => 해당 값을 읽어 이니셜라이즈 수행
+                // 파라미터에 mediaId, mediaSecret이 포함되어 있는 이니셜라이즈 함수를 사용할 경우
+                // => 파라미터에 포함된 매체값으로 이니셜라이즈 수행
+                // (Deprecated 함수지만 사용 가능하므로 용도에 따라 적용하도록 권장)
+                // 가이드 참고: /docs/api_documentation.md의 initialized Definition
+                adiscope_media_id    : "media id 기입필요",
                 adiscope_media_secret: "media secret 기입필요",
-                
+
                 // adiscopeAndroid 1.1.9 이상
                 // => 필드값은 필수이나 '무료충전소 상세 화면 이동 기능' 미사용 시 
                 //    value는 빈 값으로 기입할 수 있음 (ex. adiscope_sub_domain: "")
                 // adiscopeAndroid 1.1.8
                 // => 필드값은 필수이나 '무료충전소 상세 화면 이동 기능' 미사용 시 
                 //    디폴트 값(adiscope) 추가 필요  (ex. adiscope_sub_domain: "adiscope")
-                adiscope_sub_domain: "sub domain 기입필요"
+                adiscope_sub_domain  : "sub domain 기입필요"
         ]
     }
     ...
@@ -88,23 +95,23 @@ dependencies {
 
     implementation 'com.nps.adiscope:adapter.chartboost:9.2.1.1'        // chartboost
 
-    implementation 'com.nps.adiscope:adapter.ironsource:7.5.1.0'   // ironsource
+    implementation 'com.nps.adiscope:adapter.ironsource:7.5.1.0'        // ironsource
 
-    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.2'      // unityads
+    implementation 'com.nps.adiscope:adapter.unityads:4.2.1.2'          // unityads
 
     /****************************
-     max adapter를 연동하면 하기 네트워크들이 max bidder로 포함됩니다.
+     max adapter를 연동하면 하기 네트워크들이 max의 bidder로 포함됩니다.
      admob, fan, mobvista, pangle, smaato, vungle
      비더 네트워크를 워터폴로도 함께 운영하려면 아래 워터폴 어댑터 라이브러리들을 선택적으로 포함해야 합니다.
      (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
-    implementation 'com.nps.adiscope:adapter.max:11.9.2.1'        // max
-    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'        // applovin (watarfall adapter)
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.0'        // admob (use play-services-ads:22.3.0 dependency)
-    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'           // fan
-    implementation 'com.nps.adiscope:adapter.mobvista:16.4.32.1'     // mobvista (use androidx)
-    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.1"        // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.2'        // vungle (use androidx)
+    implementation 'com.nps.adiscope:adapter.max:11.9.2.1'              // max
+    implementation 'com.nps.adiscope:adapter.applovin:11.9.0.0'         // applovin (watarfall adapter)
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.0'            // admob (use play-services-ads:22.3.0 dependency)
+    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
+    implementation 'com.nps.adiscope:adapter.mobvista:16.4.32.1'        // mobvista (use androidx)
+    implementation "com.nps.adiscope:adapter.pangle:5.1.0.8.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:6.12.1.2'           // vungle (use androidx)
 }
 ```
 
@@ -128,6 +135,9 @@ Max 어댑터를 사용하는 매체에 한하여, 동영상 소재에 따른 �
 
 1. 애디스콥측으로부터 맥스 Ad Review 키를 전달받는다.
 2. root 수준의 build.gradle에 아래 코드를 추가한다.
+
+#### groovy (gradle ~6.x)
+
 ```groovy
 // gradle ~6.x
 // build.gradle (root)
@@ -141,7 +151,25 @@ buildscript {
 }
 ```
 
+#### kotlin (gradle ~6.x)
+
+```kotlin
+// gradle ~6.x
+// build.gradle (root)
+buildscript {
+    repositories {
+        maven { url = uri("https://artifacts.applovin.com/android") }
+    }
+    dependencies {
+        classpath("com.applovin.quality:AppLovinQualityServiceGradlePlugin:+")
+    }
+}
+```
+
 gradle 버전 7 이상 사용 시에는 settings.gradle, root 수준의 build.gradle에 각각의 코드를 추가한다.
+
+#### groovy (gradle 7+)
+
 ```groovy
 // gradle 7+
 // settings.gradle
@@ -157,12 +185,44 @@ plugins {
 }
 ```
 
+#### kotlin (gradle 7+)
+
+```kotlin
+// gradle 7+
+// settings.gradle
+pluginManagement {
+    repositories {
+        maven { url = uri("https://artifacts.applovin.com/android") }
+    }
+}
+
+// build.gradle (root)
+plugins {
+    id("com.applovin.quality") version "+" apply false
+}
+```
+
 3. app 수준의 build.gradle에 전달받은 Ad Review 키와 함께 아래 코드를 추가한다.  
    (gradle 버전 상관없이 동일하게 적용한다.)
+
+#### groovy
+
 ```groovy
+// build.gradle (app)
 apply plugin: 'applovin-quality-service'
 applovin {
-       apiKey "AD_REVIEW_KEY"
+    apiKey "AD_REVIEW_KEY"
 } 
 ```
 
+#### kotlin
+
+```kotlin
+// build.gradle (app)
+plugins {
+    id("applovin-quality-service")
+}
+applovin {
+    apiKey = "AD_REVIEW_KEY"
+}
+```
