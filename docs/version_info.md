@@ -7,10 +7,10 @@ Version Info
 ## ChangeLog
 | 날짜          | 변경 사항                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2023/11/10  | 핫픽스 <br>adiscope-core  3.3.0 → 3.3.1 </br> ㄴ 오퍼월 광고 목록 버그 수정 </br>                                                                                                                                                                                                                                                                                                                                                         |
+| 2023/12/05  | 핫픽스 <br>adiscope-core  3.3.0 → 3.3.1 </br> ㄴ 오퍼월 광고 목록 버그 수정 </br>                                                                                                                                                                                                                                                                                                                                                         |
 | 2023/11/29  | 기능 변경 <br>adiscope-core  3.1.0 → 3.3.0 </br> Rewarded Interstitial 추가 </br> Admob Dynamic Floor 추가 </br> 오퍼월 신규 광고 라벨 UI 추가 </br> admob, ironsource, smaato SDK 버전 업데이트 </br> * admob: 20.6.0 -> 22.3.0 </br> * ironsource: 7.2.1 -> 7.5.1 </br> * smaato(max bidder): 22.1.0 -> 22.1.1 </br> max 어댑터 구조 변경 및 tapjoy, inmobi, smaato 어댑터 제거 </br>                                                                          |
+| 2023/11/17  | 핫픽스 <br>adiscope-Android 업데이트 1.1.8 -> 1.1.9 </br> ㄴ 구글 플레이스토어 정책 사항 반영을 위한 오퍼월 화면의 앱링크 스킴 제거 </br>                                                                                                                                                                                                                                                                                                                                                |
 | 2023/11/10  | 핫픽스 <br>MAX Adapter 업데이트 9.2.1 → 9.2.2 </br> ㄴ inmobi bidder 제외 </br>                                                                                                                                                                                                                                                                                                                                                      |
-| 2023/08/17  | 기능 변경 <br>adiscope-core  3.0.0.0 → 3.1.0 </br> MAX 3rd party bidder 추가 (Google Bidding - Admob) </br> chartboost SDK 업데이트 8.4.2 -> 9.2.1 </br> 아래 함수 호출시, 이니셜라이즈 실패할 경우 인스턴스를 null로 반환 하도록 변경 </br>   * `AdiscopeSdk.getRewardedVideoAdInstance(act)` </br> * `AdiscopeSdk.getInterstitialAdInstance(act)` </br> * `AdiscopeSdk.getOfferwallAdInstance(act)` </br> ㄴ `AdiscopeSdk.isInitialize()` 함수로 이니셜라이즈 여부 체크하여 사용 필요 |
 | 2023/08/17  | 기능 변경 <br>adiscope-core  3.0.0.0 → 3.1.0 </br> MAX 3rd party bidder 추가 (Google Bidding - Admob) </br> chartboost SDK 업데이트 8.4.2 -> 9.2.1 </br> 아래 함수 호출시, 이니셜라이즈 실패할 경우 인스턴스를 null로 반환 하도록 변경 </br>   * `AdiscopeSdk.getRewardedVideoAdInstance(act)` </br> * `AdiscopeSdk.getInterstitialAdInstance(act)` </br> * `AdiscopeSdk.getOfferwallAdInstance(act)` </br> ㄴ `AdiscopeSdk.isInitialize()` 함수로 이니셜라이즈 여부 체크하여 사용 필요 |
 | 2023/05/04  | 기능 변경 <br>adiscope-core  2.1.8.0 → 3.0.0.0 </br> MAX 3rd party bidder 추가 (Vungle, Pangle, Tapjoy)                                                                                                                                                                                                                                                                                                                          |
 | 2023/04/25  | 기능 변경 <br>adiscope-core  2.1.7.2 → 2.1.8.0 </br> adiscope-android 1.1.7 → 1.1.8 </br> Tapjoy Interstitial 추가, Offerwall 상세화면 바로가기 기능 추가 (딥링크, 앱링크)                                                                                                                                                                                                                                                                         |
@@ -92,7 +92,7 @@ Version Info
 | 3.3.0 ~	              | 11.9.2.1~  | 22.3.0.0~         |11.9.0.0~| 6.13.7.1~        |7.2.1.2~| 16.4.32.1~          | -                 | 4.2.1.2~         | 6.12.1.2~       | 5.1.0.8.1~ | -           | -         |
 ## ReleaseNote
 > ## Version 3.3.1
-> _2023-11-29_
+> _2023-12-05_
 > * 오퍼월 광고 목록 버그 수정
 
 > ## Version 3.3.0
@@ -110,6 +110,11 @@ Version Info
 >  * (전) max 연동 시 비더로 포함되는 모든 워터폴 어댑터의 연동 필요
 >  * (후) max 연동 시 비더로 포함되는 네트워크의 물량 제공.   
      비더로 포함되는 네트워크의 워터폴 운영이 필요할 경우 선택적으로 연동 필요
+
+> ## Version 3.1.0 (hotfix v2)
+> _2023-11-17_
+> * adiscopeAndroid 업데이트 1.1.8 -> 1.1.9
+> * 구글 플레이스토어 정책 사항 반영을 위한 오퍼월 화면의 앱링크 스킴 제거
 
 > ## Version 3.1.0 (hotfix)
 > _2023-11-10_
