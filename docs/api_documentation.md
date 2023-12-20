@@ -206,6 +206,7 @@ API Reference
         public interface OptionSetter {
             void setUseCloudFrontProxy(boolean useCloudFrontProxy);
             void setChildYN(String childYN);
+            void setVolumeOff(boolean isVolume);
          }
     ```
 2. Methods
@@ -216,7 +217,24 @@ API Reference
        - void setUseCloudFrontProxy(boolean useCloudFrontProxy)
      - Parameters
        - useCloudFrontProxy : AWS Cloud Front Proxy를 사용할지말지 여부
-     - Return
+   - setChildYN
+     * 광고를 시청할 유저가 어린이인지 아닌지의 여부를 설정하는 함수.<br>이 설정값은 그대로 Google GMA 에 세팅된다.
+
+     - Definition
+         - void setChildYN(String childYN)
+     - Parameters
+         - childYN : 사용자의 어린이 유무를 확인하기 위한 설정값
+             - 어린이에 해당하거나 정보가 없는 경우: "YES" or Null
+             - 어린이가 아닌 경우(어른인 경우): "NO"
+   - setVolumeOff
+     * 광고음의 on/off 설정을 지원하는 함수로, 미송출 설정하지 않을 경우 광고음 송출이 디폴트이다. <br>Admob 네트워크 한정으로 광고음 미송출 설정이 가능하다.
+
+     - Definition
+         - void setVolumeOff(boolean isVolume)
+     - Parameters
+         - isVolume :
+             - 광고음이 송출되지 않도록 할 경우: true
+             - 광고음이 송출되도록 할 경우: false (default)
 
 
 ## API Reference - AdiscopeError.Android
