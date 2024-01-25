@@ -5,7 +5,7 @@ Sample for Adiscope Android sdk
 - minSdkVersion 16
 - To use mobvista, vungle mediation network, You should include androidx library (https://developer.android.com/jetpack/androidx/migrate)
 
-## version : 3.3.2
+## version : 3.4.0
 
 ## Link
 - [Release note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
@@ -85,7 +85,7 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.3.2'
+    implementation 'com.nps.adiscope:adiscopeCore:3.4.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 
     // adiscope sdk have to extract Google Advertising Id.
@@ -104,7 +104,7 @@ dependencies {
      비더 네트워크를 워터폴로도 함께 운영하려면 아래 워터폴 어댑터 라이브러리들을 선택적으로 포함해야 합니다.
      (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
-    implementation 'com.nps.adiscope:adapter.max:12.1.0.0'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.1.0.1'              // max
     implementation 'com.nps.adiscope:adapter.applovin:12.1.0.0'         // applovin (watarfall adapter)
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.1'            // admob (use play-services-ads:22.3.0 dependency)
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
