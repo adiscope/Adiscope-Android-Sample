@@ -34,9 +34,10 @@ allprojects {
          max, pangle, mobvista, chartboost, ironsource 
          *****************************/
 
-        // max adapter 연동 시 필수로 포함해야 합니다. (max의 비더로 포함되는 네트워크: smaato, pangle, mobvista)
+        // max adapter 연동 시 필수로 포함해야 합니다. (max의 비더로 포함되는 네트워크: smaato, pangle, mobvista, verve)
         // max 미운영 매체는 pangle, mobvista 워터폴 연동 시 각각의 maven url을 추가하셔야 합니다.
         maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max bidder로 max 연동 시 추가
+        maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // max bidder로 max 연동 시 추가
         maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
         maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
 
@@ -100,7 +101,7 @@ dependencies {
 
     /****************************
      max adapter를 연동하면 하기 네트워크들이 max의 bidder로 포함됩니다.
-     admob, fan, mobvista, pangle, smaato, vungle
+     admob, fan, mobvista, pangle, smaato, vungle, verve
      비더 네트워크를 워터폴로도 함께 운영하려면 아래 워터폴 어댑터 라이브러리들을 선택적으로 포함해야 합니다.
      (아래 네트워크들이 max bidder에 포함됨)
      *****************************/
