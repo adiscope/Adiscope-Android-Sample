@@ -227,7 +227,8 @@ API Reference
              - 어린이에 해당하거나 정보가 없는 경우: "YES" or Null
              - 어린이가 아닌 경우(어른인 경우): "NO"
    - setVolumeOff
-     * 광고음의 on/off 설정을 지원하는 함수로, 미송출 설정하지 않을 경우 광고음 송출이 디폴트이다. <br>Admob 네트워크 한정으로 광고음 미송출 설정이 가능하다.
+     * 광고음의 on/off 설정을 지원하는 함수로, 미송출 설정하지 않을 경우 광고음 송출이 디폴트이다.
+       * 지원 네트워크: Admob, Applovin, MAX, Mobvista
 
      - Definition
          - void setVolumeOff(boolean isVolume)
