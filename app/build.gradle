@@ -43,7 +43,7 @@ dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.aar'])
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.6.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.6.3'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 
     // adiscope sdk have to extract Google Advertising Id.
