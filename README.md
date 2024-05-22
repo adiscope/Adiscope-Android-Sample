@@ -1,5 +1,8 @@
 # Adiscope-Android-Sample
 Sample for Adiscope Android sdk
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
 
 ## Requirements
 - minSdkVersion 16
