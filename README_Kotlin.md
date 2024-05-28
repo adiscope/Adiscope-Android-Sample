@@ -1,5 +1,5 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
 
@@ -27,7 +27,7 @@
 
 
 ## Contents
-* [**Integration Guide**](#Integration-Guide) ([Kotlin ver](./README_Kotlin.md))
+* [**Integration Guide**](#Integration-Guide) ([Java ver](./README.md))
   * [1. Import Adiscope Sdk](#1.-Import-Adiscope-Sdk)
   * [2. Initialize](#2.-Initialize-Adiscope-Sdk)
   * [3. Set User Id](#3.-Set-User-Id)
@@ -130,14 +130,14 @@ repositories {
 **build.gradle(app)**  
 운영에 필요한 각각의 네트워크 어댑터 의존성을 추가  
 비딩을 지원하는 admob, max 어댑터는 각각 하기 네트워크들이 비더로 포함됨  
-비더 네트워크를 워터폴로 함께 운영하려면 워터폴 어댑터 라이브러리를 선택적으로 포함해야 함  
+비더 네트워크를 워터폴로 함께 운영하려면 워터폴 어댑터 라이브러리를 선택적으로 포함해야 함
 
 > ex) admob 비딩을 사용하면서 비더 네트워크를 워터폴로 운영할 경우  
 > -> admob, fan, mobvista, pangle, vungle 어댑터를 연동
 
 * admob
   * fan, mobvista, pangle, vungle
-* max 
+* max
   * admob, applovin, fan, mobvista, pangle, vungle, unityads
   * (only max bidder) smaato, inmobi, verve
 
@@ -182,8 +182,8 @@ dependencies {
 
 ### 2. Initialize Adiscope Sdk
 이니셜라이즈 함수는 크게 아래 두 가지로 지원하며, 용도에 따라 선택해서 사용할 수 있음
-* `AdiscopeSdk.initialize(Activity activity, int mediaId, String mediaSecret, AdiscopeInitializeListener listener)`
-* `AdiscopeSdk.initialize(Activity activity, AdiscopeInitializeListener listener)`
+* `AdiscopeSdk.initialize(activity: Activity, mediaId: Int, mediaSecret: String, listener: AdiscopeInitializeListener)`
+* `AdiscopeSdk.initialize(activity: Activity, listener: AdiscopeInitializeListener)`
 * [Other Initialize API](https://github.com/adiscope/Adiscope-Android-Sample/blob/master/docs/api_documentation.md#adiscopesdk)
 
 <br/>
@@ -191,33 +191,30 @@ dependencies {
 #### A) AdiscopeSdk.initialize(activity, mediaId, mediaSecret, listener)
 빌드 환경에 따라 매체 환경을 코드 내에서 분기처리하여 이니셜라이즈하는 경우
 
-```java
-AdiscopeSdk.initialize(this, 
-        INPUT_YOUR_MEDIA_ID, 
-        "INPUT_YOUR_MEDIA_SECRET_KEY", 
-        new AdiscopeInitializeListener() {
-            @Override
-            public void onInitialized(boolean isSuccess) {
-                if (isSuccess) {
-                    Log.d(TAG, "AdiscopeSdk initialized.");
-                    // (recommend) get ad instance and set ad event listener
-                    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
-                    mOfferwallAd.setOfferwallAdListener(this);
-            
-                    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this);
-                    mRewardedVideoAd.setRewardedVideoAdListener(this);
-                    
-                    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
-                    mInterstitialAd.setInterstitialAdListener(this);
-                    
-                    mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this);
-                    mRewardedInterstitialAd.setRewardedInterstitialAdListener(this);
-                } else {
-                    // Init 실패 에 대한 처리 Code 
-                    Log.d(TAG, "AdiscopeSdk initialize failed.");
-                }
-            }
-        }
+```kotlin
+AdiscopeSdk.initialize(
+  activity,
+  INPUT_YOUR_MEDIA_ID,
+  "INPUT_YOUR_MEDIA_SECRET_KEY"
+) { isSuccess ->
+    if (isSuccess) {
+        Log.d(TAG, "AdiscopeSdk initialized.")
+        // (recommend) get ad instance and set ad event listener
+        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+        mOfferwallAd.setOfferwallAdListener(this)
+
+        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
+        mRewardedVideoAd.setRewardedVideoAdListener(this)
+
+        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+        mInterstitialAd.setInterstitialAdListener(this)
+
+        mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
+        mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+   } else {
+        Log.d(TAG, "AdiscopeSdk initialize failed.")
+   }
+}
 ```
 
 <br/>
@@ -225,31 +222,30 @@ AdiscopeSdk.initialize(this,
 #### B) AdiscopeSdk.initialize(activity, listener)
 mediaId, mediaSecret 값을 고정으로 사용하는 경우
 
-> 앱 모듈의 build.gradle의 `manifestPlaceholders`에 정의된 `adiscope_media_id`, `adiscope_media_secret` 값을 
-> 매니페스트에 각각 <span style="color:#3894ff">**adiscope.global.mediaId**</span>, <span style="color:#3894ff">**adiscope.global.mediaSecret**</span> meta-data로 설정하고 
+> 앱 모듈의 build.gradle의 `manifestPlaceholders`에 정의된 `adiscope_media_id`, `adiscope_media_secret` 값을
+> 매니페스트에 각각 <span style="color:#3894ff">**adiscope.global.mediaId**</span>, <span style="color:#3894ff">**adiscope.global.mediaSecret**</span> meta-data로 설정하고
 > <span style="color:darkgrey">_AdiscopeSdk.initialize(activity, listener)_</span> 함수를 사용하면 SDK가 해당 meta-data 값을 읽어와 이니셜라이즈를 수행한다.
 
-```java
-AdiscopeSdk.initialize(this, new AdiscopeInitializeListener() {
-    @Override
-    public void onInitialized(boolean isSuccess) {
-        if (isSuccess) {
-            Log.d(TAG, "AdiscopeSdk initialized.");
-            // (recommend) get ad instance and set ad event listener
-            mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(MainActivity.this);
-            mOfferwallAd.setOfferwallAdListener(MainActivity.this);
-            
-            mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(MainActivity.this);
-            mRewardedVideoAd.setRewardedVideoAdListener(MainActivity.this);
-            
-            mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(MainActivity.this);
-            mInterstitialAd.setInterstitialAdListener(MainActivity.this);
-            
-            mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(MainActivity.this);
-            mRewardedInterstitialAd.setRewardedInterstitialAdListener(MainActivity.this);
-        } else {
-            // Init 실패 에 대한 처리 Code 
-        }
+```kotlin
+AdiscopeSdk.initialize(
+    activity
+) { isSuccess ->
+    if (isSuccess) {
+        Log.d(TAG, "AdiscopeSdk initialized.")
+        // (recommend) get ad instance and set ad event listener
+        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+        mOfferwallAd.setOfferwallAdListener(this)
+
+        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
+        mRewardedVideoAd.setRewardedVideoAdListener(this)
+
+        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+        mInterstitialAd.setInterstitialAdListener(this)
+
+        mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
+        mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+    } else {
+        Log.d(TAG, "AdiscopeSdk initialize failed.")
     }
 }
 ```
@@ -257,8 +253,8 @@ AdiscopeSdk.initialize(this, new AdiscopeInitializeListener() {
 <br/>
 
 ### 3. Set User Id
-```java
-AdiscopeSdk.setUserId("exampleUniqueUserId");
+```kotlin
+AdiscopeSdk.setUserId("exampleUniqueUserId")
 ```
 * 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 설정 (최대길이 64자)
   * `Offerwall`, `Rewarded Video`, `Rewarded Interstitial` 사용 시 필수 설정
@@ -272,45 +268,40 @@ AdiscopeSdk.setUserId("exampleUniqueUserId");
 ### Interstitial Ads
 
 #### Create Ad Instance
-```java
-import com.nps.adiscope.interstitial.InterstitialAd;
-InterstitialAd mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
+```kotlin
+import com.nps.adiscope.interstitial.InterstitialAd
+val mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
 ```
 
 #### Set Event Callback
-```java
-mInterstitialAd.setInterstitialAdListener(this);
+```kotlin
+mInterstitialAd.setInterstitialAdListener(this)
 
-@Override
-public void onInterstitialAdLoaded() {
+override fun onInterstitialAdLoaded() {
     // interstitial ad is ready
 }
 
-@Override
-public void onInterstitialAdFailedToLoad(AdiscopeError adiscopeError) {
+override fun onInterstitialAdFailedToLoad(adiscopeError: AdiscopeError) {
     // interstitial ad failed to load
 }
 
-@Override
-public void onInterstitialAdOpened(String unitId) {
+override fun onInterstitialAdOpened(unitId: String) {
     // interstitial ad show completed
 }
 
-@Override
-public void onInterstitialAdClosed(String unitId) {
+override fun onInterstitialAdClosed(unitId: String) {
     // interstitial ad closed
 }
 
-@Override
-public void onInterstitialAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+override fun onInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
     // interstitial ad failed to show
 }
 ```
 
 #### Load
-```java
-String INTERSTITIAL_UNIT_ID = "";
-mInterstitialAd.load(INTERSTITIAL_UNIT_ID);
+```kotlin
+val INTERSTITIAL_UNIT_ID = ""
+mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
@@ -321,7 +312,7 @@ mInterstitialAd.load(INTERSTITIAL_UNIT_ID);
 * 로드 성공 콜백에 따라 인터스티셜 광고 송출(show) 가능
 
 #### isLoaded
-```java
+```kotlin
 if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
     // show interstitial ad
 }else {
@@ -331,7 +322,7 @@ if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
 * 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
 
 #### Show
-```java
+```kotlin
 if(mInterstitialAd.show()){
     // succeed
 }else{
@@ -348,53 +339,47 @@ if(mInterstitialAd.show()){
 
 ### Rewarded Ads
 #### Create Ad Instance
-```java
-import com.nps.adiscope.reward.RewardedVideoAd;
-RewardedVideoAd mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this); 
+```kotlin
+import com.nps.adiscope.reward.RewardedVideoAd
+val mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this) 
 ```
 <br/>
 
 #### Set Event Callback
-```java
-mRewardedVideoAd.setRewardedVideoAdListener(this);
+```kotlin
+mRewardedVideoAd.setRewardedVideoAdListener(this)
 
-@Override
-public void onRewardedVideoAdLoaded(String unitId) {
+override fun onRewardedVideoAdLoaded(unitId: String) {
     // rewarded ad is ready
 }
 
-@Override
-public void onRewardedVideoAdFailedToLoad(String unitId, AdiscopeError adiscopeError) {
+override fun onRewardedVideoAdFailedToLoad(unitId: String, adiscopeError: AdiscopeError) {
     // rewarded ad failed to load
 }
 
-@Override
-public void onRewardedVideoAdOpened(String unitId) {
+override fun onRewardedVideoAdOpened(unitId: String) {
     // rewarded ad show completed
 }
 
-@Override
-public void onRewardedVideoAdClosed(String unitId) {
+override fun onRewardedVideoAdClosed(unitId: String) {
     // rewarded ad closed
 }
 
-@Override
-public void onRewarded(String unitId, RewardItem rewardItem) {
+override fun onRewarded(unitId: String, rewardItem: RewardItem) {
     // user should receive the reward
     // RewardItem.getType: 보상 타입
     // RewardItem.getAmount: 보상 양
 }
 
-@Override
-public void onRewardedVideoAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+override fun onRewardedVideoAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
     // rewarded ad failed to show
 }
 ```
 <br/>
 
 #### Load
-```java
-String RV_UNIT_ID = "";
+```kotlin
+String RV_UNIT_ID = ""
 mRewardedVideoAd.load(RV_UNIT_ID);
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
@@ -408,7 +393,7 @@ mRewardedVideoAd.load(RV_UNIT_ID);
 <br/>
 
 #### isLoaded
-```java
+```kotlin
 if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
     // show rewarded ad
 } else {
@@ -420,7 +405,7 @@ if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
 <br/>
 
 #### Show
-```java
+```kotlin
 if(mRewardedVideoAd.show()){
     // succeed
 }else{
@@ -437,19 +422,18 @@ if(mRewardedVideoAd.show()){
 <br/>
 
 #### Callback Reward
-```java
-@Override
-public void onRewarded(String unitId, RewardItem rewardItem) {
+```kotlin
+override fun onRewarded(unitId: String, rewardItem: RewardItem) {
     // user should receive the reward
     // RewardItem.getType: 보상 타입
     // RewardItem.getAmount: 보상 양
 }
 ```
-* 보상이 주어져야 할 경우 `OnRewarded`가 호출되며 파라미터로 관련 정보가 전달 (`RewardItem`) 
+* 보상이 주어져야 할 경우 `OnRewarded`가 호출되며 파라미터로 관련 정보가 전달 (`RewardItem`)
   * `RewardItem.type`: 보상 타입
   * `RewardItem.amount`: 보상의 양
 * 이 보상 정보를 바탕으로 게임 내에서 보상을 지급
-* `OnRewarded`는 보통 `onRewardedVideoAdOpened` 와 `onRewardedVideoAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음 
+* `OnRewarded`는 보통 `onRewardedVideoAdOpened` 와 `onRewardedVideoAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * `OnRewarded`가 호출되지 않는 경우도 존재할 수 있음
   * 보상 콜백 설정을 Server-to-Server(S2S)로 하였다면, Video 시청 후에는 `OnRewarded`가 호출되지 않음
 * Reward 정보는 어뷰징 방지를 위해서 S2S 방식으로 전달 받는 것을 권장
@@ -462,58 +446,53 @@ public void onRewarded(String unitId, RewardItem rewardItem) {
 ### Rewarded Interstitial Ads
 
 #### Create Ad Instance
-```java
-import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd;
-RewardedInterstitialAd mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this); 
+```kotlin
+import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd
+val mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
 ```
 <br/>
 
 #### Set Event Callback
-```java
-mRewardedInterstitialAd.setRewardedInterstitialAdListener(this);
+```kotlin
+mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
 
-@Override
-public void onRewardedInterstitialAdSkipped(String s) {
+override fun onRewardedInterstitialAdSkipped(unitId: String) {
     // user skipped rewarded interstitial ad
 }
 
-@Override
-public void onRewardedInterstitialAdOpened(String s) {
+override fun onRewardedInterstitialAdOpened(unitId: String) {
     // rewarded interstitial ad show completed
 }
 
-@Override
-public void onRewardedInterstitialAdClosed(String s) {
+override fun onRewardedInterstitialAdClosed(unitId: String) {
     // rewarded interstitial ad closed
 }
 
-@Override
-public void onRewardedInterstitialAdRewarded(String s, RewardItem rewardItem) {
+override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: RewardItem) {
     // user should receive the reward
     // RewardItem.getType: 보상 타입
     // RewardItem.getAmount: 보상 양
 }
 
-@Override
-public void onRewardedInterstitialAdFailedToShow(String s, AdiscopeError adiscopeError) {
+override fun onRewardedInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
     // rewarded interstitial ad failed to show
 }
 ```
 <br/>
 
 #### Preload
-```java
+```kotlin
 // preload rewarded interstitial ad which belongs to specific unit list
-String[] unitList = {"RI_UNIT1", "RI_UNIT2", "RI_UNIT3"};
-mRewardedInterstitialAd.preloadUnit(unitList);
+val unitList = arrayOf("RI_UNIT1", "RI_UNIT2", "RI_UNIT3")
+mRewardedInterstitialAd.preloadUnit(unitList)
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
 * 이니셜라이즈 콜백 이후 1회 호출 권장
 
 #### Preload All
-```java
+```kotlin
 // preload all activated rewarded interstitial ad
-mRewardedInterstitialAd.preloadAll();
+mRewardedInterstitialAd.preloadAll()
 ```
 * 어드민 페이지에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드
 * 이니셜라이즈 콜백 이후 1회 호출 권장
@@ -521,8 +500,8 @@ mRewardedInterstitialAd.preloadAll();
 <br/>
 
 #### Show
-```java
-mRewardedInterstitialAd.show("RI_UNIT1");
+```kotlin
+mRewardedInterstitialAd.show("RI_UNIT1")
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여줌
 * 해당 유닛이 로드되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여줌
@@ -534,13 +513,12 @@ mRewardedInterstitialAd.show("RI_UNIT1");
 <br/>
 
 #### Callback Reward
-```java
-@Override
- public void onRewardedInterstitialAdRewarded(String unitId, RewardItem rewardItem) {
+```kotlin
+override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: RewardItem) {
     // user should receive the reward
     // RewardItem.getType: 보상 타입
     // RewardItem.getAmount: 보상 양
- }
+}
 ```
 * 보상이 주어져야 할 경우 `onRewardedInterstitialAdRewarded`가 호출되며 파라미터로 관련 정보가 전달 (`RewardItem`)
   * `RewardItem.type`: 보상 타입
@@ -552,48 +530,45 @@ mRewardedInterstitialAd.show("RI_UNIT1");
 * Reward 정보는 어뷰징 방지를 위해서 S2S 방식으로 전달 받는 것을 권장
   * S2S 방식을 선택하더라도 보상이 전달 될 시에는 `onRewardedInterstitialAdRewarded`가 호출
   * 이때는 서버를 통해 전달받은 정보를 기준으로 처리하고, `onRewardedInterstitialAdRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
-  
+
 <br/>
 
 ### Offerwall Ads
 
 #### Create Ad Instance
-```java
-import com.nps.adiscope.offerwall.OfferwallAd;
-OfferwallAd mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
+```kotlin
+import com.nps.adiscope.offerwall.OfferwallAd
+val mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
 ```
 <br/>
 
 #### Set Event Callback
-```java
-mOfferwallAd.setOfferwallAdListener(this);
+```kotlin
+mOfferwallAd.setOfferwallAdListener(this)
 
-@Override
-public void onOfferwallAdOpened(String unitId) {
+override fun onOfferwallAdOpened(unitId: String) {
     // offerwall ad show completed
 }
 
-@Override
-public void onOfferwallAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+override fun onOfferwallAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
     // offerwall ad failed to show
 }
 
-@Override
-public void onOfferwallAdClosed(String unitId) {
+override fun onOfferwallAdClosed(unitId: String) {
     // offerwall ad closed
 }
 ```
 <br/>
 
 #### Show
-```java
-String OFFERWALL_UNIT_ID = "";
-String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
- if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+```kotlin
+val OFFERWALL_UNIT_ID = ""
+val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
+    // succeed
+} else {
+    // show is already in progress
+}
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
@@ -605,34 +580,33 @@ String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS
 
 #### Show Detail
 오퍼월 상세 페이지 이동 함수는 두 가지로 지원
-* `offerwallAd.showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId)`
-* `offerwallAd.showDetail(Activity activity, String url)`
+* `offerwallAd.showDetail(activity: Activity, unitId: String, excludeAdTypeList: Array<String>, sponsorshipItemId: Int)`
+* `offerwallAd.showDetail(activity: Activity, url: String)`
 
 **A) showDetail(activity, unitId, excludeAdTypeList, sponsorshipItemId)**
-```java
-String OFFERWALL_UNIT_ID = "";
-String SPONSORSHIP_ITEM_ID = "";
-String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
- if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+```kotlin
+val OFFERWALL_UNIT_ID = ""
+val SPONSORSHIP_ITEM_ID = ""
+val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
+    // succeed
+} else {
+    // show is already in progress
+}
 ```
 
 <br/>
 
 **B) showDetail(activity, url)**
 ```java
-String SPONSORSHIP_URL = "";
- if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+val SPONSORSHIP_URL = ""
+if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
+    // succeed
+} else {
+    // show is already in progress
+}
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 특정 광고 아이템의 상세 화면으로 이동
 * url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
 * 요청하고자 하는 스폰서십 아이디 및 URL은 애디스콥에 문의 필요
-
