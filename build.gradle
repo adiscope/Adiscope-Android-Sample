@@ -28,9 +28,6 @@ allprojects {
 
         // chartboost 연동 시 추가
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
-
-        // ironsource 연동 시 추가
-        maven { url 'https://android-sdk.is.com/' }
     }
 }
 
