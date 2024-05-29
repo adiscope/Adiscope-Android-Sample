@@ -37,7 +37,6 @@
   * [Rewarded Ads](#rewarded-ads)
   * [Interstitial Ads](#interstitial-ads)
   * [Rewarded Interstitial Ads](#rewarded-interstitial-ads)
-* [Other API](./docs/api_documentation.md)
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
 * [Reward Callback](./docs/reward_callback_info.md)
