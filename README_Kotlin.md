@@ -2,6 +2,7 @@
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.7.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 
 ## Requirements
 - minSdkVersion 15
@@ -27,15 +28,15 @@
 
 
 ## Contents
-* [**Integration Guide**](#Integration-Guide) ([Java ver](./README.md))
-  * [1. Import Adiscope Sdk](#1.-Import-Adiscope-Sdk)
-  * [2. Initialize](#2.-Initialize-Adiscope-Sdk)
-  * [3. Set User Id](#3.-Set-User-Id)
-* [**Ad Formats**](#Ad-Formats)
-  * [Interstitial Ads](#Interstitial-Ads)
-  * [Rewarded Ads](#Rewarded-Ads)
-  * [Rewarded Interstitial Ads](#Rewarded-Interstitial-Ads)
-  * [Offerwall Ads](#Offerwall-Ads)
+* [**Integration Guide**](#integration-guide) ([Java ver](./README.md))
+  * [1. Import Adiscope Sdk](#1-import-adiscope-sdk)
+  * [2. Initialize](#2-initialize-adiscope-sdk)
+  * [3. Set User Id](#3-set-user-id)
+* [**Ad Formats**](#ad-formats)
+  * [Offerwall Ads](#offerwall-ads)
+  * [Rewarded Ads](#rewarded-ads)
+  * [Interstitial Ads](#interstitial-ads)
+  * [Rewarded Interstitial Ads](#rewarded-interstitial-ads)
 * [Other API](./docs/api_documentation.md)
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
@@ -145,7 +146,7 @@ repositories {
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.2'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.3'            // admob
     
     // bidding adapter
     implementation 'com.nps.adiscope:adapter.max:12.1.0.4'              // max
@@ -265,75 +266,83 @@ AdiscopeSdk.setUserId("exampleUniqueUserId")
 
 ## Ad Formats
 
-### Interstitial Ads
+### Offerwall Ads
 
 #### Create Ad Instance
 ```kotlin
-import com.nps.adiscope.interstitial.InterstitialAd
-val mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+import com.nps.adiscope.offerwall.OfferwallAd
+val mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
 ```
+<br/>
 
 #### Set Event Callback
 ```kotlin
-mInterstitialAd.setInterstitialAdListener(this)
+mOfferwallAd.setOfferwallAdListener(this)
 
-override fun onInterstitialAdLoaded() {
-    // interstitial ad is ready
+override fun onOfferwallAdOpened(unitId: String) {
+    // offerwall ad show completed
 }
 
-override fun onInterstitialAdFailedToLoad(adiscopeError: AdiscopeError) {
-    // interstitial ad failed to load
+override fun onOfferwallAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+    // offerwall ad failed to show
 }
 
-override fun onInterstitialAdOpened(unitId: String) {
-    // interstitial ad show completed
-}
-
-override fun onInterstitialAdClosed(unitId: String) {
-    // interstitial ad closed
-}
-
-override fun onInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // interstitial ad failed to show
+override fun onOfferwallAdClosed(unitId: String) {
+    // offerwall ad closed
 }
 ```
-
-#### Load
-```kotlin
-val INTERSTITIAL_UNIT_ID = ""
-mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
-```
-* 애디스콥 이니셜라이즈 후 로드 호출 가능
-* 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
-* Interstitial의 `Load`와 `Show`는 pair로 호출
-  * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
-* 광고가 Show되는 동안 다음 광고를 Load할 수 있지만 이는 사용하는 Mediation Ad Network에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
-* 로드 성공 시 `onInterstitialAdLoaded`, 로드 실패 시 `onInterstitialAdFailedToLoad` 이벤트 콜백 호출
-* 로드 성공 콜백에 따라 인터스티셜 광고 송출(show) 가능
-
-#### isLoaded
-```kotlin
-if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
-    // show interstitial ad
-}else {
-    // ad is not loaded
-}
-```
-* 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
+<br/>
 
 #### Show
 ```kotlin
-if(mInterstitialAd.show()){
+val OFFERWALL_UNIT_ID = ""
+val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
     // succeed
-}else{
-    // this show request is duplicated
+} else {
+    // show is already in progress
 }
 ```
-* 마지막으로 로드된 인터스티셜 광고를 사용자에게 송출함
-* show 성공 시 `onInterstitialAdOpened`, 실패 시 `onInterstitialAdFailedToShow` 이벤트 콜백 호출
-* `onInterstitialAdOpened`가 호출되었다면 이후 `onInterstitialAdClosed`가 항상 호출
-* Interstitial의 `Load`와 `Show`는 pair로 호출
-  * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
+* 애디스콥 이니셜라이즈 후 호출 가능
+* 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
+* show는 중복 호출 불가
+* show가 실행되면 `onOfferwallAdOpened`와 `onOfferwallAdFailedToShow` 중 하나가 항상 호출
+* `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출
+
+<br/>
+
+#### Show Detail
+오퍼월 상세 페이지 이동 함수는 두 가지로 지원
+* `offerwallAd.showDetail(activity: Activity, unitId: String, excludeAdTypeList: Array<String>, sponsorshipItemId: Int)`
+* `offerwallAd.showDetail(activity: Activity, url: String)`
+
+**A) showDetail(activity, unitId, excludeAdTypeList, sponsorshipItemId)**
+```kotlin
+val OFFERWALL_UNIT_ID = ""
+val SPONSORSHIP_ITEM_ID = ""
+val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
+    // succeed
+} else {
+    // show is already in progress
+}
+```
+
+<br/>
+
+**B) showDetail(activity, url)**
+```java
+val SPONSORSHIP_URL = ""
+if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
+    // succeed
+} else {
+    // show is already in progress
+}
+```
+* 애디스콥 이니셜라이즈 후 호출 가능
+* 특정 광고 아이템의 상세 화면으로 이동
+* url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
+* 요청하고자 하는 스폰서십 아이디 및 URL은 애디스콥에 문의 필요
 
 <br/>
 
@@ -443,6 +452,78 @@ override fun onRewarded(unitId: String, rewardItem: RewardItem) {
 
 <br/>
 
+### Interstitial Ads
+
+#### Create Ad Instance
+```kotlin
+import com.nps.adiscope.interstitial.InterstitialAd
+val mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+```
+
+#### Set Event Callback
+```kotlin
+mInterstitialAd.setInterstitialAdListener(this)
+
+override fun onInterstitialAdLoaded() {
+    // interstitial ad is ready
+}
+
+override fun onInterstitialAdFailedToLoad(adiscopeError: AdiscopeError) {
+    // interstitial ad failed to load
+}
+
+override fun onInterstitialAdOpened(unitId: String) {
+    // interstitial ad show completed
+}
+
+override fun onInterstitialAdClosed(unitId: String) {
+    // interstitial ad closed
+}
+
+override fun onInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+    // interstitial ad failed to show
+}
+```
+
+#### Load
+```kotlin
+val INTERSTITIAL_UNIT_ID = ""
+mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
+```
+* 애디스콥 이니셜라이즈 후 로드 호출 가능
+* 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
+* Interstitial의 `Load`와 `Show`는 pair로 호출
+  * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
+* 광고가 Show되는 동안 다음 광고를 Load할 수 있지만 이는 사용하는 Mediation Ad Network에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
+* 로드 성공 시 `onInterstitialAdLoaded`, 로드 실패 시 `onInterstitialAdFailedToLoad` 이벤트 콜백 호출
+* 로드 성공 콜백에 따라 인터스티셜 광고 송출(show) 가능
+
+#### isLoaded
+```kotlin
+if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
+    // show interstitial ad
+}else {
+    // ad is not loaded
+}
+```
+* 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
+
+#### Show
+```kotlin
+if(mInterstitialAd.show()){
+    // succeed
+}else{
+    // this show request is duplicated
+}
+```
+* 마지막으로 로드된 인터스티셜 광고를 사용자에게 송출함
+* show 성공 시 `onInterstitialAdOpened`, 실패 시 `onInterstitialAdFailedToShow` 이벤트 콜백 호출
+* `onInterstitialAdOpened`가 호출되었다면 이후 `onInterstitialAdClosed`가 항상 호출
+* Interstitial의 `Load`와 `Show`는 pair로 호출
+  * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
+
+<br/>
+
 ### Rewarded Interstitial Ads
 
 #### Create Ad Instance
@@ -532,81 +613,3 @@ override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: Reward
   * 이때는 서버를 통해 전달받은 정보를 기준으로 처리하고, `onRewardedInterstitialAdRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
 
 <br/>
-
-### Offerwall Ads
-
-#### Create Ad Instance
-```kotlin
-import com.nps.adiscope.offerwall.OfferwallAd
-val mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
-```
-<br/>
-
-#### Set Event Callback
-```kotlin
-mOfferwallAd.setOfferwallAdListener(this)
-
-override fun onOfferwallAdOpened(unitId: String) {
-    // offerwall ad show completed
-}
-
-override fun onOfferwallAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // offerwall ad failed to show
-}
-
-override fun onOfferwallAdClosed(unitId: String) {
-    // offerwall ad closed
-}
-```
-<br/>
-
-#### Show
-```kotlin
-val OFFERWALL_UNIT_ID = ""
-val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
-if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
-    // succeed
-} else {
-    // show is already in progress
-}
-```
-* 애디스콥 이니셜라이즈 후 호출 가능
-* 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
-* show는 중복 호출 불가
-* show가 실행되면 `onOfferwallAdOpened`와 `onOfferwallAdFailedToShow` 중 하나가 항상 호출
-* `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출
-
-<br/>
-
-#### Show Detail
-오퍼월 상세 페이지 이동 함수는 두 가지로 지원
-* `offerwallAd.showDetail(activity: Activity, unitId: String, excludeAdTypeList: Array<String>, sponsorshipItemId: Int)`
-* `offerwallAd.showDetail(activity: Activity, url: String)`
-
-**A) showDetail(activity, unitId, excludeAdTypeList, sponsorshipItemId)**
-```kotlin
-val OFFERWALL_UNIT_ID = ""
-val SPONSORSHIP_ITEM_ID = ""
-val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
-if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
-    // succeed
-} else {
-    // show is already in progress
-}
-```
-
-<br/>
-
-**B) showDetail(activity, url)**
-```java
-val SPONSORSHIP_URL = ""
-if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
-    // succeed
-} else {
-    // show is already in progress
-}
-```
-* 애디스콥 이니셜라이즈 후 호출 가능
-* 특정 광고 아이템의 상세 화면으로 이동
-* url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
-* 요청하고자 하는 스폰서십 아이디 및 URL은 애디스콥에 문의 필요

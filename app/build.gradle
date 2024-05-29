@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.2'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.3'            // admob
 
     // bidding adapter
     implementation 'com.nps.adiscope:adapter.max:12.1.0.4'              // max
