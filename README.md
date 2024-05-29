@@ -40,6 +40,7 @@
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
 * [Reward Callback](./docs/reward_callback_info.md)
+* [Release Note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
 
 <br/>
 
