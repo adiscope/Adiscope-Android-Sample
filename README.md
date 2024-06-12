@@ -65,7 +65,7 @@ repositories {
 
 * `adiscope_media_id`: 매체 아이디
 * `adiscope_media_secret`: 매체 시크릿키
-* `adiscope_sub_domain`: [무료충전소 상세 화면 이동 기능](./docs/api_documentation.md#showdetail)에 사용하는 값으로, 해당 기능 적용 시 애디스콥과 협의 필요
+* `adiscope_sub_domain`: 옵션값 ([오퍼월 상세페이지 이동 기능](./docs/api_documentation.md#showdetail)에 사용하는 값으로, 필요 시 담당자 전달 예정)
 
 
 ```groovy
@@ -74,7 +74,7 @@ android {
         manifestPlaceholders = [
             adiscope_media_id    : "media id 기입필요",
             adiscope_media_secret: "media secret 기입필요",
-            adiscope_sub_domain  : "sub domain 기입필요"
+            adiscope_sub_domain  : "" // 옵션값으로 사용 시 value에 전달값을 기입
         ]
     }
 }
