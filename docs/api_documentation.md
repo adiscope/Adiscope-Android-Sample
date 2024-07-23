@@ -426,12 +426,13 @@ void load(String unitId)
 * 특정 보상형 광고 유닛에 속한 광고 네트워크들의 보상형 광고를 로드한다.
 * load와 show는 pair로 호출되어야 한다.
   * 즉 load를 한 후 show를 하고, 광고를 show한 후에는 다시 load를 하여 다음번 show를 준비해야 한다.
-* load-show 후 다시 load를 하려할 때 load는 show 이후 언제든 호출가능하다.
+* load-show 후 다시 load를 하려할 때 load는 show 이후 언제든 호출 가능하다.
 * 광고가 show되는 동안 다음 광고를 load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 잇으므로 항상 보장되는 동작은 아니다.
   * 그러므로 show의 callback 인 `onRewardedVideoAdClosed`에서 다시 load를 하는 것을 권장한다.
   * 이는 어뷰징 방지를 위해 보상형 광고를 연속으로 보여주는 것을 제한하여, 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 show를 할 수 있도록 어드민 페이지에서 서비스 설정을 할 수 있기 때문이다.
   </br>(일정 시간 이내에 show를 할 경우 `onRewardedVideoAdFailedToShow` callback이 호출된다)
 * load가 실행되면 `onRewardedVideoAdLoaded`, `onRewardedVideoAdFailedToLoad` 중 하나의 callback은 항상 호출된다.
+* **(Optional)** load의 시간이 필요해 로드 중에는 프로그래스바 노출 추천
 
 <br/>
 

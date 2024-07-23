@@ -1,8 +1,8 @@
 # Adiscope-Android-Sample
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.8.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.7.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 
 ## Requirements
 - minSdkVersion 15
@@ -11,17 +11,17 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                             |
-|------------|--------|---------|-------------------------------------------------------------------------------------|
-| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                       |
-| applovin   | 15     | -       |                                                                                     |
-| chartboost | 21     | -       |                                                                                     |
-| fan        | 15     | -       |                                                                                     |
-| max        | 15     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads |
-| mobvista   | 15     | -       |                                                                                     |
-| pangle     | 16     | -       |                                                                                     |
-| unityads   | 21     | -       |                                                                                     |
-| vungle     | 21     | -       |                                                                                     |
+| Adapter    | minSdk | bidding | bidders                                                                                                                             |
+|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------|
+| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                                       |
+| applovin   | 15     | -       |                                                                                                                                     |
+| chartboost | 21     | -       |                                                                                                                                     |
+| fan        | 15     | -       |                                                                                                                                     |
+| max        | 15     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, dtexchange, ogury, moloco |
+| mobvista   | 15     | -       |                                                                                                                                     |
+| pangle     | 16     | -       |                                                                                                                                     |
+| unityads   | 21     | -       |                                                                                                                                     |
+| vungle     | 21     | -       |                                                                                                                                     |
 
 </div>
 </details>
@@ -81,7 +81,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:3.7.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.8.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 }
 ```
@@ -118,6 +118,8 @@ repositories {
 
     maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max 연동 시 추가
     maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // max 연동 시 추가
+    maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
+    maven { url "https://maven.ogury.co" } // max 연동 시 추가
     maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
 
@@ -140,24 +142,24 @@ repositories {
   * fan, mobvista, pangle, vungle
 * max 
   * admob, applovin, fan, mobvista, pangle, vungle, unityads
-  * (only max bidder) smaato, inmobi, verve
+  * (only max bidder) smaato, inmobi, verve, aps, bidmachine, dtexchange, ogury, moloco
 
 
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.3'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.4'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.1.0.4'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.0'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.applovin:12.1.0.1'         // applovin
+    implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
     implementation 'com.nps.adiscope:adapter.chartboost:9.3.1.0'        // chartboost
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
     implementation 'com.nps.adiscope:adapter.mobvista:16.5.91.1'        // mobvista
     implementation "com.nps.adiscope:adapter.pangle:5.6.0.3.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.1.0.0'            // vungle
+    implementation 'com.nps.adiscope:adapter.vungle:7.3.2.0'            // vungle
     implementation 'com.nps.adiscope:adapter.unityads:4.6.1.0'          // unityads
 }
 ```
@@ -193,6 +195,11 @@ dependencies {
 빌드 환경에 따라 매체 환경을 코드 내에서 분기처리하여 이니셜라이즈하는 경우
 
 ```java
+// initialize parameters
+// mediaId: 관리자를 통해 발급
+// mediaSecret: 관리자를 통해 발급
+// callbackTag: 관리자를 통해 발급, 기본 ""
+// childYN: 어린이 여부를 설정해주는 값 (Google GMA에 세팅)
 AdiscopeSdk.initialize(this, 
         INPUT_YOUR_MEDIA_ID, 
         "INPUT_YOUR_MEDIA_SECRET_KEY", 
@@ -411,6 +418,7 @@ mRewardedVideoAd.load(RV_UNIT_ID);
 * 광고가 Show되는 동안 다음 광고를 Load할 수 있지만 이는 사용하는 Mediation Ad Network에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 * 로드 성공 시 `onRewardedVideoAdLoaded`, 로드 실패 시 `onRewardedVideoAdFailedToLoad` 이벤트 콜백 호출
 * 로드 성공 콜백에 따라 보상형 광고 송출(show) 가능
+* **(Optional)** load의 시간이 필요해 로드 중에는 프로그래스바 노출 추천
 
 <br/>
 
