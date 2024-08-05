@@ -1,8 +1,8 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 
 ## Requirements
 - minSdkVersion 15
@@ -81,7 +81,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:3.8.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.8.1'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 }
 ```
@@ -151,7 +151,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.4'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.0'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.1'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
