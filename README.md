@@ -141,8 +141,8 @@ repositories {
 * admob
   * fan, mobvista, pangle, vungle
 * max 
-  * admob, applovin, fan, mobvista, pangle, vungle, unityads
-  * (only max bidder) smaato, inmobi, verve, aps, bidmachine, dtexchange, ogury, moloco
+  * admob, applovin, fan, mobvista, pangle, vungle
+  * (only max bidder) unityads, smaato, inmobi, verve, aps, bidmachine, dtexchange, ogury, moloco
 
 > `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
