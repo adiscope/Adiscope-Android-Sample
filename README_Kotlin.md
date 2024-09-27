@@ -1,11 +1,12 @@
 # Adiscope-Android-Sample
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.9.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.9.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.9.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.9.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.9.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
-- minSdkVersion 15
+- minSdkVersion 21
 - compileSdkVersion 33
 <details>
 <summary>Network Adapter Requirements</summary>
@@ -17,10 +18,9 @@
 | applovin   | 15     | -       |                                                                                                                                     |
 | chartboost | 21     | -       |                                                                                                                                     |
 | fan        | 15     | -       |                                                                                                                                     |
-| max        | 15     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, dtexchange, ogury, moloco |
+| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, dtexchange, ogury, moloco |
 | mobvista   | 15     | -       |                                                                                                                                     |
-| pangle     | 16     | -       |                                                                                                                                     |
-| unityads   | 21     | -       |                                                                                                                                     |
+| pangle     | 19     | -       |                                                                                                                                     |
 | vungle     | 21     | -       |                                                                                                                                     |
 
 </div>
@@ -81,8 +81,8 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:3.8.1'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
+    implementation 'com.nps.adiscope:adiscopeCore:3.9.0'
+    implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
 <br/>
@@ -144,23 +144,26 @@ repositories {
   * admob, applovin, fan, mobvista, pangle, vungle, unityads
   * (only max bidder) smaato, inmobi, verve, aps, bidmachine, dtexchange, ogury, moloco
 
+> `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
+> 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
+
+![adapter version checker log](https://github.com/user-attachments/assets/286e83f0-8b63-4e3f-bb09-ad86e15df83c)
 
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.4'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.5'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.1'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.2'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
     implementation 'com.nps.adiscope:adapter.chartboost:9.3.1.0'        // chartboost
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
-    implementation 'com.nps.adiscope:adapter.mobvista:16.5.91.1'        // mobvista
-    implementation "com.nps.adiscope:adapter.pangle:5.6.0.3.0"          // pangle
+    implementation 'com.nps.adiscope:adapter.mobvista:16.8.31.0'        // mobvista
+    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.0"          // pangle
     implementation 'com.nps.adiscope:adapter.vungle:7.3.2.0'            // vungle
-    implementation 'com.nps.adiscope:adapter.unityads:4.6.1.0'          // unityads
 }
 ```
 <br/>

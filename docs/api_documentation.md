@@ -4,6 +4,7 @@ API Reference
   - [initialize](#initialize)
   - [isInitialize](#isinitialize)
   - [setUserId](#setuserid)
+  - [setRewardedCheckParam](#setrewardedcheckparam)
   - [getUnitStatus](#getunitstatus)
   - [getSDKVersion](#getsdkversion)
   - [getNetworksVersion](#getnetworksversions)
@@ -58,6 +59,8 @@ public class AdiscopeSdk {
     public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity activity)
 
     public static OptionSetter getOptionSetterInstance(Activity activity)
+
+    public static void setRewardedCheckParam(String param)
 }
 
 public interface AdiscopeInitializeListener {
@@ -117,6 +120,22 @@ public static boolean setUserId(String userId)
 * 이 정보는 리워드 지급 등에 있어 사용자를 구분하는데 사용된다.
 * 만일 서비스에서 한 사람당 N개의 계정 사용이 가능한 경우, 계정 변경 시 `setUserId` 호출로 애디스콥에 변경 정보를 전달해주어야 한다.
   * 그렇지 않을 경우 변경된 계정 정보로 보상 지급이 되지 않으니 유의해야 한다.
+
+<br/>
+
+#### setRewardedCheckParam
+```java
+public static void setRewardedCheckParam(String param)
+```
+
+| Parameters |                                        |
+|------------|----------------------------------------|
+| `param`    | rewarded callback 시 customData에 전달 될 값 |
+
+* Application 사용자의 rewarded callback 시 parameters을 추가. 이 정보는 rewarded 지급 등에 있어 구분하는데 사용 할 수 있다.
+* customData은 내부 설정 후 사용 가능. 담당자에게 요청 부탁드립니다.
+> ⚠️ param은 Base64 Encoded(UTF8) 처리 후 1000자내로 설정 해 주시기 바랍니다.
+
 
 <br/>
 
@@ -211,6 +230,9 @@ public static OfferwallAd getOfferwallAdInstance(Activity activity)
         * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
 
 <br/>
+
+### 
+
 
 #### getOptionSetterInstance
 ```java
@@ -624,7 +646,7 @@ boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
 | Parameters          |                                  |
 |---------------------|----------------------------------|
 | `activity`          | 상위 액티비티                          |
-| `unitId`            | 로드 여부를 체크할 인터스티셜 광고의 unit id     |
+| `unitId`            | 오퍼월 광고 unit id                   |
 | `excludeAdTypeList` | 구매 제한 타입 리스트<br/>ex) `[ "CPS" ]` |
 
 **Callback**
