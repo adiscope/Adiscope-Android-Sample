@@ -56,14 +56,14 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.9.0'
+    implementation 'com.nps.adiscope:adiscopeCore:3.9.2'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.5'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.2'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.3'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
