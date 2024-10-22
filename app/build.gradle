@@ -50,7 +50,7 @@ dependencies {
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
-    implementation 'com.nps.adiscope:adapter.chartboost:9.3.1.0'        // chartboost
+    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.0'        // chartboost
     implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
     implementation 'com.nps.adiscope:adapter.mobvista:16.8.31.0'        // mobvista
     implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.0"          // pangle
