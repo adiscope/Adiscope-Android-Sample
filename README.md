@@ -1,5 +1,5 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.9.2-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.0-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-3.9.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-3.9.2-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-3.9.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
