@@ -234,7 +234,7 @@ AdiscopeSdk.initialize(
 mediaId, mediaSecret 값을 고정으로 사용하는 경우
 
 > 앱 모듈의 build.gradle의 `manifestPlaceholders`에 정의된 `adiscope_media_id`, `adiscope_media_secret` 값을
-> 매니페스트에 각각 <span style="color:#3894ff">**adiscope.global.mediaId**</span>, <span style="color:#3894ff">**adiscope.global.mediaSecret**</span> meta-data로 설정하고
+> 매니페스트에 각각 <span style="color:#3894ff">**adiscope_media_id**</span>, <span style="color:#3894ff">**adiscope_media_secret**</span> meta-data로 설정하고
 > <span style="color:darkgrey">_AdiscopeSdk.initialize(activity, listener)_</span> 함수를 사용하면 SDK가 해당 meta-data 값을 읽어와 이니셜라이즈를 수행한다.
 
 ```kotlin
