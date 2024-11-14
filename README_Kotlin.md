@@ -1,13 +1,13 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.9.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.9.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.9.2-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.9.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.9.2-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
 - minSdkVersion 21
-- compileSdkVersion 33
+- compileSdkVersion 34
 <details>
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
@@ -15,11 +15,8 @@
 | Adapter    | minSdk | bidding | bidders                                                                                                                             |
 |------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------|
 | admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                                       |
-| applovin   | 15     | -       |                                                                                                                                     |
 | chartboost | 21     | -       |                                                                                                                                     |
-| fan        | 15     | -       |                                                                                                                                     |
 | max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, dtexchange, ogury, moloco |
-| mobvista   | 15     | -       |                                                                                                                                     |
 | pangle     | 19     | -       |                                                                                                                                     |
 | vungle     | 21     | -       |                                                                                                                                     |
 
@@ -37,6 +34,7 @@
   * [Rewarded Ads](#rewarded-ads)
   * [Interstitial Ads](#interstitial-ads)
   * [Rewarded Interstitial Ads](#rewarded-interstitial-ads)
+  * [Ad Event](#ad-event)
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
 * [Reward Callback](./docs/reward_callback_info.md)
@@ -81,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:3.9.2'
+    implementation 'com.nps.adiscope:adiscopeCore:3.10.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -121,7 +119,7 @@ repositories {
     maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
     maven { url "https://maven.ogury.co" } // max 연동 시 추가
     maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
-    maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
+    maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 연동 시 추가
 
     // chartboost 연동 시 추가
     maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
@@ -152,18 +150,15 @@ repositories {
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.5'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.6'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.3'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.4'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
-    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.0'        // chartboost
-    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
-    implementation 'com.nps.adiscope:adapter.mobvista:16.8.31.0'        // mobvista
-    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.3.2.0'            // vungle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.1'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:7.3.2.1'            // vungle
 }
 ```
 <br/>
@@ -222,6 +217,9 @@ AdiscopeSdk.initialize(
 
         mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
         mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+
+        mAdEvent = AdiscopeSdk.getAdEventInstance(this)
+        mAdEvent.setAdEventListener(this)
    } else {
         Log.d(TAG, "AdiscopeSdk initialize failed.")
    }
@@ -255,6 +253,9 @@ AdiscopeSdk.initialize(
 
         mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
         mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+
+        mAdEvent = AdiscopeSdk.getAdEventInstance(this)
+        mAdEvent.setAdEventListener(this)
     } else {
         Log.d(TAG, "AdiscopeSdk initialize failed.")
     }
@@ -622,5 +623,49 @@ override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: Reward
 * Reward 정보는 어뷰징 방지를 위해서 S2S 방식으로 전달 받는 것을 권장
   * S2S 방식을 선택하더라도 보상이 전달 될 시에는 `onRewardedInterstitialAdRewarded`가 호출
   * 이때는 서버를 통해 전달받은 정보를 기준으로 처리하고, `onRewardedInterstitialAdRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
+
+<br/>
+
+### Ad Event
+
+#### Create Ad Instance
+```kotlin
+import com.nps.adiscope.adevent.AdEvent
+val mAdEvent = AdiscopeSdk.getAdEventInstance(this)
+```
+<br/>
+
+#### Set Event Callback
+```kotlin
+mAdEvent.setAdEventListener(this)
+
+override fun onAdEventOpened(unitId: String) {
+    // ad event show completed
+}
+
+override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+    // ad event failed to show
+}
+
+override fun onAdEventClosed(unitId: String) {
+    // ad event closed
+}
+```
+<br/>
+
+#### Show
+```kotlin
+val AD_EVENT_UNIT_ID = ""
+if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
+    // succeed
+} else {
+    // show is already in progress
+}
+```
+* 애디스콥 이니셜라이즈 후 호출 가능
+* 애디스콥 시스템에 등록된 Ad Event 유닛으로 사용자에게 Ad Event 광고를 보여줌
+* show는 중복 호출 불가
+* show가 실행되면 `onAdEventOpened`와 `onAdEventFailedToShow` 중 하나가 항상 호출
+* `onAdEventOpened`가 호출되었다면 이후 `onAdEventClosed`가 항상 호출
 
 <br/>

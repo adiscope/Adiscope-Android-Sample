@@ -23,7 +23,7 @@ allprojects {
         maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
         maven { url "https://maven.ogury.co" } // max 연동 시 추가
         maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
-        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 혹은 mobvista 연동 시 추가
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 연동 시 추가
 
         // chartboost 연동 시 추가
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
@@ -56,22 +56,19 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.9.2'
+    implementation 'com.nps.adiscope:adiscopeCore:3.10.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:22.3.0.5'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:22.3.0.6'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.3'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.4'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
-    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.0'        // chartboost
-    implementation 'com.nps.adiscope:adapter.fan:6.13.7.1'              // fan
-    implementation 'com.nps.adiscope:adapter.mobvista:16.8.31.0'        // mobvista
-    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.3.2.0'            // vungle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.1'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:7.3.2.1'            // vungle
 }
 ```
 
@@ -119,11 +116,6 @@ dependencies {
 #### Chartboost - Rewarded Video Network
 * 9.2.1 버전부터 kotlinx의 coroutines 라이브러리를 사용합니다. 아래 참조가 포함되어 있습니다.
   `implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'`
-
-<br/>
-
-#### Fan - Rewarded Video Network
-* 디바이스에서 광고를 테스트하기 위해서는 Facebook admin에 디바이스의 ADID가 등록되어야 하며 해당 디바이스에 페이스북 앱이 설치, 로그인되어 있어야 합니다.
 
 <br/>
 

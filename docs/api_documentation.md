@@ -18,6 +18,7 @@ API Reference
 - [RewardedVideoAd](#rewardedvideoad)
 - [RewardedInterstitialAd](#rewardedinterstitialad)
 - [OfferwallAd](#offerwallad)
+- [AdEvent](#adevent)
 
 
 ## API Reference - AdiscopeSdk.Android
@@ -57,6 +58,8 @@ public class AdiscopeSdk {
     public static InterstitialAd getInterstitialAdInstance(Activity activity)
 
     public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity activity)
+      
+    public static AdEvent getAdEventInstance(Activity activity)
 
     public static OptionSetter getOptionSetterInstance(Activity activity)
 
@@ -231,8 +234,15 @@ public static OfferwallAd getOfferwallAdInstance(Activity activity)
 
 <br/>
 
-### 
+#### getAdEventInstance
+```java
+public static AdEvent getAdEventInstance(Activity activity)
+```
+* `AdEvent`의 전역 Singleton 객체를 생성한다.
+  * 애디스콥 이니셜라이즈에 대한 콜백 리스너인 `AdiscopeInitializeListener`의 콜백함수 `onInitialized` 의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해주어야 한다.
+    * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
 
+<br/>
 
 #### getOptionSetterInstance
 ```java
@@ -291,7 +301,7 @@ void setVolumeOff(boolean isVolume)
 |------------|-----------------------------------------------------|
 | `isVolume` | 광고음의 on/off 설정값. 미송출 시 `true`, 송출(`false`)이 default |
 * 광고음의 on/off 설정을 지원하며, 광고음 송출이 디폴트이다.
-  * 지원 네트워크: Admob, Applovin, MAX(일부 비더 네트워크), Mobvista
+  * 지원 네트워크: Admob, Applovin, MAX(일부 비더 네트워크)
     * MAX: 맥스에서 제공하는 일부 네트워크의 광고음 뮤트 적용
       * Google bidding and Google Admob, AppLovin, Mintegral(Mobvista), Verve
 * 앱을 음소거하면 동영상 광고 적합성이 저하되고 앱의 광고 수익이 감소할 수 있으므로, 특수한 상황에만 사용토록 권장한다.
@@ -682,5 +692,51 @@ boolean showDetail(Activity activity, String url)
 * showDetail이 정상적으로 시작되면 `true`, 그렇지 않다면 `false`를 반환한다.
 * showDetail이 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
     * `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출된다.
+
+<br/>
+
+## API Reference - AdEvent.Android
+
+### AdEvent
+```java
+public interface AdEvent {
+
+    boolean show(Activity activity, String unitId)
+
+    void setAdEventListener(AdEventListener adEventListener)
+}
+        
+    public interface AdEventListener {
+
+    void onAdEventOpened(String unitId)
+
+    void onAdEventFailedToShow(String unitId, AdiscopeError error)
+
+    void onAdEventClosed(String unitId)
+}    
+```
+
+<br/>
+
+#### show
+```java
+boolean show(Activity activity, String unitId)
+```
+| Parameters          |                                  |
+|---------------------|----------------------------------|
+| `activity`          | 상위 액티비티                          |
+| `unitId`            | Ad Event의 unit id                |
+
+**Callback**
+
+| Method                  | Info                    | Parameter                          |
+|-------------------------|-------------------------|------------------------------------|
+| `onAdEventOpened`       | Ad Event 화면이 열릴 때       | String unitId                      |
+| `onAdEventClosed`       | Ad Event 화면이 닫혔을 때      | String unitId                      |
+| `onAdEventFailedToShow` | Ad Event 화면을 보여줄 수 없을 때 | String unitId, AdiscopeError error |
+* Ad Event 광고를 사용자에게 표시한다.
+* show가 정상적으로 시작되면 `true`, 만약 이미 다른 show가 처리되는 중이라면 `false`를 반환한다.
+* show가 실행되면 (return값이 `true`일 경우) `onAdEventOpened`, `onAdEventFailedToShow` 중 하나가 항상 호출된다.
+  * `onAdEventOpened`가 호출되었다면 이후 `onAdEventClosed`가 항상 호출된다.
 
 <br/>
