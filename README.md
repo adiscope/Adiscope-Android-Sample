@@ -1,8 +1,8 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.4-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.4-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.4-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 
 ## Requirements
 - minSdkVersion 15
@@ -11,17 +11,17 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                                                                             |
-|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                                       |
-| applovin   | 15     | -       |                                                                                                                                     |
-| chartboost | 21     | -       |                                                                                                                                     |
-| fan        | 15     | -       |                                                                                                                                     |
-| max        | 15     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, dtexchange, ogury, moloco |
-| mobvista   | 15     | -       |                                                                                                                                     |
-| pangle     | 16     | -       |                                                                                                                                     |
-| unityads   | 21     | -       |                                                                                                                                     |
-| vungle     | 21     | -       |                                                                                                                                     |
+| Adapter    | minSdk | bidding | bidders                                                                                                                 |
+|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------|
+| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                           |
+| applovin   | 15     | -       |                                                                                                                         |
+| chartboost | 21     | -       |                                                                                                                         |
+| fan        | 15     | -       |                                                                                                                         |
+| max        | 15     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, ogury, moloco |
+| mobvista   | 15     | -       |                                                                                                                         |
+| pangle     | 16     | -       |                                                                                                                         |
+| unityads   | 21     | -       |                                                                                                                         |
+| vungle     | 21     | -       |                                                                                                                         |
 
 </div>
 </details>
@@ -81,7 +81,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:3.8.1'
+    implementation 'com.nps.adiscope:adiscopeCore:3.8.4'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.1'
 }
 ```
@@ -142,7 +142,7 @@ repositories {
   * fan, mobvista, pangle, vungle
 * max 
   * admob, applovin, fan, mobvista, pangle, vungle, unityads
-  * (only max bidder) smaato, inmobi, verve, aps, bidmachine, dtexchange, ogury, moloco
+  * (only max bidder) smaato, inmobi, verve, aps, bidmachine, ogury, moloco
 
 
 ```groovy
@@ -151,7 +151,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.4'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.1'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.5.1'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.applovin:12.3.1.0'         // applovin
