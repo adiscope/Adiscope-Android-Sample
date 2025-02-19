@@ -56,14 +56,14 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.10.5'
+    implementation 'com.nps.adiscope:adiscopeCore:4.0.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.6'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.5'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.6'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.1'        // chartboost
@@ -101,6 +101,7 @@ dependencies {
 
 #### Admob - Rewarded Video / Interstitial / Rewarded Interstitial Video Network
 * 애드몹 어댑터 연동 시 매니페스트에 애드몹 appId를 추가해야 합니다.
+* Max 어댑터 11.9.1 버전부터 Max 비더에 admob이 포함되므로, 애드몹 어댑터를 미연동하여도 Max 어댑터 연동 시 아래 작업이 포함되어야 합니다.
 * 애디스콥으로부터 값을 전달받은 후 기입 (미기입 시 앱 크래시 발생)
 ```xml
   <application>

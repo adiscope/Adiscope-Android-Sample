@@ -6,6 +6,7 @@ github의 api documentation에 showDetail() 메서드에 관한 설명과 사용
 <br></br>
 
 ## 딥링크 (custom scheme)
+> 오퍼월 개편으로 애디스콥 4.0.0 버전 이상 사용 시 [함수 호출 기능](./api_documentation.md#showdetail)으로 적용해주세요.
 
 애디스콥측 Manifest에 intent-filter가 적용되어 있으므로 매체 측에서 별도로 설정/구현해야 할 부분은 없습니다.  
 다만, 매체의 `build.gradle(app)`에 `adiscope_media_id`와 `adiscope_media_secret`, `adiscope_sub_domain`이 정확히 기입되어 있는지 확인이 필요합니다.
