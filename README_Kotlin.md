@@ -12,13 +12,13 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                                                                                                |
-|------------|--------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                                                          |
-| chartboost | 21     | -       |                                                                                                                                                        |
-| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, ogury, google admanager, dt exchange |
-| pangle     | 19     | -       |                                                                                                                                                        |
-| vungle     | 21     | -       |                                                                                                                                                        |
+| Adapter    | minSdk | bidding | bidders                                                                                                                                                    |
+|------------|--------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admob      | 16     | O       | fan, mobvista, pangle, vungle                                                                                                                              |
+| chartboost | 21     | -       |                                                                                                                                                            |
+| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, ogury, moloco,<br/>google admanager, dt exchange |
+| pangle     | 19     | -       |                                                                                                                                                            |
+| vungle     | 21     | -       |                                                                                                                                                            |
 
 </div>
 </details>
@@ -140,7 +140,7 @@ repositories {
   * fan, mobvista, pangle, vungle
 * max
   * admob, applovin, pangle, vungle
-  * (only max bidder) unityads, smaato, inmobi, verve, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange
+  * (only max bidder) unityads, smaato, inmobi, verve, aps, bidmachine, ogury, moloco, fan, mobvista, google admanager, dt exchange
 
 > `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
