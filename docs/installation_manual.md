@@ -56,18 +56,18 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:3.10.5'
+    implementation 'com.nps.adiscope:adiscopeCore:3.10.6'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.6'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.5'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.6.1'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.2'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.2"          // pangle
     implementation 'com.nps.adiscope:adapter.vungle:7.3.2.1'            // vungle
 }
 ```
