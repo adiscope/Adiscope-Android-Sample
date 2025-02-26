@@ -1,7 +1,7 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.0.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.0.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.0.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-4.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.0.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
@@ -79,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.0.0'
+    implementation 'com.nps.adiscope:adiscopeCore:4.0.1'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -153,11 +153,11 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:22.3.0.6'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:12.3.1.6'              // max
+    implementation 'com.nps.adiscope:adapter.max:12.3.1.7'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.1"          // pangle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.7.0.3'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:6.1.0.9.3"          // pangle
     implementation 'com.nps.adiscope:adapter.vungle:7.3.2.1'            // vungle
 }
 ```
