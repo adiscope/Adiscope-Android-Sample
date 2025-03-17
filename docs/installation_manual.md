@@ -103,6 +103,11 @@ dependencies {
 * 애드몹 어댑터 연동 시 매니페스트에 애드몹 appId를 추가해야 합니다.
 * Max 어댑터 11.9.1 버전부터 Max 비더에 admob이 포함되므로, 애드몹 어댑터를 미연동하여도 Max 어댑터 연동 시 아래 작업이 포함되어야 합니다.
 * 애디스콥으로부터 값을 전달받은 후 기입 (미기입 시 앱 크래시 발생)
+* 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의
+  * 퍼블리셔-애디스콥 간 gms 메이저 버전이 다를 경우 크래시 발생될 수 있음
+  * gms 22 버전: 애디스콥 `4.0.1` 이하 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.0.1?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 23 버전: 애디스콥 `4.1.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
+  * 관련 문서: https://developers.google.com/admob/android/migration?hl=en
 ```xml
   <application>
     <!-- admob app id for adiscope Admob rewarded video networks -->
@@ -115,7 +120,7 @@ dependencies {
 <br/>
 
 #### Chartboost - Rewarded Video Network
-* 9.2.1 버전부터 kotlinx의 coroutines 라이브러리를 사용합니다. 아래 참조가 포함되어 있습니다.
+* 9.2.1 버전부터 kotlinx의 coroutines 라이브러리를 사용합니다. 아래 참조가 포함되어 있습니다.  
   `implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'`
 
 <br/>
@@ -135,3 +140,9 @@ dependencies {
 * 11.9.0.0 버전부터 앱러빈의 미디에이션 플랫폼인 MAX를 통해 비딩, 워터폴을 교차 운영할 수 있도록 지원합니다.
 * 11.9.3 버전부터 max adapter를 연동하면 하기 네트워크들이 max bidder로 자동 포함됩니다.
   - applovin, admob, fan, mobvista, pangle, smaato, vungle
+* 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의
+  * admob, unityads bidder 내 gms 함수가 사용됨
+  * 퍼블리셔-애디스콥 간 gms 메이저 버전이 다를 경우 크래시 발생될 수 있음
+  * gms 22 버전: 애디스콥 `4.0.1` 이하 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.0.1?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 23 버전: 애디스콥 `4.1.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
+  * 관련 문서: https://developers.google.com/admob/android/migration?hl=en
