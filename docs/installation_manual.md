@@ -56,7 +56,7 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:4.1.4'
+    implementation 'com.nps.adiscope:adiscopeCore:4.1.5'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter

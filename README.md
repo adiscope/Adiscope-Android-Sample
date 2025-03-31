@@ -1,7 +1,7 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.1.4-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.1.5-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.1.4-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.1.5-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-4.1.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.1.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
@@ -79,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.1.4'
+    implementation 'com.nps.adiscope:adiscopeCore:4.1.5'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
