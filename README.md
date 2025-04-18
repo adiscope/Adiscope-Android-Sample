@@ -108,7 +108,7 @@ dependencies {
 운영에 필요한 각각의 네트워크 어댑터를 연동
 
 **build.gradle(root)**  
-max, pangle, mobvista, chartboost 네트워크 어댑터를 연동할 경우 각 주석을 참고하여 저장소 url 추가
+max, pangle, chartboost 네트워크 어댑터를 연동할 경우 각 주석을 참고하여 저장소 url 추가
 ```groovy
 repositories {
     google()
