@@ -1,9 +1,9 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.3.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.3.1-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.3.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.3.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.3.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.3.1-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
 - minSdkVersion 21
@@ -79,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.3.0'
+    implementation 'com.nps.adiscope:adiscopeCore:4.3.1'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
