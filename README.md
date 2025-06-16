@@ -1,23 +1,23 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.3.1-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-4.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.3.1-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.3.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.3.1-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.4.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.4.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
-- minSdkVersion 21
-- compileSdkVersion 34
+- minSdkVersion 23
+- compileSdkVersion 35
 <details>
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
 | Adapter    | minSdk | bidding | bidders                                                                                                                                                                                          |
 |------------|--------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 21     | O       | fan, mobvista, pangle, vungle                                                                                                                                                                    |
+| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                                    |
 | chartboost | 21     | -       |                                                                                                                                                                                                  |
 | max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, yandex |
-| pangle     | 19     | -       |                                                                                                                                                                                                  |
+| pangle     | 23     | -       |                                                                                                                                                                                                  |
 | vungle     | 21     | -       |                                                                                                                                                                                                  |
 
 </div>
@@ -79,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.3.1'
+    implementation 'com.nps.adiscope:adiscopeCore:4.4.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -149,15 +149,15 @@ repositories {
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:23.5.0.1'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.0.1.3'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.0.0'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.8.2.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:6.5.0.4.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.4.2.0'            // vungle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:7.2.0.4.0"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:7.5.0.0'            // vungle
 }
 ```
 <br/>
