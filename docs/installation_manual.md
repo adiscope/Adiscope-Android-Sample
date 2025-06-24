@@ -55,19 +55,19 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:4.3.1'
+    implementation 'com.nps.adiscope:adiscopeCore:4.4.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:23.5.0.1'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.0.1.3'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.0'              // max
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.8.2.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:6.5.0.4.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.4.2.0'            // vungle
+    implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
+    implementation "com.nps.adiscope:adapter.pangle:7.2.0.4.0"          // pangle
+    implementation 'com.nps.adiscope:adapter.vungle:7.5.0.0'            // vungle
 }
 ```
 
@@ -105,7 +105,8 @@ dependencies {
 * 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의
   * 퍼블리셔-애디스콥 간 gms 메이저 버전이 다를 경우 크래시 발생될 수 있음
   * gms 22 버전: 애디스콥 `4.1.0` 미만 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.0.1?tab=readme-ov-file#integration-guide)를 따라 연동
-  * gms 23 버전: 애디스콥 `4.1.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 23 버전: 애디스콥 `4.4.0` 미만 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.3.2?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 24 버전: 애디스콥 `4.4.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
   * 관련 문서: https://developers.google.com/admob/android/migration?hl=en
 ```xml
   <application>
@@ -143,5 +144,6 @@ dependencies {
   * admob, unityads bidder 내 gms 함수가 사용됨
   * 퍼블리셔-애디스콥 간 gms 메이저 버전이 다를 경우 크래시 발생될 수 있음
   * gms 22 버전: 애디스콥 `4.1.0` 미만 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.0.1?tab=readme-ov-file#integration-guide)를 따라 연동
-  * gms 23 버전: 애디스콥 `4.1.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 23 버전: 애디스콥 `4.4.0` 미만 [가이드](https://github.com/adiscope/Adiscope-Android-Sample/tree/4.3.2?tab=readme-ov-file#integration-guide)를 따라 연동
+  * gms 24 버전: 애디스콥 `4.4.0` 이상 [가이드](https://github.com/adiscope/Adiscope-Android-Sample?tab=readme-ov-file#integration-guide)를 따라 연동
   * 관련 문서: https://developers.google.com/admob/android/migration?hl=en

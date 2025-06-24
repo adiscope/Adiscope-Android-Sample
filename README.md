@@ -152,7 +152,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.0.0'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.0'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
