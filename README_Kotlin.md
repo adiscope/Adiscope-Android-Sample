@@ -20,6 +20,33 @@
 | pangle     | 23     | -       |                                                                                                                                                                                                  |
 | vungle     | 21     | -       |                                                                                                                                                                                                  |
 
+#### Network Version
+| Ad Network          | Android Version |
+|---------------------|-----------------|
+| AdMob               | 24.4.0          |
+| Amazon              | 11.0.1          |
+| AppLovin            | 13.3.1          |
+| BidMachine          | 3.3.0           |
+| Chartboost          | 9.8.3           |
+| DT Exchange         | 8.3.7           |
+| InMobi              | 10.8.3          |
+| Ironsource          | 8.9.1           |
+| Liftoff(Vungle)     | 7.5.0           |
+| Meta(Fan)           | 6.20.0          |
+| Mintegral(Mobvista) | 16.9.71         |
+| Moloco              | 3.10.0          |
+| Ogury               | 6.0.1           |
+| Pangle              | 7.2.0.4         |
+| Smaato              | 22.7.2          |
+| Unity Ads           | 4.15.0          |
+| Verve               | 3.6.0           |
+| Yandex              | 7.13.0          |
+
+> 기존 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](./docs/installation_manual.md#2-network-별-추가-작업)
+> - gms 22 버전: 애디스콥 `4.1.0` 미만
+> - gms 23 버전: 애디스콥 `4.4.0` 미만
+> - gms 24 버전: 애디스콥 `4.4.0` 이상
+
 </div>
 </details>
 
