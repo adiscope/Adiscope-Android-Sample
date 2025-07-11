@@ -12,13 +12,13 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                                                                                                                                          |
-|------------|--------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                                    |
-| chartboost | 21     | -       |                                                                                                                                                                                                  |
-| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, verve, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, yandex |
-| pangle     | 23     | -       |                                                                                                                                                                                                  |
-| vungle     | 21     | -       |                                                                                                                                                                                                  |
+| Adapter    | minSdk | bidding | bidders                                                                                                                                                                                   |
+|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                             |
+| chartboost | 21     | -       |                                                                                                                                                                                           |
+| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, yandex |
+| pangle     | 23     | -       |                                                                                                                                                                                           |
+| vungle     | 21     | -       |                                                                                                                                                                                           |
 
 </div>
 </details>
@@ -79,7 +79,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.4.0'
+    implementation 'com.nps.adiscope:adiscopeCore:4.5.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -115,7 +115,6 @@ repositories {
     mavenCentral()
 
     maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max 연동 시 추가
-    maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // max 연동 시 추가
     maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
     maven { url "https://maven.ogury.co" } // max 연동 시 추가
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 연동 시 추가
@@ -138,8 +137,8 @@ repositories {
 * admob
   * fan, mobvista, pangle, vungle
 * max 
-  * admob, applovin, pangle, vungle
-  * (only max bidder) unityads, smaato, inmobi, verve, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange, moloco, chartboost, ironsource, yandex
+  * admob, applovin, pangle, vungle, chartboost
+  * (only max bidder) unityads, smaato, inmobi, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange, moloco, ironsource, yandex
 
 > `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
@@ -152,7 +151,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.0'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.1'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
