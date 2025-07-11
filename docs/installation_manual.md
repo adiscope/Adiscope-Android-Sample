@@ -19,7 +19,6 @@ allprojects {
         }
 
         maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max 연동 시 추가
-        maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // max 연동 시 추가
         maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
         maven { url "https://maven.ogury.co" } // max 연동 시 추가
         maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 연동 시 추가
@@ -55,14 +54,14 @@ android {
 dependencies {
 
     // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:4.4.0'
+    implementation 'com.nps.adiscope:adiscopeCore:4.5.0'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
     
     // bidding, waterfall adapter
     implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.0'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.1'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
