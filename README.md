@@ -39,7 +39,6 @@
 | Pangle              | 7.2.0.4         |
 | Smaato              | 22.7.2          |
 | Unity Ads           | 4.15.0          |
-| Verve               | 3.6.0           |
 | Yandex              | 7.13.0          |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](./docs/installation_manual.md#2-network-별-추가-작업)
