@@ -310,27 +310,33 @@ AdiscopeSdk.setUserId("exampleUniqueUserId");
 #### Create Ad Instance
 ```java
 import com.nps.adiscope.offerwall.OfferwallAd;
-OfferwallAd mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
+if (AdiscopeSdk.isInitialize()) {
+    OfferwallAd mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```java
-mOfferwallAd.setOfferwallAdListener(this);
+if (mOfferwallAd != null) {
+    mOfferwallAd.setOfferwallAdListener(this);
 
-@Override
-public void onOfferwallAdOpened(String unitId) {
-    // offerwall ad show completed
-}
+    @Override
+    public void onOfferwallAdOpened(String unitId) {
+        // offerwall ad show completed
+    }
 
-@Override
-public void onOfferwallAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
-    // offerwall ad failed to show
-}
+    @Override
+    public void onOfferwallAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+        // offerwall ad failed to show
+    }
 
-@Override
-public void onOfferwallAdClosed(String unitId) {
-    // offerwall ad closed
+    @Override
+    public void onOfferwallAdClosed(String unitId) {
+        // offerwall ad closed
+    }
 }
 ```
 <br/>
@@ -339,11 +345,15 @@ public void onOfferwallAdClosed(String unitId) {
 ```java
 String OFFERWALL_UNIT_ID = "";
 String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
- if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
+} else {
+    // reinitialize
+}
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
@@ -363,11 +373,15 @@ String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS
 String OFFERWALL_UNIT_ID = "";
 String SPONSORSHIP_ITEM_ID = "";
 String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
- if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
+} else {
+    // Reinitialize
+}
 ```
 
 <br/>
@@ -375,11 +389,15 @@ String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS
 **B) showDetail(activity, url)**
 ```java
 String SPONSORSHIP_URL = "";
- if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
-     // succeed
- } else {
-     // show is already in progress
- }
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
+} else {
+    // Reinitialize    
+}
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 특정 광고 아이템의 상세 화면으로 이동
@@ -392,52 +410,62 @@ String SPONSORSHIP_URL = "";
 #### Create Ad Instance
 ```java
 import com.nps.adiscope.reward.RewardedVideoAd;
-RewardedVideoAd mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this); 
+if (AdiscopeSdk.isInitialize()) {
+    RewardedVideoAd mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this); 
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```java
-mRewardedVideoAd.setRewardedVideoAdListener(this);
+if (mRewardedVideoAd != null) {
+    mRewardedVideoAd.setRewardedVideoAdListener(this);
+    
+    @Override
+    public void onRewardedVideoAdLoaded(String unitId) {
+        // rewarded ad is ready
+    }
 
-@Override
-public void onRewardedVideoAdLoaded(String unitId) {
-    // rewarded ad is ready
-}
+    @Override
+    public void onRewardedVideoAdFailedToLoad(String unitId, AdiscopeError adiscopeError) {
+        // rewarded ad failed to load
+    }
 
-@Override
-public void onRewardedVideoAdFailedToLoad(String unitId, AdiscopeError adiscopeError) {
-    // rewarded ad failed to load
-}
+    @Override
+    public void onRewardedVideoAdOpened(String unitId) {
+        // rewarded ad show completed
+    }
 
-@Override
-public void onRewardedVideoAdOpened(String unitId) {
-    // rewarded ad show completed
-}
+    @Override
+    public void onRewardedVideoAdClosed(String unitId) {
+        // rewarded ad closed
+    }
 
-@Override
-public void onRewardedVideoAdClosed(String unitId) {
-    // rewarded ad closed
-}
+    @Override
+    public void onRewarded(String unitId, RewardItem rewardItem) {
+        // user should receive the reward
+        // RewardItem.getType: 보상 타입
+        // RewardItem.getAmount: 보상 양
+    }
 
-@Override
-public void onRewarded(String unitId, RewardItem rewardItem) {
-    // user should receive the reward
-    // RewardItem.getType: 보상 타입
-    // RewardItem.getAmount: 보상 양
-}
-
-@Override
-public void onRewardedVideoAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
-    // rewarded ad failed to show
+    @Override
+    public void onRewardedVideoAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+        // rewarded ad failed to show
+    }
 }
 ```
 <br/>
 
 #### Load
 ```java
-String RV_UNIT_ID = "";
-mRewardedVideoAd.load(RV_UNIT_ID);
+if (mRewardedVideoAd != null) {
+    String RV_UNIT_ID = "";
+    mRewardedVideoAd.load(RV_UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 보상형 광고 유닛에 속한 광고 네트워크의 광고를 로드
@@ -452,10 +480,14 @@ mRewardedVideoAd.load(RV_UNIT_ID);
 
 #### isLoaded
 ```java
-if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
-    // show rewarded ad
+if (mRewardedVideoAd != null) {
+    if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
+        // show rewarded ad
+    } else {
+        // do something else
+    }
 } else {
-    // do something else
+    // Reinitialize
 }
 ```
 * 특정 보상형 광고 유닛의 광고 로드 여부 상태를 확인할 수 있음
@@ -464,10 +496,14 @@ if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
 
 #### Show
 ```java
-if(mRewardedVideoAd.show()){
-    // succeed
-}else{
-    // this show request is duplicated
+if (mRewardedVideoAd != null) {
+    if (mRewardedVideoAd.show()) {
+        // succeed
+    } else {
+        // this show request is duplicated
+    }
+} else {
+    // Reinitialize
 }
 ```
 * 마지막으로 로드된 보상형 광고를 사용자에게 송출함
@@ -506,43 +542,53 @@ public void onRewarded(String unitId, RewardItem rewardItem) {
 #### Create Ad Instance
 ```java
 import com.nps.adiscope.interstitial.InterstitialAd;
-InterstitialAd mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
+if (AdiscopeSdk.isInitialize()) {
+    InterstitialAd mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
+} else {
+    // Reinitialize
+}
 ```
 
 #### Set Event Callback
 ```java
-mInterstitialAd.setInterstitialAdListener(this);
+if (mInterstitialAd != null) {
+    mInterstitialAd.setInterstitialAdListener(this);
 
-@Override
-public void onInterstitialAdLoaded() {
-    // interstitial ad is ready
-}
+    @Override
+    public void onInterstitialAdLoaded() {
+        // interstitial ad is ready
+    }
 
-@Override
-public void onInterstitialAdFailedToLoad(AdiscopeError adiscopeError) {
-    // interstitial ad failed to load
-}
+    @Override
+    public void onInterstitialAdFailedToLoad(AdiscopeError adiscopeError) {
+        // interstitial ad failed to load
+    }
 
-@Override
-public void onInterstitialAdOpened(String unitId) {
-    // interstitial ad show completed
-}
+    @Override
+    public void onInterstitialAdOpened(String unitId) {
+        // interstitial ad show completed
+    }
 
-@Override
-public void onInterstitialAdClosed(String unitId) {
-    // interstitial ad closed
-}
+    @Override
+    public void onInterstitialAdClosed(String unitId) {
+        // interstitial ad closed
+    }
 
-@Override
-public void onInterstitialAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
-    // interstitial ad failed to show
+    @Override
+    public void onInterstitialAdFailedToShow(String unitId, AdiscopeError adiscopeError) {
+        // interstitial ad failed to show
+    }
 }
 ```
 
 #### Load
 ```java
-String INTERSTITIAL_UNIT_ID = "";
-mInterstitialAd.load(INTERSTITIAL_UNIT_ID);
+if (mInterstitialAd != null) {
+    String INTERSTITIAL_UNIT_ID = "";
+    mInterstitialAd.load(INTERSTITIAL_UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
@@ -554,20 +600,28 @@ mInterstitialAd.load(INTERSTITIAL_UNIT_ID);
 
 #### isLoaded
 ```java
-if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
-    // show interstitial ad
-}else {
-    // ad is not loaded
+if (mInterstitialAd != null) {
+    if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
+        // show interstitial ad
+    } else {
+        // ad is not loaded
+    }
+} else {
+    // Reinitialize
 }
 ```
 * 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
 
 #### Show
 ```java
-if(mInterstitialAd.show()){
-    // succeed
-}else{
-    // this show request is duplicated
+if (mInterstitialAd != null) {
+    if (mInterstitialAd.show()) {
+        // succeed
+    } else {
+        // this show request is duplicated
+    }
+} else {
+    // Reinitialize
 }
 ```
 * 마지막으로 로드된 인터스티셜 광고를 사용자에게 송출함
@@ -583,39 +637,43 @@ if(mInterstitialAd.show()){
 #### Create Ad Instance
 ```java
 import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd;
-RewardedInterstitialAd mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this); 
+if (AdiscopeSdk.isInitialize()) {
+    RewardedInterstitialAd mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this);
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```java
-mRewardedInterstitialAd.setRewardedInterstitialAdListener(this);
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.setRewardedInterstitialAdListener(this);
 
-@Override
-public void onRewardedInterstitialAdSkipped(String s) {
-    // user skipped rewarded interstitial ad
-}
+    @Override
+    public void onRewardedInterstitialAdSkipped(String s) {
+        // user skipped rewarded interstitial ad
+    }
 
-@Override
-public void onRewardedInterstitialAdOpened(String s) {
-    // rewarded interstitial ad show completed
-}
+    @Override
+    public void onRewardedInterstitialAdOpened(String s) {
+        // rewarded interstitial ad show completed
+    }
 
-@Override
-public void onRewardedInterstitialAdClosed(String s) {
-    // rewarded interstitial ad closed
-}
+    @Override
+    public void onRewardedInterstitialAdClosed(String s) {
+        // rewarded interstitial ad closed
+    }
 
-@Override
-public void onRewardedInterstitialAdRewarded(String s, RewardItem rewardItem) {
-    // user should receive the reward
-    // RewardItem.getType: 보상 타입
-    // RewardItem.getAmount: 보상 양
-}
+    @Override
+    public void onRewardedInterstitialAdRewarded(String s, RewardItem rewardItem) {
+        // user should receive the reward
+        // RewardItem.getType: 보상 타입
+        // RewardItem.getAmount: 보상 양
+    }
 
-@Override
-public void onRewardedInterstitialAdFailedToShow(String s, AdiscopeError adiscopeError) {
-    // rewarded interstitial ad failed to show
+    @Override
+    public void onRewardedInterstitialAdFailedToShow(String s, AdiscopeError adiscopeError) {
+        // rewarded interstitial ad failed to show
+    }
 }
 ```
 <br/>
@@ -623,8 +681,12 @@ public void onRewardedInterstitialAdFailedToShow(String s, AdiscopeError adiscop
 #### Preload
 ```java
 // preload rewarded interstitial ad which belongs to specific unit list
-String[] unitList = {"RI_UNIT1", "RI_UNIT2", "RI_UNIT3"};
-mRewardedInterstitialAd.preloadUnit(unitList);
+if (mRewardedInterstitialAd != null) {
+    String[] unitList = {"RI_UNIT1", "RI_UNIT2", "RI_UNIT3"};
+    mRewardedInterstitialAd.preloadUnit(unitList);
+} else {
+    // Reinitialize
+}
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
 * 이니셜라이즈 콜백 이후 1회 호출 권장
@@ -632,7 +694,11 @@ mRewardedInterstitialAd.preloadUnit(unitList);
 #### Preload All
 ```java
 // preload all activated rewarded interstitial ad
-mRewardedInterstitialAd.preloadAll();
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.preloadAll();
+} else {
+    // Reinitialize
+}
 ```
 * 어드민 페이지에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드
 * 이니셜라이즈 콜백 이후 1회 호출 권장
@@ -641,7 +707,11 @@ mRewardedInterstitialAd.preloadAll();
 
 #### Show
 ```java
-mRewardedInterstitialAd.show("RI_UNIT1");
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.show("RI_UNIT1");
+} else {
+    // Reinitialize
+}
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여줌
 * 해당 유닛이 로드되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여줌
@@ -679,36 +749,44 @@ mRewardedInterstitialAd.show("RI_UNIT1");
 #### Create Ad Instance
 ```java
 import com.nps.adiscope.adevent.AdEvent
-val mAdEvent = AdiscopeSdk.getAdEventInstance(this);
+if (AdiscopeSdk.isInitialize()) {
+    AdEvent mAdEvent = AdiscopeSdk.getAdEventInstance(this);
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```java
-mAdEvent.setAdEventListener(this);
+if (mAdEvent != null) {
+    mAdEvent.setAdEventListener(this);
+    override fun onAdEventOpened(unitId: String) {
+        // ad event show completed
+    }
 
-override fun onAdEventOpened(unitId: String) {
-    // ad event show completed
-}
+    override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+        // ad event failed to show
+    }
 
-override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // ad event failed to show
-}
-
-override fun onAdEventClosed(unitId: String) {
-    // ad event closed
+    override fun onAdEventClosed(unitId: String) {
+        // ad event closed
+    }
 }
 ```
 <br/>
 
 #### Show
 ```java
-val AD_EVENT_UNIT_ID = "";
-if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
-    // succeed
+if (mAdEvent != null) {
+    val AD_EVENT_UNIT_ID = "";
+    if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
 } else {
-    // show is already in progress
+    // Reinitialize
 }
+
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 애디스콥 시스템에 등록된 Ad Event 유닛으로 사용자에게 Ad Event 광고를 보여줌

@@ -306,24 +306,31 @@ AdiscopeSdk.setUserId("exampleUniqueUserId")
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.offerwall.OfferwallAd
-val mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+    var mOfferwallAd : OfferwallAd ?= null
+if (AdiscopeSdk.isInitialize()) {
+    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```kotlin
-mOfferwallAd.setOfferwallAdListener(this)
+if (mOfferwallAd != null) {
+    mOfferwallAd.setOfferwallAdListener(this)
 
-override fun onOfferwallAdOpened(unitId: String) {
-    // offerwall ad show completed
-}
+    override fun onOfferwallAdOpened(unitId: String) {
+      // offerwall ad show completed
+    }
 
-override fun onOfferwallAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // offerwall ad failed to show
-}
+    override fun onOfferwallAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+      // offerwall ad failed to show
+    }
 
-override fun onOfferwallAdClosed(unitId: String) {
-    // offerwall ad closed
+    override fun onOfferwallAdClosed(unitId: String) {
+      // offerwall ad closed
+    }
+} else {
+
 }
 ```
 <br/>
@@ -332,10 +339,14 @@ override fun onOfferwallAdClosed(unitId: String) {
 ```kotlin
 val OFFERWALL_UNIT_ID = ""
 val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
-if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
-    // succeed
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
+      // succeed
+    } else {
+      // show is already in progress
+    }
 } else {
-    // show is already in progress
+    // Reinitialize
 }
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
@@ -356,10 +367,14 @@ if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
 val OFFERWALL_UNIT_ID = ""
 val SPONSORSHIP_ITEM_ID = ""
 val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
-if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
-    // succeed
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
 } else {
-    // show is already in progress
+    // Reinitialize
 }
 ```
 
@@ -368,10 +383,14 @@ if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPON
 **B) showDetail(activity, url)**
 ```java
 val SPONSORSHIP_URL = ""
-if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
-    // succeed
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
 } else {
-    // show is already in progress
+    // Reinitialize
 }
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
@@ -385,46 +404,55 @@ if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.reward.RewardedVideoAd
-val mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this) 
+    var mRewardedVideoAd : RewardedVideoAd ?= null
+if (AdiscopeSdk.isInitialize()) {
+    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```kotlin
-mRewardedVideoAd.setRewardedVideoAdListener(this)
+if (mRewardedVideoAd != null) {
+    mRewardedVideoAd.setRewardedVideoAdListener(this)
 
-override fun onRewardedVideoAdLoaded(unitId: String) {
-    // rewarded ad is ready
-}
+    override fun onRewardedVideoAdLoaded(unitId: String) {
+        // rewarded ad is ready
+    }
 
-override fun onRewardedVideoAdFailedToLoad(unitId: String, adiscopeError: AdiscopeError) {
-    // rewarded ad failed to load
-}
+    override fun onRewardedVideoAdFailedToLoad(unitId: String, adiscopeError: AdiscopeError) {
+        // rewarded ad failed to load
+    }
 
-override fun onRewardedVideoAdOpened(unitId: String) {
-    // rewarded ad show completed
-}
+    override fun onRewardedVideoAdOpened(unitId: String) {
+        // rewarded ad show completed
+    }
 
-override fun onRewardedVideoAdClosed(unitId: String) {
-    // rewarded ad closed
-}
+    override fun onRewardedVideoAdClosed(unitId: String) {
+        // rewarded ad closed
+    }
 
-override fun onRewarded(unitId: String, rewardItem: RewardItem) {
-    // user should receive the reward
-    // RewardItem.getType: 보상 타입
-    // RewardItem.getAmount: 보상 양
-}
+    override fun onRewarded(unitId: String, rewardItem: RewardItem) {
+        // user should receive the reward
+        // RewardItem.getType: 보상 타입
+        // RewardItem.getAmount: 보상 양
+    }
 
-override fun onRewardedVideoAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // rewarded ad failed to show
+    override fun onRewardedVideoAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+        // rewarded ad failed to show
+    }
 }
 ```
 <br/>
 
 #### Load
 ```kotlin
-String RV_UNIT_ID = ""
-mRewardedVideoAd.load(RV_UNIT_ID);
+if (mRewardedVideoAd != null) {
+    String RV_UNIT_ID = ""
+    mRewardedVideoAd.load(RV_UNIT_ID)
+} else {
+    // Reinitialize
+}
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 보상형 광고 유닛에 속한 광고 네트워크의 광고를 로드
@@ -439,10 +467,14 @@ mRewardedVideoAd.load(RV_UNIT_ID);
 
 #### isLoaded
 ```kotlin
-if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
-    // show rewarded ad
+if (mRewardedVideoAd != null) {
+    if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
+        // show rewarded ad
+    } else {
+        // do something else
+    }
 } else {
-    // do something else
+    // Reinitialize
 }
 ```
 * 특정 보상형 광고 유닛의 광고 로드 여부 상태를 확인할 수 있음
@@ -451,10 +483,14 @@ if (mRewardedVideoAd.isLoaded(RV_UNIT_ID)) {
 
 #### Show
 ```kotlin
-if(mRewardedVideoAd.show()){
-    // succeed
-}else{
-    // this show request is duplicated
+if (mRewardedVideoAd != null) {
+    if (mRewardedVideoAd.show()) {
+        // succeed
+    }else{
+        // this show request is duplicated
+    }
+} else {
+    // Reinitialize
 }
 ```
 * 마지막으로 로드된 보상형 광고를 사용자에게 송출함
@@ -493,38 +529,49 @@ override fun onRewarded(unitId: String, rewardItem: RewardItem) {
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.interstitial.InterstitialAd
-val mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+var mInterstitialAd : InterstitialAd? = null
+if (AdiscopeSdk.isInitialize()) {
+    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+}
 ```
 
 #### Set Event Callback
 ```kotlin
-mInterstitialAd.setInterstitialAdListener(this)
+if (mInterstitialAd != null) {
+    mInterstitialAd.setInterstitialAdListener(this)
 
-override fun onInterstitialAdLoaded() {
-    // interstitial ad is ready
-}
+    override fun onInterstitialAdLoaded() {
+        // interstitial ad is ready
+    }
 
-override fun onInterstitialAdFailedToLoad(adiscopeError: AdiscopeError) {
-    // interstitial ad failed to load
-}
+    override fun onInterstitialAdFailedToLoad(adiscopeError: AdiscopeError) {
+        // interstitial ad failed to load
+    }
 
-override fun onInterstitialAdOpened(unitId: String) {
-    // interstitial ad show completed
-}
+    override fun onInterstitialAdOpened(unitId: String) {
+        // interstitial ad show completed
+    }
 
-override fun onInterstitialAdClosed(unitId: String) {
-    // interstitial ad closed
-}
+    override fun onInterstitialAdClosed(unitId: String) {
+        // interstitial ad closed
+    }
 
-override fun onInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // interstitial ad failed to show
+    override fun onInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+        // interstitial ad failed to show
+    }
+} else {
+
 }
 ```
 
 #### Load
 ```kotlin
-val INTERSTITIAL_UNIT_ID = ""
-mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
+if (mInterstitialAd != null) {
+    val INTERSTITIAL_UNIT_ID = ""
+    mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
+} else {
+    // Reinitialize
+}
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
@@ -536,20 +583,28 @@ mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
 
 #### isLoaded
 ```kotlin
-if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
-    // show interstitial ad
-}else {
-    // ad is not loaded
+if (mInterstitialAd != null) {
+    if (mInterstitialAd.isLoaded(INTERSTITIAL_UNIT_ID)) {
+        // show interstitial ad
+    } else {
+        // ad is not loaded
+    }
+} else {
+  // Reinitialize
 }
 ```
 * 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
 
 #### Show
 ```kotlin
-if(mInterstitialAd.show()){
-    // succeed
-}else{
-    // this show request is duplicated
+if (mInterstitialAd != null) {
+    if (mInterstitialAd.show()) {
+        // succeed
+    } else {
+        // this show request is duplicated
+    }
+} else {
+  // Reinitialize
 }
 ```
 * 마지막으로 로드된 인터스티셜 광고를 사용자에게 송출함
@@ -565,34 +620,39 @@ if(mInterstitialAd.show()){
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd
-val mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
+var mRewardedInterstitialAd : RewardedInterstitialAd? = null
+if (AdiscopeSdk.isInitialize()) {
+    mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)  
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```kotlin
-mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
 
-override fun onRewardedInterstitialAdSkipped(unitId: String) {
-    // user skipped rewarded interstitial ad
-}
+    override fun onRewardedInterstitialAdSkipped(unitId: String) {
+        // user skipped rewarded interstitial ad
+    }
 
-override fun onRewardedInterstitialAdOpened(unitId: String) {
-    // rewarded interstitial ad show completed
-}
+    override fun onRewardedInterstitialAdOpened(unitId: String) {
+        // rewarded interstitial ad show completed
+    }
 
-override fun onRewardedInterstitialAdClosed(unitId: String) {
-    // rewarded interstitial ad closed
-}
+    override fun onRewardedInterstitialAdClosed(unitId: String) {
+        // rewarded interstitial ad closed
+    }
 
-override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: RewardItem) {
-    // user should receive the reward
-    // RewardItem.getType: 보상 타입
-    // RewardItem.getAmount: 보상 양
-}
+    override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: RewardItem) {
+        // user should receive the reward
+        // RewardItem.getType: 보상 타입
+        // RewardItem.getAmount: 보상 양
+    }
 
-override fun onRewardedInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // rewarded interstitial ad failed to show
+    override fun onRewardedInterstitialAdFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+        // rewarded interstitial ad failed to show
+    }
 }
 ```
 <br/>
@@ -601,7 +661,11 @@ override fun onRewardedInterstitialAdFailedToShow(unitId: String, adiscopeError:
 ```kotlin
 // preload rewarded interstitial ad which belongs to specific unit list
 val unitList = arrayOf("RI_UNIT1", "RI_UNIT2", "RI_UNIT3")
-mRewardedInterstitialAd.preloadUnit(unitList)
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.preloadUnit(unitList)
+} else {
+    // Reinitialize
+}
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
 * 이니셜라이즈 콜백 이후 1회 호출 권장
@@ -609,7 +673,11 @@ mRewardedInterstitialAd.preloadUnit(unitList)
 #### Preload All
 ```kotlin
 // preload all activated rewarded interstitial ad
-mRewardedInterstitialAd.preloadAll()
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.preloadAll()
+} else {
+    // Reinitialize
+}
 ```
 * 어드민 페이지에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드
 * 이니셜라이즈 콜백 이후 1회 호출 권장
@@ -618,7 +686,11 @@ mRewardedInterstitialAd.preloadAll()
 
 #### Show
 ```kotlin
-mRewardedInterstitialAd.show("RI_UNIT1")
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.show("RI_UNIT1")
+} else {
+    // Reinitialize
+}
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여줌
 * 해당 유닛이 로드되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여줌
@@ -655,24 +727,29 @@ override fun onRewardedInterstitialAdRewarded(unitId: String, rewardItem: Reward
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.adevent.AdEvent
-val mAdEvent = AdiscopeSdk.getAdEventInstance(this)
+var mAdEvent: AdEvent ?= null
+if (AdiscopeSdk.isInitialize) {
+    mAdEvent = AdiscopeSdk.getAdEventInstance(this)
+}
 ```
 <br/>
 
 #### Set Event Callback
 ```kotlin
-mAdEvent.setAdEventListener(this)
+if (mAdEvent != null) {
+    mAdEvent.setAdEventListener(this)
 
-override fun onAdEventOpened(unitId: String) {
-    // ad event show completed
-}
+    override fun onAdEventOpened(unitId: String) {
+        // ad event show completed
+    }
 
-override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-    // ad event failed to show
-}
+    override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
+        // ad event failed to show
+    }
 
-override fun onAdEventClosed(unitId: String) {
-    // ad event closed
+    override fun onAdEventClosed(unitId: String) {
+        // ad event closed
+    }
 }
 ```
 <br/>
@@ -680,10 +757,14 @@ override fun onAdEventClosed(unitId: String) {
 #### Show
 ```kotlin
 val AD_EVENT_UNIT_ID = ""
-if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
-    // succeed
+if (mAdEvent != null) { 
+    if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
+        // succeed
+    } else {
+        // show is already in progress
+    }
 } else {
-    // show is already in progress
+    // Reinitialize
 }
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
