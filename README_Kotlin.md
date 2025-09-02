@@ -1,7 +1,7 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.5.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.5.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.2-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.3-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-4.5.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.5.2-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
@@ -12,13 +12,13 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                                                                                                                                   |
-|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                             |
-| chartboost | 21     | -       |                                                                                                                                                                                           |
-| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, yandex |
-| pangle     | 23     | -       |                                                                                                                                                                                           |
-| vungle     | 21     | -       |                                                                                                                                                                                           |
+| Adapter    | minSdk | bidding | bidders                                                                                                                                                                           |
+|------------|--------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                     |
+| chartboost | 21     | -       |                                                                                                                                                                                   |
+| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource |
+| pangle     | 23     | -       |                                                                                                                                                                                   |
+| vungle     | 21     | -       |                                                                                                                                                                                   |
 
 #### Network Version
 | Ad Network          | Android Version |
@@ -39,7 +39,6 @@
 | Pangle              | 7.2.0.4         |
 | Smaato              | 22.7.2          |
 | Unity Ads           | 4.15.0          |
-| Yandex              | 7.13.0          |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](./docs/installation_manual.md#2-network-별-추가-작업)
 > - gms 22 버전: 애디스콥 `3.3.0`~`4.1.0`
@@ -105,7 +104,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:4.5.2'
+    implementation 'com.nps.adiscope:adiscopeCore:4.5.3'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -164,7 +163,7 @@ repositories {
   * fan, mobvista, pangle, vungle
 * max
   * admob, applovin, pangle, vungle, chartboost
-  * (only max bidder) unityads, smaato, inmobi, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange, moloco, ironsource, yandex
+  * (only max bidder) unityads, smaato, inmobi, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange, moloco, ironsource
 
 > `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
@@ -177,7 +176,7 @@ dependencies {
     implementation 'com.nps.adiscope:adapter.admob:24.4.0.0'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.1'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.2'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.0'        // chartboost
