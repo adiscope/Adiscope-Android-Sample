@@ -66,6 +66,7 @@
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
 * [Reward Callback](./docs/reward_callback_info.md)
+* [전면/리워드 광고 연동 작업 간소화 기능](./docs/video_simple_integration.md)
 * [Release Note](https://github.com/adiscope/Adiscope-Android-Sample/wiki/release_note)
 
 <br/>
