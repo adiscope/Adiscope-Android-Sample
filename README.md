@@ -1,5 +1,5 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.0.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.1.0-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-5.0.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-5.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
@@ -12,13 +12,14 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | bidders                                                                                                                                                                                                 |
-|------------|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 23     | O       | fan, mobvista, pangle, vungle                                                                                                                                                                           |
-| chartboost | 21     | -       |                                                                                                                                                                                                         |
-| max        | 21     | O       | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, bigo, line, pubmatic |
-| pangle     | 23     | -       |                                                                                                                                                                                                         |
-| vungle     | 21     | -       |                                                                                                                                                                                                         |
+| Adapter    | minSdk | bidding | in-house | bidders                                                                                                                                                                                                 |
+|------------|--------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admob      | 23     | O       | -        | fan, mobvista, pangle, vungle                                                                                                                                                                           |
+| chartboost | 21     | -       | -        |                                                                                                                                                                                                         |
+| max        | 21     | O       | -        | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, bigo, line, pubmatic |
+| pangle     | 23     | -       | -        |                                                                                                                                                                                                         |
+| vungle     | 21     | -       | -        |                                                                                                                                                                                                         |
+| tnkpub     | 23     | -       | O        |                                                                                                                                                                                                         |
 
 #### Network Version
 | Ad Network          | Android Version |
@@ -41,6 +42,7 @@
 | Pangle              | 7.7.0.2         |
 | Pubmatic            | 4.9.1           |
 | Smaato              | 22.7.2          |
+| TNKPub              | 7.25.01         |
 | Unity Ads           | 4.15.0          |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](./docs/installation_manual.md#2-network-별-추가-작업)
@@ -73,15 +75,38 @@
 
 ## Integration Guide
 ### 1. Import Adiscope Sdk
-#### 1-1. Add Adiscope core module
+#### 1-1. Add Adiscope module
+
+운영에 필요한 각각의 네트워크 어댑터 의존성을 추가
 
 **build.gradle(root)**
 ```groovy
 repositories {
+    google()
+    mavenCentral()
+  
     // [required] adiscope library
     maven {
-        url 'https://repository.adiscope.com/repository/adiscope/'
+        url "https://repository.adiscope.com/repository/adiscope/"
     }
+
+    // [optional] adiscope network library
+    // pangle 혹은 max 연동 시 추가
+    maven { url "https://artifact.bytedance.com/repository/pangle" }
+  
+    // chartboost 혹은 max 연동 시 추가
+    maven { url "https://cboost.jfrog.io/artifactory/chartboost-ads/" }
+
+    // max 연동 시 아래 url 모두 추가
+    maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } 
+    maven { url "https://artifactory.bidmachine.io/bidmachine" }
+    maven { url "https://maven.ogury.co" }
+    maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
+    maven { url "https://android-sdk.is.com" } // (4.2.0~)
+    maven { url "https://repo.pubmatic.com/artifactory/public-repos" } // (5.0.0~)
+
+    // tnkpub 연동 시 추가
+    maven { url "https://repository.tnkad.net:8443/repository/public/" }
 }
 ```
 <br/>  
@@ -105,108 +130,109 @@ android {
         ]
     }
 }
+```
 
+<br/>
+
+`5.1.0` 버전부터 bom 연동 방식을 지원.   
+어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
+```groovy
+dependencies {
+    // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.0")
+    implementation adiscopeBom
+  
+    // [required] adiscope core library
+    implementation "com.nps.adiscope:adiscopeCore"
+    implementation "com.nps.adiscope:adiscopeAndroid"
+    
+    // [optional] adiscope video simple integration library
+    implementation "com.nps.adiscope:adiscopeWalnut"
+  
+    // [optional] adiscope network adapter library
+    // bidding, waterfall adapter
+    implementation "com.nps.adiscope:adapter.admob"
+    
+    // bidding adapter
+    implementation "com.nps.adiscope:adapter.max"
+
+    // waterfall adapter
+    implementation "com.nps.adiscope:adapter.chartboost"
+    implementation "com.nps.adiscope:adapter.pangle"
+    implementation "com.nps.adiscope:adapter.vungle"
+  
+    // direct sold adapter
+    implementation "com.nps.adiscope:adapter.tnkpub"
+}
+```
+<br/>
+
+
+<details>
+<summary>(bom 미사용) 각 모듈 버전을 명시하여 연동할 경우</summary>
+<div markdown="1">
+
+```groovy
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:5.0.0'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
+    implementation "com.nps.adiscope:adiscopeCore:5.1.0"
+    implementation "com.nps.adiscope:adiscopeAndroid:1.2.3"
+
+    // [optional] adiscope video simple integration library
+    implementation "com.nps.adiscope:adiscopeWalnut:1.0.0"
+  
+    // [optional] adiscope network adapter library
+    // bidding, waterfall adapter
+    implementation "com.nps.adiscope:adapter.admob:24.4.0.2"
+    
+    // bidding adapter
+    implementation "com.nps.adiscope:adapter.max:13.3.1.4"
+
+    // waterfall adapter
+    implementation "com.nps.adiscope:adapter.chartboost:9.8.3.2"
+    implementation "com.nps.adiscope:adapter.pangle:7.7.0.2.1"
+    implementation "com.nps.adiscope:adapter.vungle:7.5.0.2"
+
+    // direct sold adapter
+    implementation "com.nps.adiscope:adapter.tnkpub:7.25.01.0"
 }
 ```
 <br/>
 
+</div>
+</details>
 
-**AndroidManifest.xml**
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
-    <application>
-        <!-- Define mediaId, secretKey metadata and 
-         use AdiscopeSdk.initialize(activity, listener) function,
-         sdk reads this information and initializes it  -->
-        <meta-data android:name="adiscope_media_id" android:value="${adiscope_media_id}"/>
-        <meta-data android:name="adiscope_media_secret" android:value="${adiscope_media_secret}"/>
-    </application>
-</manifest>
-```
-
-<br/>
-
-#### 1-2. Add required network module
-운영에 필요한 각각의 네트워크 어댑터를 연동
-
-**build.gradle(root)**  
-max, pangle, chartboost 네트워크 어댑터를 연동할 경우 각 주석을 참고하여 저장소 url 추가
-```groovy
-repositories {
-    google()
-    mavenCentral()
-
-    maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } // max 연동 시 추가
-    maven { url "https://artifactory.bidmachine.io/bidmachine" } // max 연동 시 추가
-    maven { url "https://maven.ogury.co" } // max 연동 시 추가
-    maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" } // max 연동 시 추가
-    maven { url "https://android-sdk.is.com" } // max 연동 시 추가
-    maven { url "https://repo.pubmatic.com/artifactory/public-repos" } // max 연동 시 추가
-    maven { url "https://artifact.bytedance.com/repository/pangle" } // max 혹은 pangle 연동 시 추가
-    maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' } // max 혹은 chartboost 연동 시 추가
-}
-```
-
-<br/>
-
-**build.gradle(app)**  
-운영에 필요한 각각의 네트워크 어댑터 의존성을 추가  
-비딩을 지원하는 admob, max 어댑터는 각각 하기 네트워크들이 비더로 포함됨  
-비더 네트워크를 워터폴로 함께 운영하려면 워터폴 어댑터 라이브러리를 선택적으로 포함해야 함  
-
-> ex) admob 비딩을 사용하면서 비더 네트워크를 워터폴로 운영할 경우  
-> -> admob, pangle, vungle 어댑터를 연동
-
-* admob
-  * fan, mobvista, pangle, vungle
-* max 
-  * admob, applovin, pangle, vungle, chartboost
-  * (only max bidder) unityads, smaato, inmobi, aps, bidmachine, ogury, fan, mobvista, google admanager, dt exchange, moloco, ironsource, bigo, line, pubmatic
-
+> 하위 버전 연동 시 해당 버전의 브랜치 `README`를 참고하여 연동해주세요. <br/><br/>
 > `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
 
 ![adapter version checker log](https://github.com/user-attachments/assets/286e83f0-8b63-4e3f-bb09-ad86e15df83c)
+<br/><br/>
 
-```groovy
-dependencies {
-    // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:24.4.0.1'            // admob
-    
-    // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.3'              // max
+#### 1-2. Add Adiscope, Network AppId metadata in `AndroidManifest.xml`
 
-    // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:7.7.0.2.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.5.0.1'            // vungle
-}
-```
-<br/>
-
-**Admob (`AndroidManifest.xml`)**  
-애드몹 어댑터 연동 시 매니페스트에 애드몹 appId를 추가해야 함  
-애디스콥으로부터 값을 전달받은 후 기입 (미기입 시 앱 크래시 발생)
-
+**AndroidManifest.xml**  
+애디스콥으로부터 설정값을 전달받은 후 `adiscope_media_id`, `adiscope_media_secret` 메타데이터 추가  
+admob 혹은 max 어댑터 연동 시 애드몹 appId 메타데이터를 추가해야 함 (값 미기입 시 앱 크래시 발생)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
     <application>
-        <!-- insert admob app id for Adiscope Admob network adapter -->
+        <!-- define mediaId, secretKey metadata and 
+         use AdiscopeSdk.initialize(activity, listener) function,
+         sdk reads this information and initializes it  -->
+        <meta-data android:name="adiscope_media_id" android:value="${adiscope_media_id}"/>
+        <meta-data android:name="adiscope_media_secret" android:value="${adiscope_media_secret}"/>
+
+        <!-- insert admob app id for adiscope admob/max network adapter -->
         <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="INPUT_YOUR_ADMOB_APP_ID"/>
+              android:name="com.google.android.gms.ads.APPLICATION_ID"
+              android:value="INPUT_YOUR_ADMOB_APP_ID"/>
     </application>
 </manifest>
 ```
+
 <br/>
 
 ### 2. Initialize Adiscope Sdk
