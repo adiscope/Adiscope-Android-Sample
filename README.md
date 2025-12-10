@@ -45,7 +45,8 @@
 | TNKPub              | 7.25.01         |
 | Unity Ads           | 4.15.0          |
 
-> 기존 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](./docs/installation_manual.md#2-network-별-추가-작업)
+> ⚠️ 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의   
+> 기존에 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
 > - gms 22 버전: 애디스콥 `3.3.0`~`4.0.1`
 > - gms 23 버전: 애디스콥 `4.1.0`~`4.3.2`
 > - gms 24 버전: 애디스콥 `4.4.0` 이상
