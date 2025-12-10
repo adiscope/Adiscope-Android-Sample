@@ -24,9 +24,6 @@ import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAdShowListener;
  *   - admob rewarded video network
  *     - need to add meta-data (com.google.android.gms.ads.APPLICATION_ID) to AndroidManifest.xml
  *
- *   - fan rewarded video network
- *     - need to register test device id to facebook admin
- *
  */
 public class MainActivity extends Activity implements RewardedVideoAdListener, OfferwallAdListener, InterstitialAdListener, RewardedInterstitialAdShowListener {
 

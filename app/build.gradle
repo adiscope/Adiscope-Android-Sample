@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
     defaultConfig {
         manifestPlaceholders = [
                 adiscope_media_id: "media id 기입필요",
@@ -10,8 +10,8 @@ android {
         ]
 
         applicationId "com.nps.sample"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion 23
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,18 +31,28 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // [required] adiscope library
-    implementation 'com.nps.adiscope:adiscopeCore:5.0.0'
-    implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.0")
+    implementation adiscopeBom
 
+    // [required] adiscope core library
+    implementation "com.nps.adiscope:adiscopeCore"
+    implementation "com.nps.adiscope:adiscopeAndroid"
+
+    // [optional] adiscope video simple integration library
+    implementation "com.nps.adiscope:adiscopeWalnut"
+
+    // [optional] adiscope network adapter library
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:24.4.0.1'            // admob
+    implementation "com.nps.adiscope:adapter.admob"
 
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.3'              // max
+    implementation "com.nps.adiscope:adapter.max"
 
     // waterfall adapter
-    implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.1'        // chartboost
-    implementation "com.nps.adiscope:adapter.pangle:7.7.0.2.0"          // pangle
-    implementation 'com.nps.adiscope:adapter.vungle:7.5.0.1'            // vungle
+    implementation "com.nps.adiscope:adapter.chartboost"
+    implementation "com.nps.adiscope:adapter.pangle"
+    implementation "com.nps.adiscope:adapter.vungle"
+
+    // direct sold adapter
+    implementation "com.nps.adiscope:adapter.tnkpub"
 }
