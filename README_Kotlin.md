@@ -1,5 +1,5 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.1.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.1.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-5.0.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-5.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
@@ -42,7 +42,7 @@
 | Pangle              | 7.7.0.2         |
 | Pubmatic            | 4.9.1           |
 | Smaato              | 22.7.2          |
-| TNKPub              | 7.25.01         |
+| TNKPub              | 7.25.02         |
 | Unity Ads           | 4.15.0          |
 
 > ⚠️ 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의   
@@ -140,7 +140,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.0")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.1")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -176,7 +176,7 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.1.0"
+    implementation "com.nps.adiscope:adiscopeCore:5.1.1"
     implementation "com.nps.adiscope:adiscopeAndroid:1.2.3"
 
     // [optional] adiscope video simple integration library
@@ -195,7 +195,7 @@ dependencies {
     implementation "com.nps.adiscope:adapter.vungle:7.5.0.2"
 
     // direct sold adapter
-    implementation "com.nps.adiscope:adapter.tnkpub:7.25.01.0"
+    implementation "com.nps.adiscope:adapter.tnkpub:7.25.02.0"
 }
 ```
 <br/>
