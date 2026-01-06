@@ -1,6 +1,6 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.0.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.0.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Unity-5.0.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-5.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.0.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
@@ -107,7 +107,7 @@ android {
 
 dependencies {
     // [required] adiscope core library
-    implementation 'com.nps.adiscope:adiscopeCore:5.0.0'
+    implementation 'com.nps.adiscope:adiscopeCore:5.0.1'
     implementation 'com.nps.adiscope:adiscopeAndroid:1.2.2'
 }
 ```
@@ -177,10 +177,10 @@ repositories {
 ```groovy
 dependencies {
     // bidding, waterfall adapter
-    implementation 'com.nps.adiscope:adapter.admob:24.4.0.1'            // admob
+    implementation 'com.nps.adiscope:adapter.admob:24.4.0.3'            // admob
     
     // bidding adapter
-    implementation 'com.nps.adiscope:adapter.max:13.3.1.3'              // max
+    implementation 'com.nps.adiscope:adapter.max:13.3.1.5'              // max
 
     // waterfall adapter
     implementation 'com.nps.adiscope:adapter.chartboost:9.8.3.1'        // chartboost
