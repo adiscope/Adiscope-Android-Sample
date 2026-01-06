@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.1")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.2")
     implementation adiscopeBom
 
     // [required] adiscope core library
