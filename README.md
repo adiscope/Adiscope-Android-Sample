@@ -1,9 +1,9 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.1.2-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.0.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.0.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.2.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.2.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.2.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.2.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
 - minSdkVersion 23
@@ -12,38 +12,39 @@
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
 
-| Adapter    | minSdk | bidding | in-house | bidders                                                                                                                                                                                                 |
-|------------|--------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admob      | 23     | O       | -        | fan, mobvista, pangle, vungle                                                                                                                                                                           |
-| chartboost | 21     | -       | -        |                                                                                                                                                                                                         |
-| max        | 21     | O       | -        | admob, applovin, fan, mobvista, smaato,<br/>inmobi, pangle, vungle, unityads,<br/>aps, bidmachine, ogury, <br/>google admanager, dt exchange, moloco, <br/>chartboost, ironsource, bigo, line, pubmatic |
-| pangle     | 23     | -       | -        |                                                                                                                                                                                                         |
-| vungle     | 21     | -       | -        |                                                                                                                                                                                                         |
-| tnkpub     | 23     | -       | O        |                                                                                                                                                                                                         |
+| Adapter    | minSdk | bidding | in-house |
+|------------|--------|---------|----------|
+| admob      | 23     | -       | -        |
+| chartboost | 21     | -       | -        |
+| max        | 21     | O       | -        |
+| pangle     | 23     | -       | -        |
+| vungle     | 21     | -       | -        |
+| tnkpub     | 23     | -       | O        |
 
 #### Network Version
-| Ad Network          | Android Version |
-|---------------------|-----------------|
-| AdMob               | 24.4.0          |
-| Amazon              | 11.0.1          |
-| AppLovin            | 13.3.1          |
-| BidMachine          | 3.3.0           |
-| Bigo                | 5.5.1           |
-| Chartboost          | 9.8.3           |
-| DT Exchange         | 8.3.7           |
-| InMobi              | 10.8.3          |
-| Ironsource          | 8.9.1           |
-| Liftoff(Vungle)     | 7.5.0           |
-| Line                | 2.9.20250110    |
-| Meta(Fan)           | 6.20.0          |
-| Mintegral(Mobvista) | 16.9.71         |
-| Moloco              | 3.10.0          |
-| Ogury               | 6.0.1           |
-| Pangle              | 7.7.0.2         |
-| Pubmatic            | 4.9.1           |
-| Smaato              | 22.7.2          |
-| TNKPub              | 7.25.03         |
-| Unity Ads           | 4.15.0          |
+| Ad Network          | Android Version | MAX bidder |
+|---------------------|-----------------|------------|
+| AdMob               | 24.8.0          | O          |
+| Amazon              | 11.1.1          | O          |
+| AppLovin            | 13.5.1          | O          |
+| BidMachine          | 3.5.1           | O          |
+| Bigo                | 5.6.2           | O          |
+| Chartboost          | 9.11.0          | O          |
+| DT Exchange         | 8.4.2           | O          |
+| InMobi              | 11.1.0          | O          |
+| Ironsource          | 9.2.0           | O          |
+| Liftoff(Vungle)     | 7.6.3           | O          |
+| Line                | 2.9.20251028    | O          |
+| Meta(Fan)           | 6.21.0          | O          |
+| Mintegral(Mobvista) | 17.0.61         | O          |
+| Moloco              | 4.4.0           | O          |
+| Ogury               | 6.2.1           | O          |
+| Pangle              | 7.8.5.2         | O          |
+| Pubmatic            | 4.11.0          | O          |
+| Smaato              | 22.7.2          | O          |
+| TNKPub              | 7.25.03         | -          |
+| Unity Ads           | 4.16.5          | O          |
+| Verve               | 3.7.1           | O          |
 
 > ⚠️ 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의   
 > 기존에 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
@@ -105,6 +106,7 @@ repositories {
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
     maven { url "https://android-sdk.is.com" } // (4.2.0~)
     maven { url "https://repo.pubmatic.com/artifactory/public-repos" } // (5.0.0~)
+    maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // (5.2.0~)
 
     // tnkpub 연동 시 추가
     maven { url "https://repository.tnkad.net:8443/repository/public/" }
@@ -140,7 +142,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.1.2")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.2.0")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -176,7 +178,7 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.1.2"
+    implementation "com.nps.adiscope:adiscopeCore:5.2.0"
     implementation "com.nps.adiscope:adiscopeAndroid:1.2.3"
 
     // [optional] adiscope video simple integration library
@@ -184,15 +186,15 @@ dependencies {
   
     // [optional] adiscope network adapter library
     // bidding, waterfall adapter
-    implementation "com.nps.adiscope:adapter.admob:24.4.0.2"
+    implementation "com.nps.adiscope:adapter.admob:24.8.0.0"
     
     // bidding adapter
-    implementation "com.nps.adiscope:adapter.max:13.3.1.4"
+    implementation "com.nps.adiscope:adapter.max:13.5.1.0"
 
     // waterfall adapter
-    implementation "com.nps.adiscope:adapter.chartboost:9.8.3.2"
-    implementation "com.nps.adiscope:adapter.pangle:7.7.0.2.1"
-    implementation "com.nps.adiscope:adapter.vungle:7.5.0.2"
+    implementation "com.nps.adiscope:adapter.chartboost:9.11.0.0"
+    implementation "com.nps.adiscope:adapter.pangle:7.8.5.2.0"
+    implementation "com.nps.adiscope:adapter.vungle:7.6.3.0"
 
     // direct sold adapter
     implementation "com.nps.adiscope:adapter.tnkpub:7.25.03.0"
