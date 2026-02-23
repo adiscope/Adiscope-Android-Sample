@@ -66,7 +66,6 @@
   * [Rewarded Ads](#rewarded-ads)
   * [Interstitial Ads](#interstitial-ads)
   * [Rewarded Interstitial Ads](#rewarded-interstitial-ads)
-  * [Ad Event](#ad-event)
 * [API Documentation](./docs/api_documentation.md)
 * [Error Information](./docs/error_info.md)
 * [Reward Callback](./docs/reward_callback_info.md)
@@ -775,56 +774,4 @@ if (mRewardedInterstitialAd != null) {
   * S2S 방식을 선택하더라도 보상이 전달 될 시에는 `onRewardedInterstitialAdRewarded`가 호출
   * 이때는 서버를 통해 전달받은 정보를 기준으로 처리하고, `onRewardedInterstitialAdRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
   
-<br/>
-
-### Ad Event
-
-#### Create Ad Instance
-```java
-import com.nps.adiscope.adevent.AdEvent
-if (AdiscopeSdk.isInitialize()) {
-    AdEvent mAdEvent = AdiscopeSdk.getAdEventInstance(this);
-}
-```
-<br/>
-
-#### Set Event Callback
-```java
-if (mAdEvent != null) {
-    mAdEvent.setAdEventListener(this);
-    override fun onAdEventOpened(unitId: String) {
-        // ad event show completed
-    }
-
-    override fun onAdEventFailedToShow(unitId: String, adiscopeError: AdiscopeError) {
-        // ad event failed to show
-    }
-
-    override fun onAdEventClosed(unitId: String) {
-        // ad event closed
-    }
-}
-```
-<br/>
-
-#### Show
-```java
-if (mAdEvent != null) {
-    val AD_EVENT_UNIT_ID = "";
-    if (mAdEvent.show(activity, AD_EVENT_UNIT_ID)) {
-        // succeed
-    } else {
-        // show is already in progress
-    }
-} else {
-    // Reinitialize
-}
-
-```
-* 애디스콥 이니셜라이즈 후 호출 가능
-* 애디스콥 시스템에 등록된 Ad Event 유닛으로 사용자에게 Ad Event 광고를 보여줌
-* show는 중복 호출 불가
-* show가 실행되면 `onAdEventOpened`와 `onAdEventFailedToShow` 중 하나가 항상 호출
-* `onAdEventOpened`가 호출되었다면 이후 `onAdEventClosed`가 항상 호출
-
 <br/>
