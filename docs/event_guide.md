@@ -12,7 +12,7 @@
 
 ### 이벤트 모듈 참조 추가
 ```groovy
-implementation "com.nps.adiscope:adiscopeLuckyEvent:5.1.4"
+implementation "com.nps.adiscope:adiscopeLuckyEvent:5.1.5"
 ```
 
 
