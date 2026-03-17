@@ -169,6 +169,19 @@ dependencies {
 ```
 <br/>
 
+<details>
+<summary> ⚠️ exoplayer 2.15.x 사용하는 경우 (SDK 의존성 충돌) </summary>
+<div markdown="1">
+
+- exoplayer 2.15.x 이하 사용 시 chartboost sdk에서 충돌 발생
+  - chartboost에서 exoplayer(`com.google.android.exoplayer:exoplayer-core`) 2.18.7과 media3 exoplayer(`androidx.media3:media3-exoplayer`) 1.4.1를 모두 사용하고 있음
+- exoplayer 2.18.x 이상 혹은 androidx media3 exoplayer 사용을 권고
+  - adiscope의 adapter.max의 chartboost, moloco sdk에서 exoplayer 2.18.x 사용 중으로 기존 의존성을 exclude하면 크래시가 발생함
+
+<br/>
+
+</div>
+</details>
 
 <details>
 <summary>(bom 미사용) 각 모듈 버전을 명시하여 연동할 경우</summary>
