@@ -25,23 +25,40 @@
 
 <br/>
 
-### 3단계 : SDK 초기화 시 혹은 광고 유닛 호출 전 어린이 여부 플래그(childYN) 값 전달하기
-- SDK 초기화 단계 혹은 광고 유닛(Offerwall, RV, interstitial, RI) 호출 전에 childYN을 전달을 권고합니다. (앱 Flow에 적합한 시점으로 골라서 선택하시면 됩니다)
-- 다만, 불가피하게 위 시점에 전달이 어려운 경우 오퍼월 광고 유닛 호출 전으로 대체할 수 있으나 광고 수익에 영향이 갈 수 있습니다. (RV 및 Interstitial의 광고 효율 및 커버리지에 영향)
+### 3단계 : SDK 초기화 시 혹은 광고 유닛 호출 전 유저 정보 설정하기
+- SDK 초기화 단계에 유저 정보 설정(`setUserIdChild` 호출)을 권고합니다. (앱 Flow에 적합한 시점으로 골라서 선택하시면 됩니다)
+- 다만, 불가피하게 위 시점에 전달이 어려운 경우 광고 유닛(Offerwall, RV, interstitial, RI) 로드 호출 전에 전으로 대체할 수 있으나 광고 수익에 영향이 갈 수 있습니다. (RV 및 Interstitial의 광고 효율 및 커버리지에 영향)
 
 <br/>
 
 ## 구현
-- childYN 플래그 전달 시점에 따라 구현 방법은 아래와 같습니다.
+#### AdiscopeUserType
+```kotlin
+enum class AdiscopeUserType(val value: Int, val childYN: String) {
+    None(0, ""), Adult(1, "NO"), Child(2, "YES");
+}
+```
+- userType은 각각 세가지로 구분하고 있습니다.
+  - `None`: 알 수 없음 (유저 나이를 판별할 수 없을 때)
+  - `Adult`: 만 13세 이상 유저
+  - `Child`: 만 13세 미만의 아동 유저
+
+<br/>
+
+setUserIdChild 호출 시점에 따라 구현 방법은 아래와 같습니다.
 
 <br/>
 
 ### SDK 초기화 시
-- SDK 초기화 시 `childYN`을 포함하여 호출해야 합니다.
+- SDK 초기화 전 유저 정보를 set한 후 초기화를 호출해야합니다.
 ```java
-// AdiscopeSdk.initialize(Activity activity, String mediaId, String mediaSecret, String callbackTag, String childYN, AdiscopeInitializeListener listener)
-
-AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, childYN, new AdiscopeInitializeListener() {
+// none: AdiscopeUserType.None (0)
+// adult: AdiscopeUserType.Adult (1)
+// child: AdiscopeUserType.Child (2)
+AdiscopeUserType userType = AdiscopeUserType.None;
+String userId = ""; // set unique user id to identify the user in reward information
+AdiscopeSdk.setUserIdChild(userId, userType);
+AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInitializeListener() {
     @Override 
     public void onInitialized(boolean isSuccess) {
         if (isSuccess) {
@@ -55,10 +72,14 @@ AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, childYN, new Adi
 <br/>
 
 ### 광고 유닛 호출 전
-- 광고 유닛(Offerwall, Rewarded Video, Interstitial, RI) 호출 전 childYN을 set해야 합니다.
+- 광고 유닛(Offerwall, Rewarded Video, Interstitial) 호출 전 유저 정보를 set합니다.
 ```java
-String childYN = "YES"; // "YES" or "NO"
-AdiscopeSdk.getOptionSetterInstance(this).setChildYN(childYN);
+// none: AdiscopeUserType.None (0)
+// adult: AdiscopeUserType.Adult (1)
+// child: AdiscopeUserType.Child (2)
+AdiscopeUserType userType = AdiscopeUserType.None;
+String userId = ""; // set unique user id to identify the user in reward information
+AdiscopeSdk.setUserIdChild(userId, userType);
 ```
 <br/>
 
