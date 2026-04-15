@@ -1,24 +1,52 @@
 API Reference
 ====================================
-- [AdiscopeSdk](#adiscopesdk)
-  - [initialize](#initialize)
-  - [isInitialize](#isinitialize)
-  - [setUserId](#setuserid)
-  - [setRewardedCheckParam](#setrewardedcheckparam)
-  - [getUnitStatus](#getunitstatus)
-  - [getSDKVersion](#getsdkversion)
-  - [getNetworksVersion](#getnetworksversions)
-  - [getAdInstance](#getinterstitialadinstance)
-- [OptionSetter](#optionsetter)
-    - [setUseCloudFrontProxy](#setusecloudfrontproxy)
-    - [setChildYN](#setvolumeoff)
-    - [setVolumeOff](#setvolumeoff)
-- [AdiscopeError](#adiscopeerror)
-- [InterstitialAd](#interstitialad)
-- [RewardedVideoAd](#rewardedvideoad)
-- [RewardedInterstitialAd](#rewardedinterstitialad)
-- [OfferwallAd](#offerwallad)
-- [AdEvent](#adevent)
+- [API Reference](#api-reference)
+  - [API Reference - AdiscopeSdk.Android](#api-reference---adiscopesdkandroid)
+    - [AdiscopeSdk](#adiscopesdk)
+      - [initialize](#initialize)
+      - [isInitialize](#isinitialize)
+      - [setUserIdChild](#setuseridchild)
+      - [setUserId](#setuserid)
+      - [setRewardedCheckParam](#setrewardedcheckparam)
+      - [getUnitStatus](#getunitstatus)
+      - [getSDKVersion](#getsdkversion)
+      - [getNetworksVersions](#getnetworksversions)
+      - [getInterstitialAdInstance](#getinterstitialadinstance)
+      - [getRewardedVideoAdInstance](#getrewardedvideoadinstance)
+      - [getRewardedInterstitialAdInstance](#getrewardedinterstitialadinstance)
+      - [getOfferwallAdInstance](#getofferwalladinstance)
+      - [getAdEventInstance](#getadeventinstance)
+      - [getOptionSetterInstance](#getoptionsetterinstance)
+  - [API Reference - OptionSetter.Android](#api-reference---optionsetterandroid)
+    - [OptionSetter](#optionsetter)
+      - [setUseCloudFrontProxy](#setusecloudfrontproxy)
+      - [setChildYN](#setchildyn)
+      - [setVolumeOff](#setvolumeoff)
+  - [API Reference - AdiscopeError.Android](#api-reference---adiscopeerrorandroid)
+    - [AdiscopeError](#adiscopeerror)
+  - [API Reference - InterstitialAd.Android](#api-reference---interstitialadandroid)
+    - [InterstitialAd](#interstitialad)
+      - [load](#load)
+      - [isLoaded](#isloaded)
+      - [show](#show)
+  - [API Reference - RewardedVideoAd.Android](#api-reference---rewardedvideoadandroid)
+    - [RewardedVideoAd](#rewardedvideoad)
+      - [load](#load-1)
+      - [isLoaded](#isloaded-1)
+      - [show](#show-1)
+  - [API Reference - RewardedInterstitialAd.Android](#api-reference---rewardedinterstitialadandroid)
+    - [RewardedInterstitialAd](#rewardedinterstitialad)
+      - [preloadUnit](#preloadunit)
+      - [preloadAll](#preloadall)
+      - [show](#show-2)
+      - [getUnitStatus (RI)](#getunitstatus-ri)
+  - [API Reference - OfferwallAd.Android](#api-reference---offerwalladandroid)
+    - [OfferwallAd](#offerwallad)
+      - [show](#show-3)
+      - [showDetail](#showdetail)
+  - [API Reference - AdEvent.Android](#api-reference---adeventandroid)
+    - [AdEvent](#adevent)
+      - [show](#show-4)
 
 
 ## API Reference - AdiscopeSdk.Android
@@ -107,6 +135,37 @@ public static boolean isInitialize()
 ```
 * 애디스콥 이니셜라이즈 여부를 확인할 수 있다. 
   * 이니셜라이즈 된 상태일 경우 `true`, 이니셜라이즈가 되지 않은 상태일 경우 `false` 반환
+
+<br/>
+
+#### setUserIdChild
+```java
+public static boolean setUserIdChild(String userId, AdiscopeUserType userType)
+```
+```kotlin
+enum class AdiscopeUserType(val value: Int, val childYN: String) {
+    None(0, ""), Adult(1, "NO"), Child(2, "YES");
+}
+```
+
+| Parameters |                |
+|------------|----------------|
+| `userId`   | 고유한 유저의 ID 값 |
+| `userType` | 사용자 타입 |
+
+* 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 및 사용자 타입을 설정한다.
+* SDK 초기화 이전 또는 광고 로드 전에 호출되어야 한다.
+* 다계정 사용이 가능한 서비스일 경우, 계정 변경 시 `setUserIdChild` 호출로 애디스콥에 변경 정보를 전달해주어야 한다.
+  * 그렇지 않을 경우 변경된 계정 정보로 보상 지급이 되지 않음
+* `userId`: 최대길이 64자
+* `userType`
+  * None: 알 수 없음 (유저 나이를 판별할 수 없을 때)
+  * Adult: 만 13세 이상 유저
+  * Child: 만 13세 미만의 아동 유저
+* 광고를 시청할 유저가 어린이인지 아닌지의 여부를 설정한다. 
+  * 이 설정값은 그대로 Google GMA 에 세팅된다.
+* 애디스콥에서는 Google Play 가족 정책을 준수해야 한다. ([Adiscope Google Play 가족 정책 확인](./families-policy.md))
+  * <span style="color:red">정책 미준수 시 광고에 제한이 생김</span> (광고 물량 축소 및 오퍼월 진입 불가)
 
 <br/>
 
