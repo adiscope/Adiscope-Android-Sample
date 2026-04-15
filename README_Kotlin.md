@@ -1,9 +1,9 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.2.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.2.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.2.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.2.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.3.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
 - minSdkVersion 23
@@ -37,13 +37,13 @@
 | Line                | 2.9.20251028    | O          |
 | Meta(Fan)           | 6.21.0          | O          |
 | Mintegral(Mobvista) | 17.0.61         | O          |
-| Moloco              | 4.4.0           | O          |
+| Moloco              | 4.5.0           | O          |
 | Ogury               | 6.2.1           | O          |
 | Pangle              | 7.8.5.2         | O          |
 | Pubmatic            | 4.11.0          | O          |
 | Smaato              | 22.7.2          | O          |
 | TNKPub              | 7.25.03         | -          |
-| Unity Ads           | 4.16.5          | O          |
+| Unity Ads           | 4.16.6          | O          |
 | Verve               | 3.7.1           | O          |
 
 > ⚠️ 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의   
@@ -60,7 +60,7 @@
 * [**Integration Guide**](#integration-guide) ([Java ver](./README.md))
   * [1. Import Adiscope Sdk](#1-import-adiscope-sdk)
   * [2. Initialize](#2-initialize-adiscope-sdk)
-  * [3. Set User Id](#3-set-user-id)
+  * [3. Set User Info](#3-set-user-info)
 * [**Ad Formats**](#ad-formats)
   * [Offerwall Ads](#offerwall-ads)
   * [Rewarded Ads](#rewarded-ads)
@@ -141,7 +141,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.2.0")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.3.0")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -190,8 +190,8 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.2.0"
-    implementation "com.nps.adiscope:adiscopeAndroid:1.2.3"
+    implementation "com.nps.adiscope:adiscopeCore:5.3.0"
+    implementation "com.nps.adiscope:adiscopeAndroid:1.2.4"
 
     // [optional] adiscope video simple integration library
     implementation "com.nps.adiscope:adiscopeWalnut:1.0.0"
@@ -201,7 +201,7 @@ dependencies {
     implementation "com.nps.adiscope:adapter.admob:24.8.0.0"
     
     // bidding adapter
-    implementation "com.nps.adiscope:adapter.max:13.5.1.0"
+    implementation "com.nps.adiscope:adapter.max:13.5.1.1"
 
     // waterfall adapter
     implementation "com.nps.adiscope:adapter.chartboost:9.11.0.0"
@@ -333,14 +333,34 @@ AdiscopeSdk.initialize(
 
 <br/>
 
-### 3. Set User Id
+### 3. Set User Info
 ```kotlin
-AdiscopeSdk.setUserId("exampleUniqueUserId")
+// none: AdiscopeUserType.None (0)
+// adult: AdiscopeUserType.Adult (1)
+// child: AdiscopeUserType.Child (2)
+val userType = AdiscopeUserType.None
+val userId = "" // set unique user id to identify the user in reward information
+AdiscopeSdk.setUserIdChild(userId, userType) // 되도록이면 initalize 호출 전 설정 권장
+AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInitializeListener() {
+    @Override 
+    public void onInitialized(boolean isSuccess) {
+        if (isSuccess) {
+            // Initialized
+        } else {
+            // Failed to initialize
+        }
+    })
 ```
-* 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 설정 (최대길이 64자)
+* 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 및 사용자 타입 설정
   * `Offerwall`, `Rewarded Video`, `Rewarded Interstitial` 사용 시 필수 설정
-* 다계정 사용이 가능한 서비스일 경우, 계정 변경 시 setUserId 호출로 애디스콥에 변경 정보를 전달해주어야 함
+* SDK 초기화 이전 또는 광고 로드 전에 호출되어야 함
+* 다계정 사용이 가능한 서비스일 경우, 계정 변경 시 `setUserIdChild` 호출로 애디스콥에 변경 정보를 전달해주어야 함
   * 그렇지 않을 경우 변경된 계정 정보로 보상 지급이 되지 않음
+* `userId`: 최대길이 64자
+* `userType`
+  * None: 알 수 없음 (유저 나이를 판별할 수 없을 때)
+  * Adult: 만 13세 이상 유저
+  * Child: 만 13세 미만의 아동 유저
 
 <br/><br/>
 
