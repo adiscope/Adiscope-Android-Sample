@@ -356,7 +356,7 @@ AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInit
     });
 ```
 * 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 및 사용자 타입 설정
-  * `Offerwall`, `Rewarded Video`, `Rewarded Interstitial` 사용 시 필수 설정
+  * `Offerwall`, `Rewarded Video`, `Interstitial`, `Rewarded Interstitial` 사용 시 필수 설정
 * SDK 초기화 이전 또는 광고 로드 전에 호출되어야 함
 * 다계정 사용이 가능한 서비스일 경우, 계정 변경 시 `setUserIdChild` 호출로 애디스콥에 변경 정보를 전달해주어야 함
   * 그렇지 않을 경우 변경된 계정 정보로 보상 지급이 되지 않음
