@@ -36,18 +36,17 @@ API Reference
       - [show](#show-1)
   - [API Reference - RewardedInterstitialAd.Android](#api-reference---rewardedinterstitialadandroid)
     - [RewardedInterstitialAd](#rewardedinterstitialad)
+      - [load](#load-2)
       - [preloadUnit](#preloadunit)
       - [preloadAll](#preloadall)
+      - [isLoaded](#isloaded-2)
       - [show](#show-2)
+      - [showWithPopup](#showwithpopup)
       - [getUnitStatus (RI)](#getunitstatus-ri)
   - [API Reference - OfferwallAd.Android](#api-reference---offerwalladandroid)
     - [OfferwallAd](#offerwallad)
       - [show](#show-3)
       - [showDetail](#showdetail)
-  - [API Reference - AdEvent.Android](#api-reference---adeventandroid)
-    - [AdEvent](#adevent)
-      - [show](#show-4)
-
 
 ## API Reference - AdiscopeSdk.Android
 ### AdiscopeSdk
@@ -571,11 +570,17 @@ boolean show()
 ### RewardedInterstitialAd
 ```java
 public interface RewardedInterstitialAd {
+    void load(String unitId)
+
     void preloadUnit(String[] unitIdList)
 
     void preloadAll()
 
+    boolean isLoaded(String unitId)
+
     void show(String unitId)
+
+    void showWithPopup(String unitId)
 
     void getUnitStatus(String unitId, IUnitStatus callback)
 
@@ -583,6 +588,10 @@ public interface RewardedInterstitialAd {
 }
 
 public interface RewardedInterstitialAdShowListener {
+    void onRewardedInterstitialAdLoaded(String unitId)
+
+    void onRewardedInterstitialAdFailedToLoad(String unitId, AdiscopeError error)
+
     void onRewardedInterstitialAdSkipped(String unitId)
 
     void onRewardedInterstitialAdOpened(String unitId)
@@ -595,16 +604,29 @@ public interface RewardedInterstitialAdShowListener {
 }
 ```
 
+#### load
+```java
+void load(String unitId)
+```
+| Parameters   |                            |
+|--------------|----------------------------|
+| `unitId`     | 로드할 보상형 전면광고의 unit id |
+
+* 특정 유닛들에 속한 광고 네트워크들의 보상형 전면광고를 순차적으로 로드한다.
+* load가 실행되면 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
+
+<br/>
+
 #### preloadUnit
 ```java
 void preloadUnit(String[] unitIdList)
 ```
 | Parameters   |                          |
 |--------------|--------------------------|
-| `unitIdList` | 로드할 전면형 보상광고의 unit id 목록 |
+| `unitIdList` | 로드할 보상형 전면광고의 unit id 목록 |
 
-* 특정 유닛들에 속한 광고 네트워크들의 전면형 보상 광고를 순차적으로 로드한다.
-  * 애디스콥 이니셜라이즈 성공 콜백을 받은 이후 1회 호출 권장
+* 특정 유닛들에 속한 광고 네트워크들의 보상형 전면광고를 순차적으로 로드한다.
+* load가 실행되면 각각의 유닛에 대해 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
 
 <br/>
 
@@ -612,8 +634,21 @@ void preloadUnit(String[] unitIdList)
 ```java
 void preloadAll()
 ```
-* 어드민 페이지에 등록되어 있는 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드한다.
-  * 애디스콥 이니셜라이즈 성공 콜백을 받은 이후 1회 호출 권장
+* 어드민 페이지에 등록되어 있는 활성화된 보상형 전면광고 유닛들을 순차적으로 로드한다.
+* load가 실행되면 각각의 유닛에 대해 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
+
+<br/>
+
+#### isLoaded
+```java
+boolean isLoaded(String unitId)
+```
+| Parameters |                            |
+|------------|----------------------------|
+| `unitId`   | 로드 여부를 체크할 보상형 전면광고의 unit id |
+
+* 특정 보상형 전면광고 유닛이 로드되었는지 확인한다.
+    * 로드된 광고가 있으면 `true`, 없으면 `false`를 반환한다.
 
 <br/>
 
@@ -624,25 +659,42 @@ void show(String unitId)
 | Parameters |                              |
 |------------|------------------------------|
 | `unitId`   | show 하고자 할 전면형 보상광고의 unit id |
+* 로드된 보상형 전면광고의 유닛을 지정하여 사용자에게 바로 보여준다.
+* show는 중복하여 호출할 수 없다.
+* show가 실행되면 `onRewardedInterstitialAdOpened`, `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
+* `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
+* `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
+
+<br/>
+
+#### showWithPopup
+```java
+void showWithPopup(String unitId)
+```
+| Parameters |                              |
+|------------|------------------------------|
+| `unitId`   | show 하고자 할 보상형 전면광고의 unit id |
+* 로드된 보상형 전면광고의 유닛을 지정하여 **안내 팝업을 보여준 뒤** 해당 광고를 사용자에게 보여준다.
+* show는 중복하여 호출할 수 없다.
+* 유저가 안내 팝업의 스킵 버튼을 클릭하면 안내 팝업창이 닫히면서 광고는 스킵된다. 이때 `onRewardedInterstitialAdSkipped`가 호출된다.
+* show가 실행되면 `onRewardedInterstitialAdSkipped`, `onRewardedInterstitialAdOpened`, `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
+* `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
+* `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
+* `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
+
+<br/>
 
 **Callback**
 
 | Method                                 | Info                           | Parameter                            |
 |----------------------------------------|--------------------------------|--------------------------------------|
+| `onRewardedInterstitialAdLoaded`       | 보상형 전면광고의 로드가 성공했을 때    | String unitId                        |
+| `onRewardedInterstitialAdFailedToLoad` | 보상형 전면광고의 로드가 실패했을 때    | String unitId                        |
 | `onRewardedInterstitialAdSkipped`      | 사용자가 스킵 버튼을 클릭하여 안내 팝업창을 닫았을 때 | String unitId                        |
-| `onRewardedInterstitialAdOpened`       | 전면형 보상광고가 열릴 때                 | String unitId                        |
-| `onRewardedInterstitialAdClosed`       | 전면형 보상광고가 닫혔을 때                | String unitId                        |
-| `onRewardedInterstitialAdRewarded`     | 전면형 보상광고 시청 후 보상이 있을 시         | String unitId, RewardItem rewardItem |
-| `onRewardedInterstitialAdFailedToShow` | 전면형 보상광고를 보여줄 수 없을 때           | String unitId, AdiscopeError error   |
-
-* 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여준다.
-* show는 중복하여 호출할 수 없다.
-* 해당 유닛이 로드되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여준다.
-    * 유저가 안내 팝업의 스킵 버튼을 클릭하면 안내 팝업창이 닫히면서 광고는 스킵된다. 이때 `onRewardedInterstitialAdSkipped`가 호출된다.
-* show가 실행되면 `onRewardedInterstitialAdSkipped`, `onRewardedInterstitialAdOpened`, `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
-* `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
-* `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
-* `onRewardedInterstitialAdClosed`와 `onRewardedInterstitialAdFailedToShow`가 호출되면 내부에서 해당 유닛을 자동으로 로드한다.
+| `onRewardedInterstitialAdOpened`       | 보상형 전면광고가 열릴 때                 | String unitId                        |
+| `onRewardedInterstitialAdClosed`       | 보상형 전면광고가 닫혔을 때                | String unitId                        |
+| `onRewardedInterstitialAdRewarded`     | 보상형 전면광고 시청 후 보상이 있을 시         | String unitId, RewardItem rewardItem |
+| `onRewardedInterstitialAdFailedToShow` | 보상형 전면광고를 보여줄 수 없을 때           | String unitId, AdiscopeError error   |
 
 <br/>
 
@@ -672,7 +724,7 @@ public class UnitStatus {
 
 | Parameters |                   |
 |------------|-------------------|
-| `unitId`   | 전면형 보상광고의 unit id |
+| `unitId`   | 보상형 전면광고의 unit id |
 | `callback` | 결과를 리턴받을 콜백 객체    |
 
 
@@ -751,51 +803,5 @@ boolean showDetail(Activity activity, String url)
 * showDetail이 정상적으로 시작되면 `true`, 그렇지 않다면 `false`를 반환한다.
 * showDetail이 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
     * `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출된다.
-
-<br/>
-
-## API Reference - AdEvent.Android
-
-### AdEvent
-```java
-public interface AdEvent {
-
-    boolean show(Activity activity, String unitId)
-
-    void setAdEventListener(AdEventListener adEventListener)
-}
-        
-    public interface AdEventListener {
-
-    void onAdEventOpened(String unitId)
-
-    void onAdEventFailedToShow(String unitId, AdiscopeError error)
-
-    void onAdEventClosed(String unitId)
-}    
-```
-
-<br/>
-
-#### show
-```java
-boolean show(Activity activity, String unitId)
-```
-| Parameters          |                                  |
-|---------------------|----------------------------------|
-| `activity`          | 상위 액티비티                          |
-| `unitId`            | Ad Event의 unit id                |
-
-**Callback**
-
-| Method                  | Info                    | Parameter                          |
-|-------------------------|-------------------------|------------------------------------|
-| `onAdEventOpened`       | Ad Event 화면이 열릴 때       | String unitId                      |
-| `onAdEventClosed`       | Ad Event 화면이 닫혔을 때      | String unitId                      |
-| `onAdEventFailedToShow` | Ad Event 화면을 보여줄 수 없을 때 | String unitId, AdiscopeError error |
-* Ad Event 광고를 사용자에게 표시한다.
-* show가 정상적으로 시작되면 `true`, 만약 이미 다른 show가 처리되는 중이라면 `false`를 반환한다.
-* show가 실행되면 (return값이 `true`일 경우) `onAdEventOpened`, `onAdEventFailedToShow` 중 하나가 항상 호출된다.
-  * `onAdEventOpened`가 호출되었다면 이후 `onAdEventClosed`가 항상 호출된다.
 
 <br/>
