@@ -1,13 +1,13 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample/releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.3.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
 - minSdkVersion 23
-- compileSdkVersion 35
+- compileSdkVersion 36
 <details>
 <summary>Network Adapter Requirements</summary>
 <div markdown="1">  
@@ -24,33 +24,31 @@
 #### Network Version
 | Ad Network          | Android Version | MAX bidder |
 |---------------------|-----------------|------------|
-| AdMob               | 24.8.0          | O          |
-| Amazon              | 11.1.1          | O          |
-| AppLovin            | 13.5.1          | O          |
-| BidMachine          | 3.5.1           | O          |
-| Bigo                | 5.6.2           | O          |
+| AdMob               | 25.2.0          | O          |
+| AppLovin            | 13.6.2          | O          |
+| BidMachine          | 3.6.1           | O          |
+| Bigo                | 5.8.2           | O          |
 | Chartboost          | 9.11.0          | O          |
-| DT Exchange         | 8.4.2           | O          |
-| InMobi              | 11.1.0          | O          |
-| Ironsource          | 9.2.0           | O          |
-| Liftoff(Vungle)     | 7.6.3           | O          |
-| Line                | 2.9.20251028    | O          |
+| DT Exchange         | 8.4.4           | O          |
+| InMobi              | 11.2.0          | O          |
+| Ironsource          | 9.4.0           | O          |
+| Liftoff(Vungle)     | 7.7.3           | O          |
+| Line                | 3000.0.1        | O          |
 | Meta(Fan)           | 6.21.0          | O          |
-| Mintegral(Mobvista) | 17.0.61         | O          |
-| Moloco              | 4.5.0           | O          |
-| Ogury               | 6.2.1           | O          |
-| Pangle              | 7.8.5.2         | O          |
+| Mintegral(Mobvista) | 17.1.51         | O          |
+| Moloco              | 4.8.0           | O          |
+| Ogury               | 6.2.2           | O          |
+| Pangle              | 7.9.1.3         | O          |
 | Pubmatic            | 4.11.0          | O          |
-| Smaato              | 22.7.2          | O          |
-| TNKPub              | 7.25.03         | -          |
+| TNKPub              | 7.25.05         | -          |
 | Unity Ads           | 4.16.6          | O          |
-| Verve               | 3.7.1           | O          |
+| Verve               | 3.8.1           | O          |
 
 > ⚠️ 애드몹 SDK(`com.google.android.gms:play-services-ads`)를 프로젝트에 이미 포함하고 있는 경우 버전 호환에 유의   
-> 기존에 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
-> - gms 22 버전: 애디스콥 `3.3.0`~`4.0.1`
+> 기존에 gms SDK 사용중인 퍼블리셔는 admob, max 어댑터 사용 시 25버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
 > - gms 23 버전: 애디스콥 `4.1.0`~`4.3.2`
-> - gms 24 버전: 애디스콥 `4.4.0` 이상
+> - gms 24 버전: 애디스콥 `4.4.0`~`5.3.0`
+> - gms 25 버전: 애디스콥 `5.4.0` 이상
 
 </div>
 </details>
@@ -99,13 +97,12 @@ repositories {
     maven { url "https://cboost.jfrog.io/artifactory/chartboost-ads/" }
 
     // max 연동 시 아래 url 모두 추가
-    maven { url "https://s3.amazonaws.com/smaato-sdk-releases/" } 
     maven { url "https://artifactory.bidmachine.io/bidmachine" }
     maven { url "https://maven.ogury.co" }
     maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
-    maven { url "https://android-sdk.is.com" } // (4.2.0~)
-    maven { url "https://repo.pubmatic.com/artifactory/public-repos" } // (5.0.0~)
-    maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" } // (5.2.0~)
+    maven { url "https://android-sdk.is.com" }
+    maven { url "https://repo.pubmatic.com/artifactory/public-repos" }
+    maven { url "https://verve.jfrog.io/artifactory/verve-gradle-release" }
 
     // tnkpub 연동 시 추가
     maven { url "https://repository.tnkad.net:8443/repository/public/" }
@@ -141,7 +138,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.3.0")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.4.0")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -190,7 +187,7 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.3.0"
+    implementation "com.nps.adiscope:adiscopeCore:5.4.0"
     implementation "com.nps.adiscope:adiscopeAndroid:1.2.4"
 
     // [optional] adiscope video simple integration library
@@ -198,18 +195,18 @@ dependencies {
   
     // [optional] adiscope network adapter library
     // bidding, waterfall adapter
-    implementation "com.nps.adiscope:adapter.admob:24.8.0.0"
+    implementation "com.nps.adiscope:adapter.admob:25.2.0.0"
     
     // bidding adapter
-    implementation "com.nps.adiscope:adapter.max:13.5.1.1"
+    implementation "com.nps.adiscope:adapter.max:13.6.2.0"
 
     // waterfall adapter
     implementation "com.nps.adiscope:adapter.chartboost:9.11.0.0"
-    implementation "com.nps.adiscope:adapter.pangle:7.8.5.2.0"
-    implementation "com.nps.adiscope:adapter.vungle:7.6.3.0"
+    implementation "com.nps.adiscope:adapter.pangle:7.9.1.3.0"
+    implementation "com.nps.adiscope:adapter.vungle:7.7.3.0"
 
     // direct sold adapter
-    implementation "com.nps.adiscope:adapter.tnkpub:7.25.03.0"
+    implementation "com.nps.adiscope:adapter.tnkpub:7.25.05.0"
 }
 ```
 <br/>
@@ -218,7 +215,7 @@ dependencies {
 </details>
 
 > 하위 버전 연동 시 해당 버전의 브랜치 `README`를 참고하여 연동해주세요. <br/><br/>
-> `3.9.0~` adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
+> adiscopeCore 버전 기준으로 코어 버전과 매핑되는 어댑터 버전이 아닐 경우 <br/>
 > 이니셜라이즈 시점에 아래와 같이 에러 레벨의 로그가 표시됩니다.
 
 ![adapter version checker log](https://github.com/user-attachments/assets/286e83f0-8b63-4e3f-bb09-ad86e15df83c)
@@ -684,7 +681,7 @@ if (mInterstitialAd != null) {
 
 #### Create Ad Instance
 ```kotlin
-import com.nps.adiscope.rewardinterstitial.RewardedInterstitialAd
+import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAd
 var mRewardedInterstitialAd : RewardedInterstitialAd? = null
 if (AdiscopeSdk.isInitialize()) {
     mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)  
@@ -696,6 +693,14 @@ if (AdiscopeSdk.isInitialize()) {
 ```kotlin
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+
+    override fun onRewardedInterstitialAdLoaded(unitId: String) {
+        // rewarded interstitial ad loaded
+    }
+
+    override fun onRewardedInterstitialAdFailedToLoad(unitId: String, adiscopeError: AdiscopeError) {
+        // rewarded interstitial ad failed to load
+    }
 
     override fun onRewardedInterstitialAdSkipped(unitId: String) {
         // user skipped rewarded interstitial ad
@@ -722,6 +727,19 @@ if (mRewardedInterstitialAd != null) {
 ```
 <br/>
 
+#### Load
+```kotlin
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.load("RI_UNIT1")
+} else {
+    // Reinitialize
+}
+```
+* 파라미터에 지정한 전면형 보상 광고 유닛 1개를 로드
+* 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+
+<br/>
+
 #### Preload
 ```kotlin
 // preload rewarded interstitial ad which belongs to specific unit list
@@ -733,7 +751,9 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
-* 이니셜라이즈 콜백 이후 1회 호출 권장
+* 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+
+<br/>
 
 #### Preload All
 ```kotlin
@@ -745,7 +765,17 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 어드민 페이지에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드
-* 이니셜라이즈 콜백 이후 1회 호출 권장
+* 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+
+<br/>
+
+#### IsLoaded
+```kotlin
+if (mRewardedInterstitialAd != null) {
+    boolean isLoaded = mRewardedInterstitialAd.isLoaded("RI_UNIT1")
+}
+```
+* 해당 유닛이 로드되어 있는지 확인
 
 <br/>
 
@@ -757,12 +787,26 @@ if (mRewardedInterstitialAd != null) {
     // Reinitialize
 }
 ```
-* 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 보여줌
-* 해당 유닛이 로드되어 있으면 안내 팝업을 보여준 뒤 해당 광고를 사용자에게 보여줌
-  * 안내 팝업의 건너뛰기 버튼 클릭 시 팝업이 종료되며 `onRewardedInterstitialAdSkipped`가 호출됨
-  * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
+* 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 **팝업 없이 바로** 보여줌
+* `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * show는 중복하여 호출할 수 없음
-* `onRewardedInterstitialAdClosed` 혹은 `onRewardedInterstitialAdFailedToShow`가 호출되면 내부에서 해당 유닛을 자동으로 로드한다
+* show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
+
+<br/>
+
+#### ShowWithPopup
+```kotlin
+if (mRewardedInterstitialAd != null) {
+    mRewardedInterstitialAd.showWithPopup("RI_UNIT1")
+} else {
+    // Reinitialize
+}
+```
+* 로드된 전면형 보상 광고의 유닛을 지정하여 **안내 팝업을 보여준 뒤** 해당 광고를 사용자에게 보여줌
+  * 안내 팝업의 건너뛰기 버튼 클릭 시 팝업이 종료되며 `onRewardedInterstitialAdSkipped`가 호출됨
+* `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
+* show는 중복하여 호출할 수 없음
+* show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
 
 <br/>
 
