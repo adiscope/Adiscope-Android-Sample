@@ -17,7 +17,7 @@
 |INVALID_ADID (Only Android)	|10	|"ADID value is invalid"	|adid 가 없거나 유효하지 않음을 의미	|지속적으로 발생 시 Adiscope 개발팀에 문의|
 |TIME_OUT	|11	|"Time out"	|세팅한 기간 내에 Mediation 광고 네트워크의 로드 성공 콜백이 오지 않은 경우	|지속적으로 발생 시 Adiscope 개발팀에 문의|
 |SHOW_CALLED_BEFORE_LOAD	|12	|"Show called before load"	|RewardedVideoAd.Show()를 Load() 없이 실행하였을 경우	|지속적으로 발생 시 Adiscope 개발팀에 문의|
-|INSUFFICIENT_MEMORY	|13	|"Insufficient memory to show ad"	|광고 노출에 필요한 시스템 가용 메모리가 부족한 경우 (Adiscope admin page에 설정된 기준치 미달)	|기기의 메모리 정리 후 다시 시도|
+|INSUFFICIENT_MEMORY(Only Android)|13	|"Insufficient memory to show ad"	|광고 노출에 필요한 시스템 가용 메모리가 부족한 경우 (Adiscope admin page에 설정된 기준치 미달)	|기기의 메모리 정리 후 다시 시도|
 |"UNKNOWN_ERROR (Only Unity)"	|-1	|""	|알 수 없는 오류	|지속적으로 발생 시 Adiscope 개발팀에 문의|
 
 <br/>
@@ -38,5 +38,5 @@
 |INVALID_ADID (Only Android)|10|adid 가 없거나 유효하지 않음을 의미|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요(Code 10]**|
 |TIME_OUT|11|세팅한 기간 내에 Mediation 광고 네트워크의 로드 성공 콜백이 오지 않은 경우|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요 (Code 11)**|
 |SHOW_CALLED_BEFORE_LOAD|12|RewardedVideoAd.Show()를 Load() 없이 실행하였을 경우|load() 실행 후 show() 호출 권고|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요 (Code 12)**|
-|INSUFFICIENT_MEMORY|13|광고 노출에 필요한 시스템 가용 메모리가 부족한 경우 (Adiscope admin page에 설정된 기준치 미달)|기기의 메모리 정리 후 다시 시도|**가용 메모리가 부족하여 광고를 재생할 수 없습니다. 메모리 정리 후 다시 시도해주세요. (Code 13)**|
+|INSUFFICIENT_MEMORY(Only Android)|13|광고 노출에 필요한 시스템 가용 메모리가 부족한 경우 (Adiscope admin page에 설정된 기준치 미달)|기기의 메모리 정리 후 다시 시도|**가용 메모리가 부족하여 광고를 재생할 수 없습니다. 메모리 정리 후 다시 시도해주세요. (Code 13)**|
 |UNKNOWN_ERROR(Only Unity)|-1|알 수 없는 오류|지속적으로 발생 시 Adiscope 개발팀에 문의|**재생 중에 오류가 발생했습니다 잠시 후 다시 시도해주세요 (Code -1)**|
