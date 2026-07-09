@@ -419,6 +419,7 @@ if (mOfferwallAd != null) {
 ```
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * show는 중복 호출 불가
 * show가 실행되면 `onOfferwallAdOpened`와 `onOfferwallAdFailedToShow` 중 하나가 항상 호출
 * `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출
@@ -464,6 +465,7 @@ if (mOfferwallAd != null) {
 * 애디스콥 이니셜라이즈 후 호출 가능
 * 특정 광고 아이템의 상세 화면으로 이동
 * url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * 요청하고자 하는 스폰서십 아이디 및 URL은 애디스콥에 문의 필요
 
 <br/>
@@ -531,6 +533,7 @@ if (mRewardedVideoAd != null) {
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 보상형 광고 유닛에 속한 광고 네트워크의 광고를 로드
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * RewardedVideoAd의 `Load`와 `Show`는 pair로 호출
   * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
 * 광고가 Show되는 동안 다음 광고를 Load할 수 있지만 이는 사용하는 Mediation Ad Network에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
@@ -553,6 +556,7 @@ if (mRewardedVideoAd != null) {
 }
 ```
 * 특정 보상형 광고 유닛의 광고 로드 여부 상태를 확인할 수 있음
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 
 <br/>
 
@@ -654,6 +658,7 @@ if (mInterstitialAd != null) {
 ```
 * 애디스콥 이니셜라이즈 후 로드 호출 가능
 * 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * Interstitial의 `Load`와 `Show`는 pair로 호출
   * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
 * 광고가 Show되는 동안 다음 광고를 Load할 수 있지만 이는 사용하는 Mediation Ad Network에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
@@ -673,6 +678,7 @@ if (mInterstitialAd != null) {
 }
 ```
 * 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 
 #### Show
 ```java
@@ -761,6 +767,7 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛 1개를 로드
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
 
 <br/>
@@ -776,6 +783,7 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
 
 <br/>
@@ -801,6 +809,7 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 해당 유닛이 로드되어 있는지 확인
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 
 <br/>
 
@@ -813,6 +822,7 @@ if (mRewardedInterstitialAd != null) {
 }
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 **팝업 없이 바로** 보여줌
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * show는 중복하여 호출할 수 없음
 * show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
@@ -829,6 +839,7 @@ if (mRewardedInterstitialAd != null) {
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 **안내 팝업을 보여준 뒤** 해당 광고를 사용자에게 보여줌
   * 안내 팝업의 건너뛰기 버튼 클릭 시 팝업이 종료되며 `onRewardedInterstitialAdSkipped`가 호출됨
+* 광고 유닛명은 반드시 대문자로 전달해야 함
 * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * show는 중복하여 호출할 수 없음
 * show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
