@@ -1,7 +1,7 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.3-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-5.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.3-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-5.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
@@ -138,7 +138,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.4.0")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.4.3")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -187,7 +187,7 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.4.0"
+    implementation "com.nps.adiscope:adiscopeCore:5.4.3"
     implementation "com.nps.adiscope:adiscopeAndroid:1.2.4"
 
     // [optional] adiscope video simple integration library
