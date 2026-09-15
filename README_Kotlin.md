@@ -1,8 +1,8 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.3-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.5.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.5.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.5.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
@@ -28,7 +28,7 @@
 | AppLovin            | 13.6.2          | O          |
 | BidMachine          | 3.6.1           | O          |
 | Bigo                | 5.8.2           | O          |
-| Chartboost          | 9.11.0          | O          |
+| Chartboost          | 9.14.0          | O          |
 | DT Exchange         | 8.4.4           | O          |
 | InMobi              | 11.2.0          | O          |
 | Ironsource          | 9.4.0           | O          |
@@ -38,7 +38,7 @@
 | Mintegral(Mobvista) | 17.1.51         | O          |
 | Moloco              | 4.8.0           | O          |
 | Ogury               | 6.2.2           | O          |
-| Pangle              | 7.9.1.3         | O          |
+| Pangle              | 8.1.0.5         | O          |
 | Pubmatic            | 4.11.0          | O          |
 | TNKPub              | 7.25.05         | -          |
 | Unity Ads           | 4.16.6          | O          |
@@ -138,7 +138,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.4.3")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.5.0")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -187,8 +187,8 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.4.3"
-    implementation "com.nps.adiscope:adiscopeAndroid:1.2.4"
+    implementation "com.nps.adiscope:adiscopeCore:5.5.0"
+    implementation "com.nps.adiscope:adiscopeAndroid:1.2.5"
 
     // [optional] adiscope video simple integration library
     implementation "com.nps.adiscope:adiscopeWalnut:1.0.0"
@@ -198,11 +198,11 @@ dependencies {
     implementation "com.nps.adiscope:adapter.admob:25.2.0.0"
     
     // bidding adapter
-    implementation "com.nps.adiscope:adapter.max:13.6.2.0"
+    implementation "com.nps.adiscope:adapter.max:13.6.2.1"
 
     // waterfall adapter
-    implementation "com.nps.adiscope:adapter.chartboost:9.11.0.0"
-    implementation "com.nps.adiscope:adapter.pangle:7.9.1.3.0"
+    implementation "com.nps.adiscope:adapter.chartboost:9.14.0.0"
+    implementation "com.nps.adiscope:adapter.pangle:8.1.0.5.0"
     implementation "com.nps.adiscope:adapter.vungle:7.7.3.0"
 
     // direct sold adapter

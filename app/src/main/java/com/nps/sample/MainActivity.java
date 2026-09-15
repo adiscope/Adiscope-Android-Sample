@@ -203,6 +203,16 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
 
     // region implementation RewardedInterstitialAdListener
     @Override
+    public void onRewardedInterstitialAdLoaded(String unitId) {
+        Log.d(TAG, "onRewardedInterstitialAdLoaded");
+    }
+
+    @Override
+    public void onRewardedInterstitialAdFailedToLoad(String unitId, AdiscopeError adiscopeError) {
+        Log.d(TAG, "onRewardedInterstitialAdFailedToShow : " + adiscopeError);
+    }
+
+    @Override
     public void onRewardedInterstitialAdSkipped(String unitId) {
         Log.d(TAG, "onRewardedInterstitialAdSkipped");
     }
