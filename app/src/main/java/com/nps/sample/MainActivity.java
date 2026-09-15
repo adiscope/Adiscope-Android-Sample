@@ -11,6 +11,7 @@ import com.nps.adiscope.AdiscopeSdk;
 import com.nps.adiscope.interstitial.InterstitialAd;
 import com.nps.adiscope.interstitial.InterstitialAdListener;
 import com.nps.adiscope.listener.AdiscopeInitializeListener;
+import com.nps.adiscope.model.AdiscopeUserType;
 import com.nps.adiscope.offerwall.OfferwallAd;
 import com.nps.adiscope.offerwall.OfferwallAdListener;
 import com.nps.adiscope.reward.RewardItem;
@@ -46,35 +47,33 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // set user info (unique user id, user type), recommended before initialize
+        AdiscopeSdk.setUserIdChild("testUserId", getAdiscopeUserType(getUserAge()));
+
+        // get singleton ad instances (SDK 5.5.0+: non-null even before initialize)
+        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this);
+        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this);
+        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this);
+        mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this);
+
+        // set listener before initialize to receive NOT_INITIALIZED fail callbacks
+        mOfferwallAd.setOfferwallAdListener(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        mInterstitialAd.setInterstitialAdListener(this);
+        mRewardedInterstitialAd.setRewardedInterstitialAdListener(this);
+
         // initialize adiscope sdk
         AdiscopeSdk.initialize(this, SAMPLE_MEDIA_ID, SAMPLE_MEDIA_SECRET, new AdiscopeInitializeListener() {
             @Override
             public void onInitialized(boolean isSuccess) {
                 if (isSuccess) {
-                    // get offerwall singleton instance
-                    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(MainActivity.this);
-
-                    // get rewardVideo singleton instance
-                    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(MainActivity.this);
-
-                    // get interstitial singleton instance
-                    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(MainActivity.this);
-
-                    mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(MainActivity.this);
-
-                    // set listener
-                    mOfferwallAd.setOfferwallAdListener(MainActivity.this);
-                    mRewardedVideoAd.setRewardedVideoAdListener(MainActivity.this);
-                    mInterstitialAd.setInterstitialAdListener(MainActivity.this);
-                    mRewardedInterstitialAd.setRewardedInterstitialAdListener(MainActivity.this);
+                    Log.d(TAG, "AdiscopeSdk initialized.");
                 } else {
-                    // Init 실패 에 대한 처리 Code
+                    // Init 실패 시 initialize 재호출로 재시도 가능
+                    Log.e(TAG, "AdiscopeSdk initialize failed.");
                 }
             }
         });
-
-        // set userId (user unique id)
-        AdiscopeSdk.setUserId("testUserId");
 
         ((Button) findViewById(R.id.btnShowOfferwall)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +118,27 @@ public class MainActivity extends Activity implements RewardedVideoAdListener, O
             }
         });
 
+    }
+
+    /**
+     * 매체에서 수집하고 있는 유저의 만 나이를 반환
+     * - 유저 나이를 알 수 없는 경우 null 반환
+     */
+    private Integer getUserAge() {
+        return null; // TODO: 매체의 유저 정보(만 나이)로 교체
+    }
+
+    /**
+     * 유저의 만 나이로 AdiscopeUserType 결정
+     * - 만 13세 미만: Child (Google Play 가족 정책 준수를 위해 반드시 설정 필요)
+     * - 만 13세 이상: Adult
+     * - 나이를 알 수 없음: None
+     */
+    private static AdiscopeUserType getAdiscopeUserType(Integer age) {
+        if (age == null) {
+            return AdiscopeUserType.None;
+        }
+        return age < 13 ? AdiscopeUserType.Child : AdiscopeUserType.Adult;
     }
 
     // region implementation RewardedVideoAdListener

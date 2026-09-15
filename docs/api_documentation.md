@@ -126,6 +126,10 @@ public static void initialize(Activity activity, String mediaId, String mediaSec
 | `callbackTag` | 보상 콜백을 복수 개로 등록해서 사용할 시에 어떤 보상 콜백을 사용할지 지정됨. 지정하지 않을 시 빈값(`""`)으로 지정하며, 이때 기본 보상콜백이 사용됨 (복수 개 사용 시 애디스콥에 문의)                                                                                                         |
 |   `childYN`   | 어린이인지 아닌지의 여부를 설정해주는 값으로 Google GMA에 세팅됨.<br/>애디스콥에서는 Google Play 가족 정책을 준수해야 함([Adiscope Google Play 가족 정책 확인](./families-policy.md)) <br/><span style="color:red">정책 미준수 시 광고에 제한이 생김</span>(광고 물량 축소 및 오퍼월 진입 불가) |
 
+* 이니셜라이즈가 진행 중일 때 다시 호출하면 마지막으로 전달한 activity, listener로 교체되며 `onInitialized`는 1회만 호출된다.
+* 이미 이니셜라이즈된 상태에서 호출하면 즉시 `onInitialized(true)`가 호출된다.
+* 이니셜라이즈 중 실패하면 `onInitialized(false)`가 호출되며, `initialize`를 다시 호출하여 재시도할 수 있다.
+
 <br/>
 
 #### isInitialize
@@ -134,6 +138,7 @@ public static boolean isInitialize()
 ```
 * 애디스콥 이니셜라이즈 여부를 확인할 수 있다. 
   * 이니셜라이즈 된 상태일 경우 `true`, 이니셜라이즈가 되지 않은 상태일 경우 `false` 반환
+  * 상태 확인용 함수이며, SDK 5.5.0 이상에서는 광고 인스턴스를 가져오기 전에 확인할 필요는 없다.
 
 <br/>
 
@@ -257,8 +262,9 @@ public static String getNetworksVersions()
 public static InterstitialAd getInterstitialAdInstance(Activity activity)
 ```
 * `InterstitialAd`의 전역 Singleton 객체를 생성한다.
-    * 애디스콥 이니셜라이즈에 대한 콜백 리스너인 `AdiscopeInitializeListener`의 콜백함수 `onInitialized` 의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해주어야 한다.
-        * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
+    * 이니셜라이즈 여부와 관계없이 전역 Singleton 객체를 반환한다. (SDK 5.5.0 이상)
+        * 이니셜라이즈 전에 load/show 등을 호출하면 fail 콜백으로 `NOT_INITIALIZED`(14)가 전달된다.
+        * SDK 5.4.x 이하는 `onInitialized`의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해야 하며, 이니셜라이즈 전에는 null을 반환한다.
 
 <br/>
 
@@ -267,8 +273,9 @@ public static InterstitialAd getInterstitialAdInstance(Activity activity)
 public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
 ```
 * `RewardedVideoAd`의 전역 Singleton 객체를 생성한다.
-    * 애디스콥 이니셜라이즈에 대한 콜백 리스너인 `AdiscopeInitializeListener`의 콜백함수 `onInitialized` 의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해주어야 한다.
-        * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
+    * 이니셜라이즈 여부와 관계없이 전역 Singleton 객체를 반환한다. (SDK 5.5.0 이상)
+        * 이니셜라이즈 전에 load/show 등을 호출하면 fail 콜백으로 `NOT_INITIALIZED`(14)가 전달된다.
+        * SDK 5.4.x 이하는 `onInitialized`의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해야 하며, 이니셜라이즈 전에는 null을 반환한다.
 
 <br/>
 
@@ -277,8 +284,9 @@ public static RewardedVideoAd getRewardedVideoAdInstance(Activity activity)
 public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity activity)
 ```
 * `RewardedInterstitialAd`의 전역 Singleton 객체를 생성한다.
-    * 애디스콥 이니셜라이즈에 대한 콜백 리스너인 `AdiscopeInitializeListener`의 콜백함수 `onInitialized` 의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해주어야 한다.
-        * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
+    * 이니셜라이즈 여부와 관계없이 전역 Singleton 객체를 반환한다. (SDK 5.5.0 이상)
+        * 이니셜라이즈 전에 load/show 등을 호출하면 fail 콜백으로 `NOT_INITIALIZED`(14)가 전달된다.
+        * SDK 5.4.x 이하는 `onInitialized`의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해야 하며, 이니셜라이즈 전에는 null을 반환한다.
 
 <br/>
 
@@ -287,8 +295,9 @@ public static RewardedInterstitialAd getRewardedInterstitialAdInstance(Activity 
 public static OfferwallAd getOfferwallAdInstance(Activity activity)
 ```
 * `OfferwallAd`의 전역 Singleton 객체를 생성한다.
-    * 애디스콥 이니셜라이즈에 대한 콜백 리스너인 `AdiscopeInitializeListener`의 콜백함수 `onInitialized` 의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해주어야 한다.
-        * `isSuccess` 값이 false일 경우에 인스턴스를 가져올 경우 null 반환
+    * 이니셜라이즈 여부와 관계없이 전역 Singleton 객체를 반환한다. (SDK 5.5.0 이상)
+        * 이니셜라이즈 전에 load/show 등을 호출하면 fail 콜백으로 `NOT_INITIALIZED`(14)가 전달된다.
+        * SDK 5.4.x 이하는 `onInitialized`의 `isSuccess` 값을 true로 받은 뒤 객체를 생성해야 하며, 이니셜라이즈 전에는 null을 반환한다.
 
 <br/>
 
@@ -431,6 +440,7 @@ void load(String unitId)
 * load와 show는 pair로 호출되어야 한다.
   * 즉 load를 한 후 show를 하고, 광고를 show한 후에는 다시 load를 하여 다음번 show를 준비해야 한다.
 * load가 실행되면 `onInterstitialAdLoaded` 와 `onInterstitialAdFailedToLoad` 중 하나의 callback은 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `onInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14)가 전달된다.
 
 <br/>
 
@@ -460,8 +470,9 @@ boolean show()
 | `onInterstitialAdFailedToShow` | 인터스티셜 광고를 보여줄 수 없을 때 | String unitId, AdiscopeError error |
 
 * 최근에 로드된 인터스티셜 광고 유닛에 속한 광고를 사용자에게 보여준다.
-    * show가 정상적으로 시작되면 true, 만약 이미 다른 show가 진행중이라면 `false` 반환
+    * show가 정상적으로 시작되면 true, 만약 이미 다른 show가 진행중이거나 이니셜라이즈 전이라면 `false` 반환
 * show가 실행되면 (return값이 `true`일 경우) `onInterstitialAdOpened`, `onInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
     * `onInterstitialAdOpened`가 호출되었다면 이후 `onInterstitialAdClosed`가 항상 호출된다.
 
 <br/>
@@ -522,6 +533,7 @@ void load(String unitId)
   * 이는 어뷰징 방지를 위해 보상형 광고를 연속으로 보여주는 것을 제한하여, 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 show를 할 수 있도록 어드민 페이지에서 서비스 설정을 할 수 있기 때문이다.
   </br>(일정 시간 이내에 show를 할 경우 `onRewardedVideoAdFailedToShow` callback이 호출된다)
 * load가 실행되면 `onRewardedVideoAdLoaded`, `onRewardedVideoAdFailedToLoad` 중 하나의 callback은 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `onRewardedVideoAdFailedToLoad`로 `NOT_INITIALIZED`(14)가 전달된다.
 * **(Optional)** load의 시간이 필요해 로드 중에는 프로그래스바 노출 추천
 
 <br/>
@@ -555,8 +567,9 @@ boolean show()
 
 
 * 최근에 로드된 보상형 광고 유닛에 속한 광고를 사용자에게 보여준다.
-    * show가 정상적으로 시작되면 true, 만약 이미 다른 show가 진행중이라면 `false` 반환
+    * show가 정상적으로 시작되면 true, 만약 이미 다른 show가 진행중이거나 이니셜라이즈 전이라면 `false` 반환
 * show가 실행되면 (return값이 `true`일 경우) `onRewardedVideoAdOpened`, `onRewardedVideoAdFailedToShow` 중 하나가 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onRewardedVideoAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
     * `onRewardedVideoAdOpened가`가 호출되었다면 이후 `onRewardedVideoAdClosed`가 항상 호출된다.
 * `OnRewarded`는 보통 `onRewardedVideoAdOpened` 와 `onRewardedVideoAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있다.
 * Reward 정보는 어뷰징 방지를 위해서 Server-to-Server(S2S) 방식으로 전달 받는 것을 권장한다.
@@ -614,6 +627,7 @@ void load(String unitId)
 
 * 특정 유닛들에 속한 광고 네트워크들의 보상형 전면광고를 순차적으로 로드한다.
 * load가 실행되면 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14)가 전달된다.
 
 <br/>
 
@@ -627,6 +641,7 @@ void preloadUnit(String[] unitIdList)
 
 * 특정 유닛들에 속한 광고 네트워크들의 보상형 전면광고를 순차적으로 로드한다.
 * load가 실행되면 각각의 유닛에 대해 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14)가 전달된다.
 
 <br/>
 
@@ -636,6 +651,7 @@ void preloadAll()
 ```
 * 어드민 페이지에 등록되어 있는 활성화된 보상형 전면광고 유닛들을 순차적으로 로드한다.
 * load가 실행되면 각각의 유닛에 대해 onRewardedInterstitialAdLoaded 와 onRewardedInterstitialAdFailedToLoad 중 하나의 callback은 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14)가 전달된다.
 
 <br/>
 
@@ -661,6 +677,7 @@ void show(String unitId)
 | `unitId`   | show 하고자 할 전면형 보상광고의 unit id |
 * 로드된 보상형 전면광고의 유닛을 지정하여 사용자에게 바로 보여준다.
 * show는 중복하여 호출할 수 없다.
+* 이니셜라이즈 전에 호출하면 `onRewardedInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
 * show가 실행되면 `onRewardedInterstitialAdOpened`, `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
 * `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
 * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened`와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 시스템의 상황에 따라 달라질 수 있다.
@@ -676,6 +693,7 @@ void showWithPopup(String unitId)
 | `unitId`   | show 하고자 할 보상형 전면광고의 unit id |
 * 로드된 보상형 전면광고의 유닛을 지정하여 **안내 팝업을 보여준 뒤** 해당 광고를 사용자에게 보여준다.
 * show는 중복하여 호출할 수 없다.
+* 이니셜라이즈 전에 호출하면 `onRewardedInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
 * 유저가 안내 팝업의 스킵 버튼을 클릭하면 안내 팝업창이 닫히면서 광고는 스킵된다. 이때 `onRewardedInterstitialAdSkipped`가 호출된다.
 * show가 실행되면 `onRewardedInterstitialAdSkipped`, `onRewardedInterstitialAdOpened`, `onRewardedInterstitialAdFailedToShow` 중 하나가 항상 호출된다.
 * `onRewardedInterstitialAdOpened`가 호출되었다면 이후 `onRewardedInterstitialAdClosed`가 항상 호출된다.
@@ -778,8 +796,9 @@ boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
 | `onOfferwallAdClosed`       | 오퍼월 광고가 닫혔을 때      | String unitId                      |
 | `onOfferwallAdFailedToShow` | 오퍼월 광고를 보여줄 수 없을 때 | String unitId, AdiscopeError error |
 * 오퍼월 광고를 사용자에게 표시한다.
-* show가 정상적으로 시작되면 `true`, 만약 이미 다른 show가 처리되는 중이라면 `false`를 반환한다.
+* show가 정상적으로 시작되면 `true`, 만약 이미 다른 show가 처리되는 중이거나 이니셜라이즈 전이라면 `false`를 반환한다.
 * show가 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
     * `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출된다.
 
 <br/>
@@ -802,6 +821,7 @@ boolean showDetail(Activity activity, String url)
 * 특정 광고 아이템의 상세 페이지로 이동한다.
 * showDetail이 정상적으로 시작되면 `true`, 그렇지 않다면 `false`를 반환한다.
 * showDetail이 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
+* 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
     * `onOfferwallAdOpened`가 호출되었다면 이후 `onOfferwallAdClosed`가 항상 호출된다.
 
 <br/>

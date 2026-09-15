@@ -259,6 +259,19 @@ admob 혹은 max 어댑터 연동 시 애드몹 appId 메타데이터를 추가�
 빌드 환경에 따라 매체 환경을 코드 내에서 분기처리하여 이니셜라이즈하는 경우
 
 ```kotlin
+// (recommend) get ad instance and set ad event listener before initialize
+mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+mOfferwallAd.setOfferwallAdListener(this)
+
+mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
+mRewardedVideoAd.setRewardedVideoAdListener(this)
+
+mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+mInterstitialAd.setInterstitialAdListener(this)
+
+mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
+mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+
 // initialize parameters
 // mediaId: 관리자를 통해 발급
 // mediaSecret: 관리자를 통해 발급
@@ -271,24 +284,12 @@ AdiscopeSdk.initialize(
 ) { isSuccess ->
     if (isSuccess) {
         Log.d(TAG, "AdiscopeSdk initialized.")
-        // (recommend) get ad instance and set ad event listener
-        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
-        mOfferwallAd.setOfferwallAdListener(this)
-
-        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
-        mRewardedVideoAd.setRewardedVideoAdListener(this)
-
-        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
-        mInterstitialAd.setInterstitialAdListener(this)
-
-        mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
-        mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
-
         mAdEvent = AdiscopeSdk.getAdEventInstance(this)
         mAdEvent.setAdEventListener(this)
-   } else {
+    } else {
+        // Init 실패에 대한 처리 Code (initialize 재호출로 재시도 가능)
         Log.d(TAG, "AdiscopeSdk initialize failed.")
-   }
+    }
 }
 ```
 
@@ -302,31 +303,42 @@ mediaId, mediaSecret 값을 고정으로 사용하는 경우
 > <span style="color:darkgrey">_AdiscopeSdk.initialize(activity, listener)_</span> 함수를 사용하면 SDK가 해당 meta-data 값을 읽어와 이니셜라이즈를 수행한다.
 
 ```kotlin
+// (recommend) get ad instance and set ad event listener before initialize
+mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
+mOfferwallAd.setOfferwallAdListener(this)
+
+mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
+mRewardedVideoAd.setRewardedVideoAdListener(this)
+
+mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
+mInterstitialAd.setInterstitialAdListener(this)
+
+mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
+mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
+
 AdiscopeSdk.initialize(
     activity
 ) { isSuccess ->
     if (isSuccess) {
         Log.d(TAG, "AdiscopeSdk initialized.")
-        // (recommend) get ad instance and set ad event listener
-        mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
-        mOfferwallAd.setOfferwallAdListener(this)
-
-        mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
-        mRewardedVideoAd.setRewardedVideoAdListener(this)
-
-        mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
-        mInterstitialAd.setInterstitialAdListener(this)
-
-        mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
-        mRewardedInterstitialAd.setRewardedInterstitialAdListener(this)
-
         mAdEvent = AdiscopeSdk.getAdEventInstance(this)
         mAdEvent.setAdEventListener(this)
     } else {
+        // Init 실패에 대한 처리 Code (initialize 재호출로 재시도 가능)
         Log.d(TAG, "AdiscopeSdk initialize failed.")
     }
 }
 ```
+
+<br/>
+
+#### 이니셜라이즈 호출 동작
+* SDK 5.5.0 이상에서는 이니셜라이즈 여부와 관계없이 광고 인스턴스를 가져올 수 있으므로, 인스턴스 생성 및 리스너 설정을 `initialize` 호출 전에 하는 것을 권장
+  * 이니셜라이즈 전에 광고 load/show를 호출하면 각 광고의 fail 콜백으로 `NOT_INITIALIZED`(14)가 전달됨
+  * SDK 5.4.x 이하는 `onInitialized`의 `isSuccess`가 `true`로 전달된 뒤 인스턴스를 가져와야 함 (이니셜라이즈 전에는 null 반환)
+* 이니셜라이즈가 진행 중일 때 `initialize`를 다시 호출하면 마지막으로 전달한 activity, listener로 교체되며 `onInitialized`는 1회만 호출됨
+* 이미 이니셜라이즈된 상태에서 `initialize`를 호출하면 즉시 `onInitialized(true)`가 호출됨
+* 이니셜라이즈에 실패(`onInitialized(false)`)한 경우 `initialize`를 다시 호출하여 재시도할 수 있음
 
 <br/>
 
@@ -335,18 +347,21 @@ AdiscopeSdk.initialize(
 // none: AdiscopeUserType.None (0)
 // adult: AdiscopeUserType.Adult (1)
 // child: AdiscopeUserType.Child (2)
-val userType = AdiscopeUserType.None
 val userId = "" // set unique user id to identify the user in reward information
+val userAge: Int? = null // 매체에서 수집하고 있는 유저의 만 나이 (알 수 없으면 null)
+val userType = when {
+    userAge == null -> AdiscopeUserType.None  // 나이를 알 수 없음
+    userAge < 13 -> AdiscopeUserType.Child    // 만 13세 미만: 반드시 설정 필요
+    else -> AdiscopeUserType.Adult            // 만 13세 이상
+}
 AdiscopeSdk.setUserIdChild(userId, userType) // 되도록이면 initalize 호출 전 설정 권장
-AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInitializeListener() {
-    @Override 
-    public void onInitialized(boolean isSuccess) {
-        if (isSuccess) {
-            // Initialized
-        } else {
-            // Failed to initialize
-        }
-    })
+AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag) { isSuccess ->
+    if (isSuccess) {
+        // Initialized
+    } else {
+        // Failed to initialize
+    }
+}
 ```
 * 참여/시청한 광고에 대한 보상 지급을 위한 사용자 아이디 및 사용자 타입 설정
   * `Offerwall`, `Rewarded Video`, `Interstitial`, `Rewarded Interstitial` 사용 시 필수 설정
@@ -358,6 +373,9 @@ AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInit
   * None: 알 수 없음 (유저 나이를 판별할 수 없을 때)
   * Adult: 만 13세 이상 유저
   * Child: 만 13세 미만의 아동 유저
+  * 매체에서 수집하고 있는 유저의 만 나이로 분기하여 설정
+  * 만 13세 미만 유저는 Google Play 가족 정책 준수를 위해 **반드시 `Child`로 설정**해야 함
+  * 만 13세 이상 유저는 모두 성인으로 판단하므로 `None`으로 두어도 정책 및 광고 동작에 문제 없음
 
 <br/><br/>
 
@@ -368,11 +386,9 @@ AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInit
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.offerwall.OfferwallAd
-    var mOfferwallAd : OfferwallAd ?= null
-if (AdiscopeSdk.isInitialize()) {
-    mOfferwallAd = AdiscopeSdk.getOfferwallAdInstance(this)
-}
+val mOfferwallAd: OfferwallAd? = AdiscopeSdk.getOfferwallAdInstance(this)
 ```
+* 이니셜라이즈 여부와 관계없이 전역 싱글톤 객체를 반환함 (SDK 5.5.0 이상, 5.4.x 이하는 이니셜라이즈 전 null 반환)
 <br/>
 
 #### Set Event Callback
@@ -400,18 +416,16 @@ if (mOfferwallAd != null) {
 #### Show
 ```kotlin
 val OFFERWALL_UNIT_ID = ""
-val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+val excludeAdTypeList = arrayOf<String>() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
 if (mOfferwallAd != null) {
     if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList)) {
       // succeed
     } else {
-      // show is already in progress
+      // show is already in progress or not initialized
     }
-} else {
-    // Reinitialize
 }
 ```
-* 애디스콥 이니셜라이즈 후 호출 가능
+* 이니셜라이즈 전 호출 시 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * 어드민 페이지에 등록된 오퍼월 광고 유닛으로 사용자에게 오퍼월 광고를 보여줌
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * show는 중복 호출 불가
@@ -429,34 +443,30 @@ if (mOfferwallAd != null) {
 ```kotlin
 val OFFERWALL_UNIT_ID = ""
 val SPONSORSHIP_ITEM_ID = ""
-val excludeAdTypeList = arrayOf() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+val excludeAdTypeList = arrayOf<String>() // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
 if (mOfferwallAd != null) {
     if (mOfferwallAd.showDetail(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, SPONSORSHIP_ITEM_ID)) {
         // succeed
     } else {
-        // show is already in progress
+        // show is already in progress or not initialized
     }
-} else {
-    // Reinitialize
 }
 ```
 
 <br/>
 
 **B) showDetail(activity, url)**
-```java
+```kotlin
 val SPONSORSHIP_URL = ""
 if (mOfferwallAd != null) {
     if (mOfferwallAd.showDetail(activity, SPONSORSHIP_URL)) {
         // succeed
     } else {
-        // show is already in progress
+        // show is already in progress or not initialized
     }
-} else {
-    // Reinitialize
 }
 ```
-* 애디스콥 이니셜라이즈 후 호출 가능
+* 이니셜라이즈 전 호출 시 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * 특정 광고 아이템의 상세 화면으로 이동
 * url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
 * 광고 유닛명은 반드시 대문자로 전달해야 함
@@ -468,11 +478,9 @@ if (mOfferwallAd != null) {
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.reward.RewardedVideoAd
-    var mRewardedVideoAd : RewardedVideoAd ?= null
-if (AdiscopeSdk.isInitialize()) {
-    mRewardedVideoAd = AdiscopeSdk.getRewardedVideoAdInstance(this)
-}
+val mRewardedVideoAd: RewardedVideoAd? = AdiscopeSdk.getRewardedVideoAdInstance(this)
 ```
+* 이니셜라이즈 여부와 관계없이 전역 싱글톤 객체를 반환함 (SDK 5.5.0 이상, 5.4.x 이하는 이니셜라이즈 전 null 반환)
 <br/>
 
 #### Set Event Callback
@@ -512,13 +520,11 @@ if (mRewardedVideoAd != null) {
 #### Load
 ```kotlin
 if (mRewardedVideoAd != null) {
-    String RV_UNIT_ID = ""
+    val RV_UNIT_ID = ""
     mRewardedVideoAd.load(RV_UNIT_ID)
-} else {
-    // Reinitialize
 }
 ```
-* 애디스콥 이니셜라이즈 후 로드 호출 가능
+* 이니셜라이즈 전 호출 시 `onRewardedVideoAdFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 * 특정 보상형 광고 유닛에 속한 광고 네트워크의 광고를 로드
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * RewardedVideoAd의 `Load`와 `Show`는 pair로 호출
@@ -538,8 +544,6 @@ if (mRewardedVideoAd != null) {
     } else {
         // do something else
     }
-} else {
-    // Reinitialize
 }
 ```
 * 특정 보상형 광고 유닛의 광고 로드 여부 상태를 확인할 수 있음
@@ -553,14 +557,13 @@ if (mRewardedVideoAd != null) {
     if (mRewardedVideoAd.show()) {
         // succeed
     }else{
-        // this show request is duplicated
+        // this show request is duplicated or not initialized
     }
-} else {
-    // Reinitialize
 }
 ```
 * 마지막으로 로드된 보상형 광고를 사용자에게 송출함
 * show 성공 시 `onRewardedVideoAdOpened`, 실패 시 `onRewardedVideoAdFailedToShow` 이벤트 콜백 호출
+* 이니셜라이즈 전 호출 시 `false`를 반환하며 `onRewardedVideoAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * `onRewardedVideoAdOpened`가 호출되었다면 이후 `onRewardedVideoAdClosed`가 항상 호출
 * RewardedVideoAd의 `Load`와 `Show`는 pair로 호출
   * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
@@ -595,11 +598,9 @@ override fun onRewarded(unitId: String, rewardItem: RewardItem) {
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.interstitial.InterstitialAd
-var mInterstitialAd : InterstitialAd? = null
-if (AdiscopeSdk.isInitialize()) {
-    mInterstitialAd = AdiscopeSdk.getInterstitialAdInstance(this)
-}
+val mInterstitialAd: InterstitialAd? = AdiscopeSdk.getInterstitialAdInstance(this)
 ```
+* 이니셜라이즈 여부와 관계없이 전역 싱글톤 객체를 반환함 (SDK 5.5.0 이상, 5.4.x 이하는 이니셜라이즈 전 null 반환)
 
 #### Set Event Callback
 ```kotlin
@@ -635,11 +636,9 @@ if (mInterstitialAd != null) {
 if (mInterstitialAd != null) {
     val INTERSTITIAL_UNIT_ID = ""
     mInterstitialAd.load(INTERSTITIAL_UNIT_ID)
-} else {
-    // Reinitialize
 }
 ```
-* 애디스콥 이니셜라이즈 후 로드 호출 가능
+* 이니셜라이즈 전 호출 시 `onInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 * 특정 인터스티셜 유닛에 속한 광고 네트워크의 광고를 로드
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * Interstitial의 `Load`와 `Show`는 pair로 호출
@@ -656,8 +655,6 @@ if (mInterstitialAd != null) {
     } else {
         // ad is not loaded
     }
-} else {
-  // Reinitialize
 }
 ```
 * 특정 인터스티셜 유닛의 광고 로드 여부 상태를 확인할 수 있음
@@ -669,14 +666,13 @@ if (mInterstitialAd != null) {
     if (mInterstitialAd.show()) {
         // succeed
     } else {
-        // this show request is duplicated
+        // this show request is duplicated or not initialized
     }
-} else {
-  // Reinitialize
 }
 ```
 * 마지막으로 로드된 인터스티셜 광고를 사용자에게 송출함
 * show 성공 시 `onInterstitialAdOpened`, 실패 시 `onInterstitialAdFailedToShow` 이벤트 콜백 호출
+* 이니셜라이즈 전 호출 시 `false`를 반환하며 `onInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * `onInterstitialAdOpened`가 호출되었다면 이후 `onInterstitialAdClosed`가 항상 호출
 * Interstitial의 `Load`와 `Show`는 pair로 호출
   * Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load하여 다음 번 Show를 준비
@@ -688,11 +684,9 @@ if (mInterstitialAd != null) {
 #### Create Ad Instance
 ```kotlin
 import com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAd
-var mRewardedInterstitialAd : RewardedInterstitialAd? = null
-if (AdiscopeSdk.isInitialize()) {
-    mRewardedInterstitialAd = AdiscopeSdk.getRewardedInterstitialAdInstance(this)  
-}
+val mRewardedInterstitialAd: RewardedInterstitialAd? = AdiscopeSdk.getRewardedInterstitialAdInstance(this)
 ```
+* 이니셜라이즈 여부와 관계없이 전역 싱글톤 객체를 반환함 (SDK 5.5.0 이상, 5.4.x 이하는 이니셜라이즈 전 null 반환)
 <br/>
 
 #### Set Event Callback
@@ -737,13 +731,12 @@ if (mRewardedInterstitialAd != null) {
 ```kotlin
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.load("RI_UNIT1")
-} else {
-    // Reinitialize
 }
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛 1개를 로드
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+* 이니셜라이즈 전 호출 시 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 
 <br/>
 
@@ -753,13 +746,12 @@ if (mRewardedInterstitialAd != null) {
 val unitList = arrayOf("RI_UNIT1", "RI_UNIT2", "RI_UNIT3")
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.preloadUnit(unitList)
-} else {
-    // Reinitialize
 }
 ```
 * 파라미터에 지정한 전면형 보상 광고 유닛들에 대한 로드를 순차적으로 진행
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+* 이니셜라이즈 전 호출 시 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 
 <br/>
 
@@ -768,19 +760,18 @@ if (mRewardedInterstitialAd != null) {
 // preload all activated rewarded interstitial ad
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.preloadAll()
-} else {
-    // Reinitialize
 }
 ```
 * 어드민 페이지에 등록된 활성화된 전면형 보상 광고 유닛들을 순차적으로 로드
 * 로드 결과는 `onRewardedInterstitialAdLoaded` 또는 `onRewardedInterstitialAdFailedToLoad` 콜백으로 전달됨
+* 이니셜라이즈 전 호출 시 `onRewardedInterstitialAdFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 
 <br/>
 
 #### IsLoaded
 ```kotlin
 if (mRewardedInterstitialAd != null) {
-    boolean isLoaded = mRewardedInterstitialAd.isLoaded("RI_UNIT1")
+    val isLoaded = mRewardedInterstitialAd.isLoaded("RI_UNIT1")
 }
 ```
 * 해당 유닛이 로드되어 있는지 확인
@@ -792,14 +783,13 @@ if (mRewardedInterstitialAd != null) {
 ```kotlin
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.show("RI_UNIT1")
-} else {
-    // Reinitialize
 }
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 사용자에게 **팝업 없이 바로** 보여줌
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * show는 중복하여 호출할 수 없음
+* 이니셜라이즈 전 호출 시 `onRewardedInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
 
 <br/>
@@ -808,8 +798,6 @@ if (mRewardedInterstitialAd != null) {
 ```kotlin
 if (mRewardedInterstitialAd != null) {
     mRewardedInterstitialAd.showWithPopup("RI_UNIT1")
-} else {
-    // Reinitialize
 }
 ```
 * 로드된 전면형 보상 광고의 유닛을 지정하여 **안내 팝업을 보여준 뒤** 해당 광고를 사용자에게 보여줌
@@ -817,6 +805,7 @@ if (mRewardedInterstitialAd != null) {
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * `onRewardedInterstitialAdRewarded`는 보통 `onRewardedInterstitialAdOpened` 와 `onRewardedInterstitialAdClosed` 사이에 호출되는 경우가 많으나 광고 미디에이션 네트워크마다 동작이 다를 수 있음
 * show는 중복하여 호출할 수 없음
+* 이니셜라이즈 전 호출 시 `onRewardedInterstitialAdFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 * show 완료/실패 후 해당 유닛이 **자동으로 리로드되지 않으므로** 필요 시 `load` 또는 `preloadUnit`을 직접 호출하여 다시 로드해야 함
 
 <br/>
