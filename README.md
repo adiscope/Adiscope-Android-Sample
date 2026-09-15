@@ -382,8 +382,8 @@ AdiscopeSdk.initialize(this, mediaId, mediaSecret, callbackTag, new AdiscopeInit
   * Adult: 만 13세 이상 유저
   * Child: 만 13세 미만의 아동 유저
   * 매체에서 수집하고 있는 유저의 만 나이로 분기하여 설정
-  * 만 13세 미만 유저는 Google Play 가족 정책 준수를 위해 **반드시 `Child`로 설정**해야 함
-  * 만 13세 이상 유저는 모두 성인으로 판단하므로 `None`으로 두어도 정책 및 광고 동작에 문제 없음
+  * 만 13세 미만 매체에서 만 13세 미만 유저는 Google Play 가족 정책 준수를 위해 **반드시 `Child`로 설정**해야 함
+  * 만 13세 이상 매체는 모든 유저를 성인으로 판단하므로 `None`으로 두어도 정책 및 광고 동작에 문제 없음
 
 <br/><br/>
 
