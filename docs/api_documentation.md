@@ -759,9 +759,15 @@ public interface OfferwallAd {
 
     boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
 
+    boolean show(Activity activity, String unitId, String[] excludeAdTypeList, String placement)
+
     boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId)
 
+    boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId, String placement)
+
     boolean showDetail(Activity activity, String url)
+
+    boolean showDetail(Activity activity, String url, String placement)
 
     void setOfferwallAdListener(OfferwallAdListener offerwallAdListener)
 }
@@ -781,12 +787,15 @@ public interface OfferwallAd {
 #### show
 ```java
 boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
+
+boolean show(Activity activity, String unitId, String[] excludeAdTypeList, String placement)
 ```
 | Parameters          |                                  |
 |---------------------|----------------------------------|
 | `activity`          | 상위 액티비티                          |
 | `unitId`            | 오퍼월 광고 unit id                   |
 | `excludeAdTypeList` | 구매 제한 타입 리스트<br/>ex) `[ "CPS" ]` |
+| `placement`         | 오퍼월을 여는 위치 구분 값 (SDK 5.6.0 이상, 선택)<br/>영문 대소문자, 숫자만 사용 가능 |
 
 **Callback**
 
@@ -796,6 +805,9 @@ boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
 | `onOfferwallAdClosed`       | 오퍼월 광고가 닫혔을 때      | String unitId                      |
 | `onOfferwallAdFailedToShow` | 오퍼월 광고를 보여줄 수 없을 때 | String unitId, AdiscopeError error |
 * 오퍼월 광고를 사용자에게 표시한다.
+* `placement`는 오퍼월 V2에서만 지원하며, 오퍼월 V1에서는 사용하지 않는다.
+    * 영문 대소문자, 숫자 외 문자가 포함되면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `INVALID_REQUEST`(4)가 전달된다.
+    * `null` 또는 빈 문자열이면 `placement` 없이 호출한 것과 동일하게 동작한다.
 * show가 정상적으로 시작되면 `true`, 만약 이미 다른 show가 처리되는 중이거나 이니셜라이즈 전이라면 `false`를 반환한다.
 * show가 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
 * 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.
@@ -807,7 +819,11 @@ boolean show(Activity activity, String unitId, String[] excludeAdTypeList)
 ```java
 boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId)
 
+boolean showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId, String placement)
+
 boolean showDetail(Activity activity, String url)
+
+boolean showDetail(Activity activity, String url, String placement)
 ```
 
 | Parameters          |                                                                 |
@@ -817,8 +833,10 @@ boolean showDetail(Activity activity, String url)
 | `excludeAdTypeList` | 구매 제한 타입 리스트<br/>ex) `[ "CPS" ]`                                |
 | `sponsorshipItemId` | 이동하고자 할 스폰서십의 item id. Admin page에 등록된 id와 동일해야 한다.             |
 | `url`               | mediaId, unitId, excludeAdTypes, sponsorshipItemId가 포함된 형식의 url |
+| `placement`         | 오퍼월을 여는 위치 구분 값 (SDK 5.6.0 이상, 선택)<br/>영문 대소문자, 숫자만 사용 가능 |
 
 * 특정 광고 아이템의 상세 페이지로 이동한다.
+* `placement` 동작은 [show](#show-3)와 동일하다.
 * showDetail이 정상적으로 시작되면 `true`, 그렇지 않다면 `false`를 반환한다.
 * showDetail이 실행되면 (return값이 `true`일 경우) `onOfferwallAdOpened`, `onOfferwallAdFailedToShow` 중 하나가 항상 호출된다.
 * 이니셜라이즈 전에 호출하면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `NOT_INITIALIZED`(14)가 전달된다.

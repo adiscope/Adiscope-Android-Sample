@@ -1,8 +1,8 @@
 # Adiscope-Android-Sample
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.5.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.6.0-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-5.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.5.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.5.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.6.0-blue)](https://github.com/adiscope/Adiscope-Unity-UPM)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.6.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 ## Requirements
@@ -29,17 +29,17 @@
 | BidMachine          | 3.6.1           | O          |
 | Bigo                | 5.8.2           | O          |
 | Chartboost          | 9.14.0          | O          |
-| DT Exchange         | 8.4.4           | O          |
-| InMobi              | 11.2.0          | O          |
-| Ironsource          | 9.4.0           | O          |
-| Liftoff(Vungle)     | 7.7.3           | O          |
+| DT Exchange         | 8.4.7           | O          |
+| InMobi              | 11.5.0          | O          |
+| Ironsource          | 9.6.0           | O          |
+| Liftoff(Vungle)     | 7.7.8           | O          |
 | Line                | 3000.0.1        | O          |
 | Meta(Fan)           | 6.21.0          | O          |
 | Mintegral(Mobvista) | 17.1.51         | O          |
 | Moloco              | 4.8.0           | O          |
 | Ogury               | 6.2.2           | O          |
 | Pangle              | 8.1.0.5         | O          |
-| Pubmatic            | 4.11.0          | O          |
+| Pubmatic            | 5.4.1           | O          |
 | TNKPub              | 7.25.05         | -          |
 | Unity Ads           | 4.16.6          | O          |
 | Verve               | 3.8.1           | O          |
@@ -138,7 +138,7 @@ android {
 ```groovy
 dependencies {
     // bom으로 연동 시 어댑터별 버전을 명시하지 않아도 코어 모듈 버전으로 매핑된 버전의 어댑터가 자동으로 연동됨
-    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.5.0")
+    Dependency adiscopeBom = platform("com.nps.adiscope:adiscope-bom:5.6.0")
     implementation adiscopeBom
   
     // [required] adiscope core library
@@ -187,26 +187,26 @@ dependencies {
 ```groovy
 dependencies {
     // [required] adiscope core library
-    implementation "com.nps.adiscope:adiscopeCore:5.5.0"
-    implementation "com.nps.adiscope:adiscopeAndroid:1.2.5"
+    implementation "com.nps.adiscope:adiscopeCore:5.6.0"
+    implementation "com.nps.adiscope:adiscopeAndroid:1.2.6"
 
     // [optional] adiscope video simple integration library
     implementation "com.nps.adiscope:adiscopeWalnut:1.0.0"
   
     // [optional] adiscope network adapter library
     // bidding, waterfall adapter
-    implementation "com.nps.adiscope:adapter.admob:25.2.0.0"
+    implementation "com.nps.adiscope:adapter.admob:25.2.0.1"
     
     // bidding adapter
-    implementation "com.nps.adiscope:adapter.max:13.6.2.1"
+    implementation "com.nps.adiscope:adapter.max:13.6.2.2"
 
     // waterfall adapter
-    implementation "com.nps.adiscope:adapter.chartboost:9.14.0.0"
-    implementation "com.nps.adiscope:adapter.pangle:8.1.0.5.0"
-    implementation "com.nps.adiscope:adapter.vungle:7.7.3.0"
+    implementation "com.nps.adiscope:adapter.chartboost:9.14.0.1"
+    implementation "com.nps.adiscope:adapter.pangle:8.1.0.5.1"
+    implementation "com.nps.adiscope:adapter.vungle:7.7.8.0"
 
     // direct sold adapter
-    implementation "com.nps.adiscope:adapter.tnkpub:7.25.05.0"
+    implementation "com.nps.adiscope:adapter.tnkpub:7.25.05.1"
 }
 ```
 <br/>
@@ -480,6 +480,32 @@ if (mOfferwallAd != null) {
 * url는 `mediaId`, `unitId`, `excludeAdTypeList`, `sponsorshipItemId`가 포함된 형식
 * 광고 유닛명은 반드시 대문자로 전달해야 함
 * 요청하고자 하는 스폰서십 아이디 및 URL은 애디스콥에 문의 필요
+
+<br/>
+
+#### Show with Placement
+`5.6.0` 버전부터 오퍼월을 여는 위치를 구분하는 `placement` 값을 함께 전달하는 함수를 지원
+* `offerwallAd.show(Activity activity, String unitId, String[] excludeAdTypeList, String placement)`
+* `offerwallAd.showDetail(Activity activity, String unitId, String[] excludeAdTypeList, int sponsorshipItemId, String placement)`
+* `offerwallAd.showDetail(Activity activity, String url, String placement)`
+
+```java
+String OFFERWALL_UNIT_ID = "";
+String PLACEMENT = "MainLobby"; // 영문 대소문자, 숫자만 사용 가능
+String[] excludeAdTypeList = {}; // 제외할 오퍼월 광고 타입 (ex. ["CPS"])
+if (mOfferwallAd != null) {
+    if (mOfferwallAd.show(activity, OFFERWALL_UNIT_ID, excludeAdTypeList, PLACEMENT)) {
+        // succeed
+    } else {
+        // show is already in progress, not initialized or invalid placement
+    }
+}
+```
+* 오퍼월 V2에서만 지원하며, 오퍼월 V1에서는 전달한 `placement`를 사용하지 않고 기존 함수와 동일하게 동작
+* `placement`는 영문 대소문자와 숫자만 사용 가능
+  * 그 외 문자가 포함되면 `false`를 반환하며 `onOfferwallAdFailedToShow`로 `INVALID_REQUEST`(4) 전달
+  * `null` 또는 빈 문자열을 전달하면 `placement` 없이 호출한 것과 동일하게 동작
+* 그 외 동작은 [Show](#show), [Show Detail](#show-detail)과 동일
 
 <br/>
 
